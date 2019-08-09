@@ -1,0 +1,47 @@
+.editImg {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 999;
+  overflow: hidden;
+}
+
+.editImg-mask {
+  background: rgba(0, 0, 0, .7);
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+}
+
+.editImg-img {
+  position: absolute;
+  z-index: 2;
+}
+
+.editImg-tracker {
+  position: absolute;
+  box-shadow: 0 0 0 2000px #000;
+  opacity: .5;
+  z-index: 2;
+  border: .5px solid #fff;
+}
+
+.editImg-btn {
+  width: 5rem;
+  line-height: 2rem;
+  color: #fff;
+  font-size: .8rem;
+  text-align: center;
+  background: #2489ED;
+  border-radius: .4rem;
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+}

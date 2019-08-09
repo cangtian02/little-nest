@@ -1,0 +1,37 @@
+.select-img-box {
+  margin: 2rem;
+  background: #f8f8f8;
+  padding: 1.2rem 0 .8rem 0;
+  border-radius: .4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.select-img-box span {
+  color: #aaa;
+  font-size: 2rem;
+}
+
+.select-img-box p {
+  font-size: .8rem;
+  color: #aaa;
+  margin-top: .4rem;
+}
+
+.select-img-box em {
+  color: #B4B4B4;
+  font-size: .6rem;
+  margin-top: .8rem;
+}
+
+.select-img-box input {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}

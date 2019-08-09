@@ -1,0 +1,27 @@
+{
+  "name": "little-nest",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "better-scroll": "^1.15.2",
+    "fastclick": "^1.0.6",
+    "hammerjs": "^2.0.8",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-loadable": "^5.5.0",
+    "react-redux": "^7.1.0",
+    "react-router": "^5.0.1",
+    "react-router-dom": "^5.0.1",
+    "react-scripts": "1.1.4",
+    "redux": "^4.0.4",
+    "vanilla-lazyload": "^12.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "sf": "node sf.js"
+  }
+}
