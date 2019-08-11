@@ -1,5 +1,9 @@
 .ed-step-one {
-  padding-bottom: 4rem;
+  padding-bottom: 2rem;
+}
+
+.ed-step-one.hidden {
+  display: none;
 }
 
 .eso-img-box {
@@ -8,7 +12,6 @@
   top: 0;
   right: 0;
   z-index: 2;
-  overflow: hidden;
 }
 
 .eso-img-box_img {
@@ -27,7 +30,7 @@
   align-items: center;
   justify-content: center;
   background: rgba(0, 0, 0, .5);
-  border-radius: .24rem;
+  border-radius: 50%;
 }
 
 .eso-img-box_btn span {
@@ -41,6 +44,21 @@
   right: 0;
   bottom: 0;
   top: 0;
+  z-index: 2;
+  overflow: hidden;
+}
+
+.eso-img-box_lablebox div {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #6CA2D6;
+  position: absolute;
+  z-index: 1;
+}
+
+.eso-img-box_lablebox div.active {
+  background: #2489ED;
   z-index: 2;
 }
 
@@ -76,7 +94,7 @@
 }
 
 .eso-tab-content-btns {
-  margin: 1rem 0 3rem .2rem;
+  margin: 1rem 0 0 .2rem;
   display: flex;
   height: 1.8rem;
 }
@@ -93,6 +111,7 @@
   height: 2rem;
   display: flex;
   justify-content: center;
+  margin-top: 2rem;
 }
 
 .eso-btns div {
@@ -106,14 +125,14 @@
   border-radius: .3rem;
 }
 
-.add-lable-data {
+.eso-add-lable-input {
   width: 100%;
   line-height: 2rem;
   border-bottom: .5px solid #eee;
   color: #434343;
 }
 
-.add-lable-data-tips {
+.eso-add-lable-tips {
   color: #aaa;
   font-size: .6rem;
   line-height: .6rem;
