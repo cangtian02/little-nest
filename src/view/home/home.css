@@ -1,3 +1,22 @@
+.home {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+}
+
+.home-content {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 2.5rem;
+  z-index: 1;
+  overflow: auto;
+}
+
 .home-slide {
   position: relative;
 }
@@ -21,7 +40,11 @@
   border-radius: .2rem;
   color: #fff;
   position: absolute;
-  top: 50%;
+  top: 56%;
   left: 50%;
   transform: translateX(-50%);
+}
+
+.home-item {
+  margin: 1.5rem .8rem 2rem .8rem;
 }

@@ -1,0 +1,57 @@
+.footer {
+  height: 2.5rem;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  border-top: .5px solid #eee;
+}
+
+.footer ul {
+  height: 100%;
+  display: flex;
+}
+
+.footer ul a {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .8rem;
+}
+
+.footer ul a.active {
+  color: #2489ED;
+}
+
+.footer ul a:first-child {
+  margin-right: 1rem;
+}
+
+.footer ul a:last-child {
+  margin-left: 1rem;
+}
+
+.footer-submit {
+  width: 3rem;
+  height: 3rem;
+  border: .5px solid #eee;
+  border-radius: 50%;
+  position: absolute;
+  left: 50%;
+  margin-left: -1.5rem;
+  bottom: .75rem;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+}
+
+.footer-submit span {
+  font-size: 1.2rem;
+  color: #2489ED;
+  font-weight: bold;
+}

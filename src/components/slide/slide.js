@@ -29,10 +29,7 @@ class Slide extends React.Component {
     }
 
     componentDidMount() {
-        if (this.props.data.length > 0) {
-            this.setSlideWidth();
-            this.initSlide();
-        }
+        if (this.props.data.length > 0) this.setSlideWidth();
     }
 
     componentWillUnmount() {
@@ -47,6 +44,8 @@ class Slide extends React.Component {
             group_style: {
                 width: width
             }
+        }, () => {
+            this.initSlide();
         });
     }
 
