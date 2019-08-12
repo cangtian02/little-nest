@@ -252,7 +252,7 @@ class Stepone extends React.Component {
   handleSaveDraft() {
     this.resetLableData().then(lableData => {
       // console.log(this.props.info)
-      // console.log(lableData)
+      console.log(lableData)
     });
   }
 
@@ -264,8 +264,8 @@ class Stepone extends React.Component {
         let div = box.children[i];
         let scale = this.imgInfo.width / box.clientWidth;
         let pos = {
-          x: parseInt(div.offsetLeft * scale),
-          y: parseInt(div.offsetTop * scale),
+          x: parseInt(div.offsetLeft * scale, 0),
+          y: parseInt(div.offsetTop * scale, 0),
         }
         lableData[i].push({ pos: pos });
       }
