@@ -1,0 +1,45 @@
+.detail-more {
+  margin: 0 .6rem;
+}
+
+.detail-more-block {
+  height: .6rem;
+}
+
+.dt-lableInfo {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+}
+
+.dt-lableInfo .bg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+}
+
+.dt-lableInfo .box {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  background: rgba(0, 0, 0, .8);
+  animation: lableInfo .15s ease-in-out;
+}
+
+@keyframes lableInfo {
+  0% {
+    transform: translate3d(0, 100%, 0);
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}

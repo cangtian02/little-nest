@@ -1,0 +1,114 @@
+.dt-info {
+  margin: 1rem .6rem .4rem .6rem;
+}
+
+.dti-user {
+  display: flex;
+  align-items: center;
+  height: 2.2rem;
+  margin-bottom: .8rem;
+}
+
+.dti-user .l {
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.dti-user .c {
+  flex: 1;
+  margin: 0 .4rem;
+}
+
+.dti-user .c p {
+  font-size: .7rem;
+  color: #434343;
+  font-weight: bold;
+  line-height: 1rem;
+}
+
+.dti-user .c span {
+  font-size: .6rem;
+  color: #aaa;
+}
+
+.dti-user .r {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 1.4rem;
+  padding: 0 .5rem;
+  border-radius: .7rem;
+  color: #434343;
+  font-size: .6rem;
+  border: .5px solid #434343;
+}
+
+.dti-user .r.disable {
+  color: #aaa;
+  border: .5px solid #aaa;
+}
+
+.dti-name {
+  color: #434343;
+  font-size: .8rem;
+  font-weight: bold;
+  line-height: 1.1rem;
+  margin-bottom: .2rem;
+}
+
+.dti-time {
+  font-size: .6rem;
+  color: #aaa;
+  line-height: .7rem;
+  margin-bottom: .4rem;
+}
+
+.dti-lable {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.dti-lable em {
+  line-height: .9rem;
+  padding: 0 .3rem;
+  border-radius: .45rem;
+  background: #D7D7D7;
+  font-size: .6rem;
+  color: #434343;
+  margin-right: .3rem;
+  margin-bottom: .4rem;
+}
+
+.dti-info {
+  font-size: .7rem;
+  color: #555;
+  line-height: .9rem;
+  text-indent: 1.4rem;
+  margin: .2rem 0 .8rem 0;
+}
+
+.dti-num {
+  display: flex;
+  align-items: center;
+  height: 1.2rem;
+}
+
+.dti-num div {
+  display: flex;
+  align-items: center;
+  height: 1.2rem;
+  margin-right: .8rem;
+}
+
+.dti-num div span {
+  font-size: 1.1rem;
+  color: #aaa;
+  margin-right: .1rem;
+}
+
+.dti-num div em {
+  font-size: .7rem;
+  color: #aaa;
+}

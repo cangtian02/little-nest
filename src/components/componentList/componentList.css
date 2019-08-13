@@ -29,3 +29,10 @@
   resize: none;
   font-family: sans-serif, "Microsoft YaHei", 微软雅黑;
 }
+
+.com-publicTitle {
+  line-height: 1.8rem;
+  font-size: .7rem;
+  color: #434343;
+  border-bottom: .5px solid #eee;
+}

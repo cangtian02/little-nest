@@ -16,3 +16,11 @@ export function TextArea(props) {
     </div>
   );
 }
+
+export function PublicTitle(props) {
+  return (
+    <div className="com-publicTitle">
+      {props.val}
+    </div>
+  );
+}

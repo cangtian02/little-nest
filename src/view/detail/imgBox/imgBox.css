@@ -1,0 +1,59 @@
+.dt-imgBox {
+  position: relative;
+  overflow: hidden;
+}
+
+.dt-imgBox-img {
+  display: block;
+  width: 100%;
+}
+
+.dt-imgBox-lable {
+  width: 1rem;
+  height: 1rem;
+  background: #2489ED;
+  border-radius: 50%;
+  position: absolute;
+  z-index: 1;
+}
+
+.dt-imgBox-course {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  background: rgba(0, 0, 0, .35);
+}
+
+.dt-imgBox-course span {
+  font-size: 3rem;
+  color: #fff;
+  position: absolute;
+  left: 45%;
+  top: 35%;
+  animation: course 1s linear infinite;
+}
+
+@keyframes course {
+  0% {
+    transform: scale(1)
+  }
+
+  50% {
+    transform: scale(1.2)
+  }
+
+  100% {
+    transform: scale(1)
+  }
+}
+
+.dt-imgBox-course p {
+  font-size: 1rem;
+  color: #fff;
+  position: absolute;
+  left: 48%;
+  top: 60%;
+}

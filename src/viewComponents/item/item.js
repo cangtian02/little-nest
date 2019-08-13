@@ -24,22 +24,26 @@ class Item extends React.Component {
     return <div className="ib-lable">{arr}</div>;
   }
 
+  handleItem() {
+    this.props.handleItem && this.props.handleItem(this.props.val.id);
+  }
+
   render() {
     if (!this.props.val) return null;
     let val = this.props.val;
     return (
       <div className="item-box">
-        <div className="ib-img">
+        <div className="ib-img" onClick={() => this.handleItem()}>
           <img src={val.img} alt={val.name} />
           {this.getLableDom(val.lable)}
         </div>
-        <div className="ib-name clamp2">{val.name}</div>
+        <div className="ib-name clamp2" onClick={() => this.handleItem()}>{val.name}</div>
         <div className="ib-info">
-          <div className="ib-user">
+          <div className="ib-user" onClick={() => this.handleItem()}>
             <img src={val.userIcon} alt={val.userName} />
             <p className="ellipsis">{val.userName}</p>
           </div>
-          <div className="ib-praise">
+          <div className="ib-praise" onClick={() => this.handleItem()}>
             <span className="iconfont icon--dianzan"></span>
             <p>{val.praise || 0}</p>
           </div>

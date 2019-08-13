@@ -34,10 +34,14 @@ class Home extends React.Component {
     });
   }
 
+  handleItem(id) {
+    this.props.history.push('/detail?itemId=' + id);
+  }
+
   getItemDom() {
     let arr = [];
     this.state.item.forEach((val, i) => {
-      arr.push(<Item val={val} key={i} />);
+      arr.push(<Item val={val} key={i} handleItem={id => this.handleItem(id)} />);
     });
     return arr;
   }

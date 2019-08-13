@@ -194,6 +194,9 @@ class Stepone extends React.Component {
         this.setState({ lableData });
       },
     });
+    setTimeout(() => {
+      document.getElementById('esoAddLableData').focus();
+    }, 20);
   }
 
   updateLableData(val, idx) {

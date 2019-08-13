@@ -23,14 +23,21 @@ const Submit = Loadable({
     loading: LoadingComponents
 });
 
+const Detail = Loadable({
+    loader: () => import('../view/detail/detail'),
+    loading: LoadingComponents
+});
+
 export const routes = [
     {
         path: '/home',
         component: Home,
-    },
-    {
+    }, {
         path: '/submit',
         component: Submit,
+    }, {
+        path: '/detail',
+        component: Detail,
     },
 ];
 

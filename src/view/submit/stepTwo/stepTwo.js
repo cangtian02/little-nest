@@ -62,6 +62,9 @@ class Steptwo extends React.Component {
         this.setState({ lable });
       },
     });
+    setTimeout(() => {
+      document.getElementById('slbAddLable').focus();
+    }, 20);
   }
 
   getLable() {
