@@ -88,8 +88,8 @@ class Stepone extends React.Component {
     let div = document.createElement('div');
     div.setAttribute('class', 'active');
     div.setAttribute('id', 'eso-lable-btn-active');
-    div.style.left = (window.innerWidth - 20) / 2  + 'px';
-    div.style.top = (box.clientHeight - 20) / 2 + 'px';
+    div.style.left = (window.innerWidth - 24) / 2  + 'px';
+    div.style.top = (box.clientHeight - 24) / 2 + 'px';
     box.appendChild(div);
 
     div.addEventListener('touchmove', this.lableMove, false);

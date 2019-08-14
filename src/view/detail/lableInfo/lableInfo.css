@@ -1,0 +1,105 @@
+.dt-lableInfo {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  transform: translate3d(0, 100%, 0);
+  transition: .2s all ease-in-out;
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-user-drag: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.dt-lableInfo.active {
+  transform: translate3d(0, 0, 0);
+}
+
+.dt-lableInfo .box {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  background: rgba(0, 0, 0, .8);
+  overflow: hidden;
+}
+
+.dtl-slide {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+}
+
+.dtl-slide-content {
+  position: absolute;
+  top: 0;
+  bottom: 1.6rem;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  display: flex;
+}
+
+.dtl-slide-item {
+  flex: 1;
+  height: 100%;
+  position: relative;
+  padding: 1rem .8rem;
+  overflow: auto;
+}
+
+.dtl-slide-item::-webkit-scrollbar {
+  display: none;
+}
+
+.dtl-slide-item_title {
+  color: #fff;
+  font-size: .9rem;
+  line-height: 1.1rem;
+  margin-bottom: 1rem;
+}
+
+.dtl-slide-item_list {
+  display: flex;
+  color: #fff;
+  font-size: .8rem;
+  line-height: 1rem;
+  margin-bottom: 1rem;
+}
+
+.dtl-slide-item_list .r {
+  margin-left: .4rem;
+  flex: 1;
+}
+
+.dtl-slide-item_info {
+  color: #fff;
+  font-size: .8rem;
+  line-height: 1.2rem;
+  text-indent: 1.6rem;
+}
+
+.dtl-slide-dots {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: .6rem;
+  height: .4rem;
+  display: flex;
+  justify-content: center;
+}
+
+.dtl-slide-dots li {
+  width: .35rem;
+  height: .35rem;
+  border-radius: 50%;
+  background: #fff;
+  margin: 0 .2rem;
+}
+
+.dtl-slide-dots li.active {
+  background: #2489ED;
+}

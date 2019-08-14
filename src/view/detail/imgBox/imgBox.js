@@ -1,6 +1,5 @@
 import React from 'react';
 import './imgBox.css';
-import Hammer from 'hammerjs';
 
 class Imgbox extends React.Component {
 
@@ -12,34 +11,44 @@ class Imgbox extends React.Component {
   }
 
   componentDidMount() {
-    let btn = document.getElementById('dt-imgBox');
-    let hammertime = new Hammer(btn);
 
-    hammertime.on("doubletap", e => {
-      localStorage.setItem('dt-imgBox-course', 1);
-      this.setState({ toggleCourse: true });
-      this.props.doubletapImgBox && this.props.doubletapImgBox();
-    });
   }
 
-  getCourseDom() {
-    if (this.state.toggleCourse) return null;
+  handleLableIndex(i) {
+    if (!this.props.toggleLableInfo) {
+      this.props.showLableInfo && this.props.showLableInfo(i);
+    } else {
+      this.props.handleLableIndex && this.props.handleLableIndex(i);
+    }
+  }
 
-    return (
-      <div className="dt-imgBox-course">
-        <span className="iconfont icon-Double-Tap"></span>
-        <p>双击发现更多~</p>
-      </div>
-    );
+  getLableDom() {
+    let arr = [];
+    let data = [
+      { x: 100, y: 90 },
+      { x: 150, y: 120 },
+    ];
+
+    data.forEach((val, i) => {
+      arr.push(
+        <div className={'dt-imgBox-lable' + (this.props.toggleLableInfo && this.props.lableIndex === i ? ' active' : '')} style={{ left: val.x + 'px', top: val.y + 'px' }} key={i} onClick={() => this.handleLableIndex(i)}></div>
+      );
+    });
+
+    return arr;
+  }
+
+  handleHideLableInfo() {
+    if (this.props.toggleLableInfo) {
+      this.props.hideLableInfo && this.props.hideLableInfo();
+    }
   }
 
   render() {
     return (
-      <div className="dt-imgBox" id="dt-imgBox">
-        <img src='./img/1.jpg' alt="" className="dt-imgBox-img" />
-        <div className="dt-imgBox-lable" style={{left: '100px', top: '90px'}}></div>
-        <div className="dt-imgBox-lable" style={{ left: '170px', top: '140px' }}></div>
-        {this.getCourseDom()}
+      <div className="dt-imgBox" id="dt-imgBox" style={{ height: window.innerWidth / 4 * 3 + 'px' }}>
+        <img src='./img/1.jpg' alt="" className="dt-imgBox-img" onClick={() => this.handleHideLableInfo()} />
+        {this.getLableDom()}
       </div>
     );
   }

@@ -32,6 +32,8 @@ class Home extends React.Component {
       data: '222',
       banner: [img, img, img]
     });
+
+    window.sessionStorage.setItem('goHomeHistory', 'Y');
   }
 
   handleItem(id) {

@@ -24,3 +24,11 @@ export function PublicTitle(props) {
     </div>
   );
 }
+
+export function BotGoHomeBtn(props) {
+  let goHomeHistory = window.sessionStorage.getItem('goHomeHistory') === 'Y';
+  if (goHomeHistory) return null;
+  return (
+    <div className="com-gome" onClick={() => props.history.push('/home')}>回首页</div>
+  );
+}

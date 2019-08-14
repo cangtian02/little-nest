@@ -36,3 +36,19 @@
   color: #434343;
   border-bottom: .5px solid #eee;
 }
+
+.com-gome {
+  width: 6rem;
+  line-height: 1.8rem;
+  position: fixed;
+  left: 50%;
+  bottom: 1rem;
+  transform: translateX(-50%);
+  z-index: 99;
+  background: #2489ED;
+  border-radius: .9rem;
+  color: #fff;
+  font-size: .8rem;
+  text-align: center;
+  box-shadow: 0 1px 5px #f8f8f8;
+}

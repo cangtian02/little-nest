@@ -3,27 +3,18 @@ import './detail.css';
 import ImgBox from './imgBox/imgBox';
 import Info from './info/info';
 import Evaluate from './evaluate/evaluate';
-import { PublicTitle } from '../../components/componentList/componentList';
-import Item from '../../viewComponents/item/item';
-import img from '../submit/1.jpg';
-
-const item = {
-  id: 2,
-  img: img,
-  name: '小窝名字啊啊啊小窝名字啊啊啊',
-  userIcon: img,
-  userName: '小明设计师',
-  lable: ['简约', '极客范', '简约', '极客范'],
-  praise: 30,
-};
+import Itemmore from './itemMore/itemMore';
+import Lableinfo from './lableInfo/lableInfo';
+import { BotGoHomeBtn } from '../../components/componentList/componentList';
 
 class Detail extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      item: [item, item, item],
       toggleLableInfo: false,
+      lableIndex: 0,
+      lableData: [0,0]
     }
   }
 
@@ -31,63 +22,52 @@ class Detail extends React.Component {
 
   }
 
-  handleItem(id) {
-    this.props.history.push('/detail?itemId=' + id);
-  }
-
-  getItemDom() {
-    let arr = [];
-    this.state.item.forEach((val, i) => {
-      arr.push(<Item val={val} key={i} handleItem={id => this.handleItem(id)} />);
-    });
-    return arr;
-  }
-
-  doubletapImgBox() {
-    setTimeout(() => {
-      let root = document.getElementById('root');
-      root.scrollTop = 0;
-      document.getElementById('root').setAttribute('class', root.getAttribute('class') + ' hidden');
-      this.setState({ toggleLableInfo: true });
-    }, 100);
+  componentWillUnmount() {
+    if (this.state.toggleLableInfo) this.hideLableInfo();
   }
 
   hideLableInfo() {
+    this.setState({ toggleLableInfo: false });
     let root = document.getElementById('root');
     let className = root.getAttribute('class');
     className = className.split(' ');
     className = className.splice(0, className.length - 1);
     document.getElementById('root').setAttribute('class', className);
-    this.setState({ toggleLableInfo: false });
   }
 
-  getLableInfoDom() {
-    if (!this.state.toggleLableInfo) return null;
+  showLableInfo(i) {
+    let root = document.getElementById('root');
+    root.scrollTop = 0;
+    document.getElementById('root').setAttribute('class', root.getAttribute('class') + ' hidden');
+    this.setState({ toggleLableInfo: true, lableIndex: i });
+  }
 
-    let top = document.getElementById('dt-imgBox').clientHeight;
-
-    return (
-      <div className="dt-lableInfo">
-        <div className="bg" onClick={() => this.hideLableInfo()}></div>
-        <div className="box" style={{top: top + 'px'}}>
-
-        </div>
-      </div>
-    );
+  handleLableIndex(i) {
+    this.setState({
+      lableIndex: i
+    });
   }
 
   render() {
     return (
       <div className="detail">
-        <ImgBox doubletapImgBox={() => this.doubletapImgBox()} />
+        <ImgBox 
+          toggleLableInfo={this.state.toggleLableInfo} 
+          lableIndex={this.state.lableIndex} 
+          showLableInfo={i => this.showLableInfo(i)}
+          hideLableInfo={() => this.hideLableInfo()} 
+          handleLableIndex={i => this.handleLableIndex(i)}
+        />
         <Info />
         <Evaluate />
-        <div className="detail-more">
-          <PublicTitle val={'更多小窝'} />
-          <div className="detail-more-block"></div>
-          {this.getItemDom()}
-        </div>
-        {this.getLableInfoDom()}
+        <Itemmore history={this.props.history} />
+        <Lableinfo 
+          lableData={this.state.lableData}
+          toggleLableInfo={this.state.toggleLableInfo} 
+          lableIndex={this.state.lableIndex} 
+          handleLableIndex={i => this.handleLableIndex(i)}
+        />
+        <BotGoHomeBtn history={this.props.history} />
       </div>
     );
   }
