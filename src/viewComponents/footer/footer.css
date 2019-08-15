@@ -6,6 +6,7 @@
   bottom: 0;
   z-index: 2;
   border-top: .5px solid #eee;
+  background: #fff;
 }
 
 .footer ul {

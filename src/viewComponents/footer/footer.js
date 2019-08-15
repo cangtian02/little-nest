@@ -20,7 +20,7 @@ class Footer extends React.Component {
       <div className="footer">
         <ul>
           <NavLink activeClassName="active" to="/home">首页</NavLink>
-          <NavLink activeClassName="active" to="/submit">我的</NavLink>
+          <NavLink activeClassName="active" to="/wo">我的</NavLink>
         </ul>
         <NavLink className="footer-submit" to="/submit"><span className="iconfont icon-tianjia"></span></NavLink>
       </div>

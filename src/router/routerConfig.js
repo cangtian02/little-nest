@@ -28,6 +28,11 @@ const Detail = Loadable({
     loading: LoadingComponents
 });
 
+const Wo = Loadable({
+    loader: () => import('../view/wo/wo'),
+    loading: LoadingComponents
+});
+
 export const routes = [
     {
         path: '/home',
@@ -38,6 +43,9 @@ export const routes = [
     }, {
         path: '/detail',
         component: Detail,
+    }, {
+        path: '/wo',
+        component: Wo,
     },
 ];
 
