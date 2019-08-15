@@ -28,16 +28,16 @@
   left: 0;
   right: .4rem;
   z-index: 2;
-  height: 1.2rem;
+  height: 1rem;
   display: flex;
   justify-content: flex-end;
 }
 
 .ib-lable div {
-  height: 1.2rem;
+  height: 1rem;
   display: flex;
   align-items: center;
-  padding: 0 .4rem;
+  padding: 0 .3rem;
   border: .5px solid #fff;
   border-radius: .6rem;
   color: #fff;
@@ -56,6 +56,7 @@
   margin: 0 .4rem .6rem .4rem;
   height: 2rem;
   display: flex;
+  align-items: center;
 }
 
 .ib-user {
@@ -87,4 +88,19 @@
 
 .ib-praise span {
   margin-right: .3rem;
+  font-size: 1rem;
+}
+
+.ib-praise p {
+  margin-top: .2rem;
+}
+
+.ib-commentBtn {
+  height: 1.2rem;
+  line-height: 1.2rem;
+  padding: 0 .5rem;
+  background: #2489ED;
+  border-radius: .6rem;
+  font-size: .6rem;
+  color: #fff;
 }

@@ -28,6 +28,10 @@ class Item extends React.Component {
     this.props.handleItem && this.props.handleItem(this.props.val.id);
   }
 
+  handleCommentBtn() {
+    this.props.handleCommentBtn && this.props.handleCommentBtn(this.props.val.id);
+  }
+
   render() {
     if (!this.props.val) return null;
     let val = this.props.val;
@@ -39,14 +43,27 @@ class Item extends React.Component {
         </div>
         <div className="ib-name clamp2" onClick={() => this.handleItem()}>{val.name}</div>
         <div className="ib-info">
-          <div className="ib-user" onClick={() => this.handleItem()}>
-            <img src={val.userIcon} alt={val.userName} />
-            <p className="ellipsis">{val.userName}</p>
-          </div>
-          <div className="ib-praise" onClick={() => this.handleItem()}>
+          {
+            !this.props.showCommentBtn
+            ?
+            <div className="ib-user" onClick={() => this.handleItem()}>
+              <img src={val.userIcon} alt={val.userName} />
+              <p className="ellipsis">{val.userName}</p>
+            </div>
+            :
+            null
+          }
+          <div className="ib-praise" style={this.props.showCommentBtn ? {flex: 1} : {}} onClick={() => this.handleItem()}>
             <span className="iconfont icon--dianzan"></span>
             <p>{val.praise || 0}</p>
           </div>
+          {
+            this.props.showCommentBtn
+            ?
+              <div className="ib-commentBtn" onClick={() => this.handleCommentBtn()}>查看评论</div>
+            :
+            null
+          }
         </div>
       </div>
     );

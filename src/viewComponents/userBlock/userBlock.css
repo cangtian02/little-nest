@@ -30,12 +30,70 @@
 }
 
 .userBlock-top .c .b {
+  height: 1rem;
+  display: flex;
+  align-items: center;
   font-size: .7rem;
   color: #aaa;
+}
+
+.userBlock-top .c .b span {
+  margin-top: .1rem;
+  margin-left: .3rem;
 }
 
 .userBlock-top .r.iconfont {
   font-size: 1.2rem;
   color: #aaa;
   margin-top: .3rem;
+}
+
+.userBlock-numlist {
+  display: flex;
+  margin: .8rem 0 .6rem 0;
+}
+
+.userBlock-numlist li {
+  width: 25%;
+  height: 2.2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.userBlock-numlist li p {
+  font-size: .7rem;
+  line-height: 1rem;
+  margin-bottom: .2rem;
+  color: #434343;
+}
+
+.userBlock-numlist li span {
+  font-size: .7rem;
+  color: #aaa;
+}
+
+.userBlock-lable {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: .3rem;
+}
+
+.userBlock-lable li {
+  height: 1rem;
+  margin-right: .4rem;
+  margin-bottom: .3rem;
+  display: flex;
+  align-items: center;
+  padding: 0 .3rem;
+  border: .5px solid #aaa;
+  border-radius: .6rem;
+  font-size: .6rem;
+  color: #aaa;
+}
+
+.userBlock-info {
+  font-size: .6rem;
+  color: #333;
+  line-height: .9rem;
 }
