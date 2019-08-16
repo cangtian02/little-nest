@@ -33,6 +33,11 @@ const Wo = Loadable({
     loading: LoadingComponents
 });
 
+const Setting = Loadable({
+    loader: () => import('../view/setting/setting'),
+    loading: LoadingComponents
+});
+
 export const routes = [
     {
         path: '/home',
@@ -46,6 +51,9 @@ export const routes = [
     }, {
         path: '/wo',
         component: Wo,
+    }, {
+        path: '/setting',
+        component: Setting,
     },
 ];
 

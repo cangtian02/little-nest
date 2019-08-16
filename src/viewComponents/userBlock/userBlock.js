@@ -14,6 +14,10 @@ class Userblock extends React.Component {
 
   }
 
+  handleSetting() {
+    this.props.history.push('/setting');
+  }
+
   render() {
     return (
       <div className="userBlock">
@@ -23,7 +27,7 @@ class Userblock extends React.Component {
             <div className="t">用户昵称霹雳巴拉</div>
             <div className="b"><i>设计师</i><span className="iconfont icon-xingbienan"></span></div>
           </div>
-          <span className="iconfont icon--shezhi r"></span>
+          <span className="iconfont icon--shezhi r" onClick={() => this.handleSetting()}></span>
         </div>
         <div className="userBlock-numlist">
           <li><p>23</p><span>关注</span></li>

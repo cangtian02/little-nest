@@ -53,7 +53,8 @@ em {
   font-style: normal;
 }
 
-input, textarea {
+input,
+textarea {
   outline: none;
   border: none;
 }
@@ -112,4 +113,19 @@ a:active {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.borderBottom {
+  position: relative;
+}
+
+.borderBottom::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: #eee;
+  transform: scaleY(.5);
 }

@@ -50,7 +50,7 @@ class Wo extends React.Component {
     return (
       <div className="wo">
         <div className="wo-content">
-          <UserBlock />
+          <UserBlock history={this.props.history} />
           <div className="wo-item">
             {this.getItemDom()}
           </div>

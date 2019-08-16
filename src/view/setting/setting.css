@@ -1,0 +1,67 @@
+.setting {
+  padding: .8rem 0;
+}
+
+.set-item-box {
+  padding-left: .6rem;
+  background: #fff;
+  margin-bottom: 1rem;
+}
+
+.set-item-box .set-item:last-child::after {
+  display: none;
+}
+
+.set-item {
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.set-item .l {
+  width: 2.5rem;
+  font-size: .7rem;
+  color: #434343;
+}
+
+.set-item .r {
+  flex: 1;
+  display: flex;
+  height: 100%;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: .6rem;
+  color: #888;
+  font-size: .7rem;
+}
+
+.set-item.userIcon {
+  height: 3.4rem;
+}
+
+.set-item.userIcon .r img {
+  width: 2.6rem;
+  height: 2.6rem;
+  border-radius: 50%;
+}
+
+.set-title {
+  line-height: 1.6rem;
+  padding-left: .6rem;
+}
+
+.set-info-box {
+  background: #fff;
+  padding: .6rem;
+  margin-bottom: 1rem;
+}
+
+.set-info-box textarea {
+  width: 100%;
+  height: 3.2rem;
+  line-height: 1rem;
+  color: #434343;
+  font-size: .7rem;
+  resize: none;
+  font-family: sans-serif, "Microsoft YaHei", 微软雅黑;
+}
