@@ -1,0 +1,126 @@
+.m-picker,
+.m-picker-mask {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.m-picker {
+  z-index: 99999;
+}
+
+.m-picker-mask {
+  z-index: 1;
+  background: #000;
+  opacity: 0;
+  transition-property: opacity;
+}
+
+.m-picker-body {
+  position: absolute;
+  z-index: 2;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 12.4rem;
+  background: #ddd;
+  transform: translate3d(0, 100%, 0);
+  transition-property: transform;
+  display: flex;
+  flex-direction: column;
+}
+
+.m-picker.m-picker-show .m-picker-body {
+  transition-duration: 300ms;
+  transform: translate3d(0, 0, 0);
+}
+
+.m-picker.m-picker-show .m-picker-mask {
+  opacity: .5;
+  transition-duration: 300ms;
+}
+
+.m-picker.m-picker-hide .m-picker-body {
+  transition-duration: 300ms;
+  transform: translate3d(0, 100%, 0);
+}
+
+.m-picker.m-picker-hide .m-picker-mask {
+  opacity: 0;
+  transition-duration: 300ms;
+}
+
+.m-picker-header {
+  height: 2.4rem;
+  background: #eee;
+}
+
+.m-picker-header p {
+  float: right;
+  padding: 0 1rem;
+  line-height: 2.4rem;
+  color: #2489ED;
+}
+
+.m-picker-content {
+  flex: 1;
+  display: flex;
+  position: relative;
+  overflow: hidden;
+  -webkit-mask-box-image: -webkit-linear-gradient(bottom, transparent, transparent 5%, #fff 20%, #fff 80%, transparent 95%, transparent);
+}
+
+.m-picker-line {
+  height: 2rem;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.m-picker-line::after,
+.m-picker-line::before {
+  content: '';
+  height: 1px;
+  background: #c6c6c6;
+  transform: scaleY(.5);
+  position: absolute;
+  left: 0;
+  right: 0;
+}
+
+.m-picker-line::after {
+  top: 0;
+}
+
+.m-picker-line::before {
+  bottom: 0;
+}
+
+.m-picker-list {
+  flex: 1;
+  position: relative;
+}
+
+.m-picker-ul {
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 0rem;
+  margin-top: 4rem;
+}
+
+.m-picker-item {
+  height: 2rem;
+  line-height: 2rem;
+  text-align: center;
+  font-size: .8rem;
+  color: #888;
+}
+
+.m-picker-item-active {
+  color: #222;
+}

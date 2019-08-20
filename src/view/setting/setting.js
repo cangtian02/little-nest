@@ -121,7 +121,12 @@ class Setting extends React.Component {
   }
 
   handlePicker(type) {
-    Picker();
+    Picker({
+      type: 'gender',
+      onOk: val => {
+        console.log(val)
+      }
+    });
   }
 
   handleCancel() {
