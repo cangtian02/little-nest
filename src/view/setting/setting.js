@@ -62,7 +62,7 @@ class Setting extends React.Component {
     });
     setTimeout(() => {
       document.getElementById('setAddLable').focus();
-    }, 20);
+    }, 300);
   }
   
   getLable() {
@@ -94,7 +94,7 @@ class Setting extends React.Component {
           </div>
           <div className="set-item borderBottom">
             <div className="l">性别</div>
-            <div className="r">男</div>
+            <div className="r" onClick={() => this.handlePicker('gender')}>男</div>
           </div>
           <div className="set-item borderBottom">
             <div className="l">职业</div>
@@ -102,7 +102,7 @@ class Setting extends React.Component {
           </div>
           <div className="set-item borderBottom">
             <div className="l">生日</div>
-            <div className="r" onClick={() => this.handlePicker('day')}>1995-02-22</div>
+            <div className="r">1995-02-22</div>
           </div>
         </div>
         <div className="set-title">个人简介</div>
@@ -122,9 +122,10 @@ class Setting extends React.Component {
 
   handlePicker(type) {
     Picker({
-      type: 'gender',
-      onOk: val => {
+      type: type,
+      onOk: (val, indx) => {
         console.log(val)
+        console.log(indx)
       }
     });
   }

@@ -10,7 +10,19 @@ const genderData = [{
 }, {
   val: 2,
   text: '女'
-}];
+  }, {
+    val: 1,
+    text: '男'
+  }, {
+    val: 2,
+    text: '女'
+  }, {
+    val: 1,
+    text: '男'
+  }, {
+    val: 2,
+    text: '女'
+  }];
 
 class Picker extends React.Component {
 
@@ -22,24 +34,37 @@ class Picker extends React.Component {
     }
 
     this.data = props.type === 'gender' ? [genderData] : [];
+    if (this.props.defaultData.length > 0) this.data = this.props.defaultData;
     this.wheels = [];
   }
 
   componentDidMount() {
-    let selectedIndex = [];
-    this.data.forEach(val => selectedIndex.push(0));
-    this.setState({ selectedIndex });
+    this.init();
+
+    // window.addEventListener('hashchange', () => {
+    //   this.removeDom();
+    // });
+  }
+
+  init() {
+    if (this.props.defaultIndex.length > 0) {
+      this.setState({ selectedIndex: this.props.defaultIndex });
+    } else {
+      let selectedIndex = [];
+      this.data.forEach(val => selectedIndex.push(0));
+      this.setState({ selectedIndex });
+    }
 
     setTimeout(() => {
       this.setState({
         classStr: 'm-picker-show',
       }, () => {
-        this.init();
+        this.initWheel();
       });
     }, 20);
   }
 
-  init() {
+  initWheel() {
     const list = document.getElementsByClassName('m-picker-list');
 
     for (let i = 0; i < list.length; i++) {
@@ -47,11 +72,12 @@ class Picker extends React.Component {
         this.wheels[i] = new BScroll(list[i], {
           probeType: 3,
           wheel: {
-            selectedIndex: 0,
+            selectedIndex: this.state.selectedIndex[i],
             rotate: 15,
             adjustTime: 100,
             wheelWrapperClass: 'm-picker-ul',
             wheelItemClass: 'm-picker-item',
+            wheelDisabledItemClass: 'wheel-disabled-item',
           }
         });
       } else {
@@ -83,9 +109,9 @@ class Picker extends React.Component {
   handleFunc() {
     let arr = [];
     this.data.forEach((val, i) => {
-      arr.push(val[this.state.selectedIndex[i]])
+      arr.push(val[this.state.selectedIndex[i]]);
     });
-    this.props.onOk && this.props.onOk(arr);
+    this.props.onOk && this.props.onOk(arr, this.state.selectedIndex);
     this.handleHide();
   }
 
@@ -94,9 +120,13 @@ class Picker extends React.Component {
       classStr: 'm-picker-hide',
     }, () => {
       setTimeout(() => {
-        if (this.props.element) document.body.removeChild(this.props.element);
+        this.removeDom();
       }, 400);
     });
+  }
+
+  removeDom() {
+    if (this.props.element) document.body.removeChild(this.props.element);
   }
 
   render() {
@@ -117,11 +147,15 @@ class Picker extends React.Component {
 
 Picker.propTypes = {
   type: PropTypes.string,
+  defaultData: PropTypes.array,
+  defaultIndex: PropTypes.array,
   onOk: PropTypes.func,
 };
 
 Picker.defaultProps = {
   type: 'gender',
+  defaultData: [],
+  defaultIndex: [],
   onOk: () => { },
 };
 

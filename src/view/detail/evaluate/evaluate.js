@@ -84,7 +84,7 @@ class Evaluate extends React.Component {
     });
     setTimeout(() => {
       document.getElementById('evaluateText').focus();
-    }, 20);
+    }, 300);
   }
 
   handleReply() {
@@ -101,7 +101,7 @@ class Evaluate extends React.Component {
     });
     setTimeout(() => {
       document.getElementById('replyText').focus();
-    }, 20);
+    }, 300);
   }
 
 }

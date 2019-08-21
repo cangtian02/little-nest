@@ -16,6 +16,11 @@ class Toast extends React.Component {
   }
 
   componentDidMount() {
+    // window.addEventListener('hashchange', () => {
+    //   this.timeout && clearTimeout(this.timeout);
+    //   this.removeDom();
+    // });
+
     setTimeout(() => {
       this.setState({
         classStr: 'm-toast-show',
@@ -49,9 +54,13 @@ class Toast extends React.Component {
       classStr: 'm-toast-hide',
     }, () => {
       setTimeout(() => {
-        if (this.props.element) document.body.removeChild(this.props.element);
+        this.removeDom();
       }, this.hideTime);
     });
+  }
+
+  removeDom() {
+    if (this.props.element) document.body.removeChild(this.props.element);
   }
 
   render() {
