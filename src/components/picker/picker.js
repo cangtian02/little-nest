@@ -111,7 +111,7 @@ class Picker extends React.Component {
     }, () => {
       setTimeout(() => {
         this.removeDom();
-      }, 400);
+      }, 100);
     });
   }
 
@@ -142,7 +142,7 @@ Picker.propTypes = {
 };
 
 Picker.defaultProps = {
-  type: 'gender',
+  type: '',
   defaultData: [],
   defaultIndex: [],
   onOk: () => { },

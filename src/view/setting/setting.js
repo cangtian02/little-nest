@@ -113,7 +113,7 @@ class Setting extends React.Component {
           </div>
           <div className="set-item borderBottom">
             <div className="l">生日</div>
-            <div className="r">1995-02-22</div>
+            <div className="r" onClick={() => this.handlePicker('gender')}>1995-02-22</div>
           </div>
         </div>
         <div className="set-title">个人简介</div>

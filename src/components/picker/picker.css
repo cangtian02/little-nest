@@ -43,13 +43,13 @@
 }
 
 .m-picker.m-picker-hide .m-picker-body {
-  transition-duration: 300ms;
+  transition-duration: 150ms;
   transform: translate3d(0, 100%, 0);
 }
 
 .m-picker.m-picker-hide .m-picker-mask {
   opacity: 0;
-  transition-duration: 300ms;
+  transition-duration: 150ms;
 }
 
 .m-picker-header {

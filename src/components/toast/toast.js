@@ -11,8 +11,6 @@ class Toast extends React.Component {
       isOpen: props.isOpen,
       classStr: '',
     }
-
-    this.hideTime = 550;
   }
 
   componentDidMount() {
@@ -26,17 +24,6 @@ class Toast extends React.Component {
       this.timeout = setTimeout(() => {
         this.close();
       }, this.props.duration);
-    }
-
-    if (this.props.history && (this.props.type === 'modal' || this.props.type === 'loading')) {
-      console.log(this.props.type)
-      const pathname = this.props.history.location.pathname;
-      this.props.history.listen(val => {
-        if (val.pathname !== pathname) {
-          console.log(111)
-          // this.removeDom();
-        }
-      });
     }
   }
 
@@ -57,7 +44,7 @@ class Toast extends React.Component {
     }, () => {
       setTimeout(() => {
         this.removeDom();
-      }, this.hideTime);
+      }, 150);
     });
   }
 

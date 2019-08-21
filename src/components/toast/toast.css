@@ -69,14 +69,14 @@
 }
 
 .m-toast.m-toast-hide .m-toast-body {
-  transition-duration: 300ms;
+  transition-duration: 150ms;
   transform: translate3d(-50%, -50%, 0) scale(.9);
   opacity: 0;
 }
 
 .m-toast.m-toast-hide .m-toast-mask {
   opacity: 0;
-  transition-duration: 500ms;
+  transition-duration: 150ms;
 }
 
 .m-toast-info {
