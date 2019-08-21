@@ -28,10 +28,20 @@ class Setting extends React.Component {
     this.state = {
       lable: [...slable, ...slable, ...slable],
     }
+
+    this.components = [];
   }
 
   componentDidMount() {
 
+  }
+
+  componentWillUnmount() {
+    this.components.forEach(val => this.removeModal(val));
+  }
+
+  removeModal(node) {
+    node && node.parentNode && node.parentNode.removeChild(node);
   }
 
   selectLable(idx) {
@@ -41,7 +51,7 @@ class Setting extends React.Component {
   }
 
   addLable() {
-    Utils.toast.modal({
+    let modal = Utils.toast.modal({
       message: '<input class="set-add-lable-input" id="setAddLable" placeholder="标签名称" />',
       onOk: () => {
         let name = document.getElementById('setAddLable').value;
@@ -60,6 +70,7 @@ class Setting extends React.Component {
         this.setState({ lable });
       },
     });
+    this.components.push(modal);
     setTimeout(() => {
       document.getElementById('setAddLable').focus();
     }, 300);
@@ -121,13 +132,15 @@ class Setting extends React.Component {
   }
 
   handlePicker(type) {
-    Picker({
+    let picker = Picker({
       type: type,
       onOk: (val, indx) => {
         console.log(val)
         console.log(indx)
       }
     });
+
+    this.components.push(picker);
   }
 
   handleCancel() {

@@ -36,6 +36,14 @@ class Steptwo extends React.Component {
 
   }
 
+  componentWillUnmount() {
+    this.removeModal(this.addLableModal);
+  }
+
+  removeModal(node) {
+    node && node.parentNode && node.parentNode.removeChild(node);
+  }
+
   selectLable(idx) {
     let lable = JSON.parse(JSON.stringify(this.state.lable));
     lable[idx].select = !lable[idx].select;
@@ -43,7 +51,7 @@ class Steptwo extends React.Component {
   }
 
   addLable() {
-    Utils.toast.modal({
+    this.addLableModal = Utils.toast.modal({
       message: '<input class="slb-add-lable-input" id="slbAddLable" placeholder="标签名称" />',
       onOk: () => {
         let name = document.getElementById('slbAddLable').value;

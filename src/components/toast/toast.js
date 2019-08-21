@@ -16,11 +16,6 @@ class Toast extends React.Component {
   }
 
   componentDidMount() {
-    // window.addEventListener('hashchange', () => {
-    //   this.timeout && clearTimeout(this.timeout);
-    //   this.removeDom();
-    // });
-
     setTimeout(() => {
       this.setState({
         classStr: 'm-toast-show',
@@ -32,10 +27,17 @@ class Toast extends React.Component {
         this.close();
       }, this.props.duration);
     }
-  }
 
-  componentWillUnmount() {
-    this.timeout && clearTimeout(this.timeout);
+    if (this.props.history && (this.props.type === 'modal' || this.props.type === 'loading')) {
+      console.log(this.props.type)
+      const pathname = this.props.history.location.pathname;
+      this.props.history.listen(val => {
+        if (val.pathname !== pathname) {
+          console.log(111)
+          // this.removeDom();
+        }
+      });
+    }
   }
 
   handleOk(props) {
@@ -102,6 +104,7 @@ class Toast extends React.Component {
 
 Toast.propTypes = {
   isOpen: PropTypes.bool.isRequired,
+  history: PropTypes.object,
   type: PropTypes.string,
   title: PropTypes.string.isRequired,
   message: PropTypes.string.isRequired,
@@ -114,9 +117,10 @@ Toast.propTypes = {
 
 Toast.defaultProps = {
   isOpen: true,
-  type: 'info',
+  history: null,
+  type: '',
   title: '',
-  message: 'message',
+  message: '',
   onCancel: () => { },
   onOk: () => { },
   okText: '确定',
@@ -131,15 +135,15 @@ const show = props => {
     React.createElement(Toast, { ...props, element: element }),
     element
   );
-  if (props.type === 'loading') return element;
+  return element;
 }
 
 const initFnc = {
   modal(props) {
-    show({ ...props, type: 'modal'});
+    return show({ ...props, type: 'modal'});
   },
   info(message, duration = 2000) {
-    show({message: message, duration: duration, type: 'info'});
+    return show({message: message, duration: duration, type: 'info'});
   },
   loading() {
     return show({type: 'loading'});

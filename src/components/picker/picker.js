@@ -10,19 +10,7 @@ const genderData = [{
 }, {
   val: 2,
   text: '女'
-  }, {
-    val: 1,
-    text: '男'
-  }, {
-    val: 2,
-    text: '女'
-  }, {
-    val: 1,
-    text: '男'
-  }, {
-    val: 2,
-    text: '女'
-  }];
+}];
 
 class Picker extends React.Component {
 
@@ -40,10 +28,6 @@ class Picker extends React.Component {
 
   componentDidMount() {
     this.init();
-
-    // window.addEventListener('hashchange', () => {
-    //   this.removeDom();
-    // });
   }
 
   init() {
@@ -73,7 +57,7 @@ class Picker extends React.Component {
           probeType: 3,
           wheel: {
             selectedIndex: this.state.selectedIndex[i],
-            rotate: 15,
+            rotate: 25,
             adjustTime: 100,
             wheelWrapperClass: 'm-picker-ul',
             wheelItemClass: 'm-picker-item',
@@ -98,9 +82,15 @@ class Picker extends React.Component {
     this.data.forEach((val1, i) => {
       let arr2 = [];
       val1.forEach((val2, j) => {
-        arr2.push(<div className={'m-picker-item' + (j === this.state.selectedIndex[i] ? ' m-picker-item-active' : '')} key={j}>{val2.text}</div>);
+        arr2.push(<div className="m-picker-item" key={j}>{val2.text}</div>);
       });
-      arr1.push(<div className="m-picker-list" key={i}><ul className="m-picker-ul">{arr2}</ul></div>)
+      arr1.push(
+        <div className="m-picker-list" key={i}>
+          <ul className="m-picker-ul">{arr2}</ul>
+          <div className="m-picker-line m-picker-line-top"></div>
+          <div className="m-picker-line m-picker-line-bot"></div>
+        </div>
+      );
     });
 
     return arr1;
@@ -135,7 +125,6 @@ class Picker extends React.Component {
       <div className="m-picker-body">
         <div className="m-picker-header"><p onClick={() => this.handleFunc()}>确定</p></div>
         <div className="m-picker-content">
-          <div className="m-picker-line"></div>
           {this.getItem()}
         </div>
       </div>
@@ -166,6 +155,8 @@ const show = props => {
     React.createElement(Picker, { ...props, element: element }),
     element
   );
+
+  return element;
 }
 
 export default show;

@@ -16,6 +16,15 @@ class Evaluate extends React.Component {
 
   }
 
+  componentWillUnmount() {
+    this.removeModal(this.evaluateModal);
+    this.removeModal(this.replyModal);
+  }
+
+  removeModal(node) {
+    node && node.parentNode && node.parentNode.removeChild(node);
+  }
+
   getItemDom() {
     return (
       <div className="dte-item-box">
@@ -71,7 +80,7 @@ class Evaluate extends React.Component {
   }
 
   handleEvaluate() {
-    Utils.toast.modal({
+    this.evaluateModal = Utils.toast.modal({
       message: '<input class="evaluate-text-input" id="evaluateText" placeholder="来说点什么" />',
       onOk: () => {
         let name = document.getElementById('evaluateText').value;
@@ -88,7 +97,7 @@ class Evaluate extends React.Component {
   }
 
   handleReply() {
-    Utils.toast.modal({
+    this.replyModal = Utils.toast.modal({
       message: '<input class="evaluate-text-input" id="replyText" placeholder="来回复点什么" />',
       onOk: () => {
         let name = document.getElementById('replyText').value;

@@ -68,6 +68,13 @@ class Stepone extends React.Component {
   componentWillUnmount() {
     document.getElementById('eso-lable-box').removeEventListener('touchstart', this.esoLableBoxFunc, false);
     document.getElementById('eso-lable-btn-active').removeEventListener('touchmove', this.lableMove, false);
+
+    this.removeModal(this.addLableModal);
+    this.removeModal(this.deleteLableModal);
+  }
+
+  removeModal(node) {
+    node && node.parentNode && node.parentNode.removeChild(node);
   }
 
   esoLableBoxFunc(e) {
@@ -174,7 +181,7 @@ class Stepone extends React.Component {
   }
 
   addLableData() {
-    Utils.toast.modal({
+    this.addLableModal = Utils.toast.modal({
       message: '<input class="eso-add-lable-input" id="esoAddLableData" placeholder="标签名称" /><div class="eso-add-lable-tips">添加标签名称后不填写内容将不会展示</div>',
       onOk: () => {
         let name = document.getElementById('esoAddLableData').value;
@@ -206,7 +213,7 @@ class Stepone extends React.Component {
   }
 
   deleteLable() {
-    Utils.toast.modal({
+    this.deleteLableModal = Utils.toast.modal({
       message: '确定删除此标签？',
       onOk: () => {
         let lableData = JSON.parse(JSON.stringify(this.state.lableData));
