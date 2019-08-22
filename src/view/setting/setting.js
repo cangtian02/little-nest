@@ -113,7 +113,7 @@ class Setting extends React.Component {
           </div>
           <div className="set-item borderBottom">
             <div className="l">生日</div>
-            <div className="r" onClick={() => this.handlePicker('gender')}>1995-02-22</div>
+            <div className="r" onClick={() => this.handlePicker('date')}>1995-02-22</div>
           </div>
         </div>
         <div className="set-title">个人简介</div>
@@ -132,8 +132,16 @@ class Setting extends React.Component {
   }
 
   handlePicker(type) {
+    let defaultIndex = [0];
+    let defaultDate = '';
+
+    if (type === 'gender') defaultIndex = [1];
+    if (type === 'date') defaultDate = '';
+    
     let picker = Picker({
       type: type,
+      defaultIndex: defaultIndex,
+      defaultDate: defaultDate,
       onOk: (val, indx) => {
         console.log(val)
         console.log(indx)

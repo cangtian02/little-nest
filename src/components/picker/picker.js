@@ -24,6 +24,8 @@ class Picker extends React.Component {
     this.data = props.type === 'gender' ? [genderData] : [];
     if (this.props.defaultData.length > 0) this.data = this.props.defaultData;
     this.wheels = [];
+
+    console.log(props.defaultDate)
   }
 
   componentDidMount() {
@@ -138,6 +140,7 @@ Picker.propTypes = {
   type: PropTypes.string,
   defaultData: PropTypes.array,
   defaultIndex: PropTypes.array,
+  defaultDate: PropTypes.string,
   onOk: PropTypes.func,
 };
 
@@ -145,10 +148,19 @@ Picker.defaultProps = {
   type: '',
   defaultData: [],
   defaultIndex: [],
+  defaultDate: '1995-01-01',
   onOk: () => { },
 };
 
+const types = ['gender', 'date'];
+
 const show = props => {
+  if (!props.type && !props.defaultData) return ;
+  if (props.type && !types.includes(props.type)) return;
+  if (!props.type && props.defaultData && (!Array.isArray(props.defaultData) || props.defaultData.length === 0)) return;
+
+  props.defaultDate = !props.defaultDate ? '1995-01-01' : props.defaultDate;
+
   let element = document.createElement('div');
   document.body.appendChild(element);
   ReactDOM.render(
