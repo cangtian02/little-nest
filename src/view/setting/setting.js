@@ -26,6 +26,9 @@ class Setting extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      info: {
+        name: '昵称',
+      },
       lable: [...slable, ...slable, ...slable],
     }
 
@@ -101,7 +104,9 @@ class Setting extends React.Component {
           </div>
           <div className="set-item borderBottom">
             <div className="l">昵称</div>
-            <div className="r">用户昵称</div>
+            <div className="r">
+              <input placeholder={'昵称'} value={this.state.info.name} onChange={e => this.updateData('name', e.target.value)} />
+            </div>
           </div>
           <div className="set-item borderBottom">
             <div className="l">性别</div>
@@ -109,7 +114,9 @@ class Setting extends React.Component {
           </div>
           <div className="set-item borderBottom">
             <div className="l">职业</div>
-            <div className="r">设计师</div>
+            <div className="r">
+              <input placeholder={'职业'} value={'设计师'} onChange={e => this.updateData('name', e.target.value)} />
+            </div>
           </div>
           <div className="set-item borderBottom">
             <div className="l">生日</div>
@@ -131,12 +138,18 @@ class Setting extends React.Component {
     );
   }
 
+  updateData(key, val) {
+    let info = this.state.info;
+    info[key] = val;
+    this.setState({ info });
+  }
+
   handlePicker(type) {
-    let defaultIndex = [0];
+    let defaultIndex = [];
     let defaultDate = '';
 
     if (type === 'gender') defaultIndex = [1];
-    if (type === 'date') defaultDate = '';
+    if (type === 'date') defaultDate = '2019-08-21';
     
     let picker = Picker({
       type: type,

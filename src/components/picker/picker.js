@@ -3,14 +3,7 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import BScroll from 'better-scroll';
 import './picker.css';
-
-const genderData = [{
-  val: 1,
-  text: '男'
-}, {
-  val: 2,
-  text: '女'
-}];
+import Data from './data';
 
 class Picker extends React.Component {
 
@@ -19,13 +12,10 @@ class Picker extends React.Component {
     this.state = {
       classStr: '',
       selectedIndex: [],
+      itemData: [],
     }
 
-    this.data = props.type === 'gender' ? [genderData] : [];
-    if (this.props.defaultData.length > 0) this.data = this.props.defaultData;
     this.wheels = [];
-
-    console.log(props.defaultDate)
   }
 
   componentDidMount() {
@@ -33,21 +23,45 @@ class Picker extends React.Component {
   }
 
   init() {
+    let itemData = [];
+    let selectedIndex = [];
+    if (this.props.type === 'gender') itemData = Data.gender();
+    if (this.props.type === 'date') itemData = Data.date(this.props.defaultDate);
+    if (this.props.defaultData.length > 0) itemData = this.props.defaultData;
+
     if (this.props.defaultIndex.length > 0) {
-      this.setState({ selectedIndex: this.props.defaultIndex });
+      selectedIndex = this.props.defaultIndex;
     } else {
-      let selectedIndex = [];
-      this.data.forEach(val => selectedIndex.push(0));
-      this.setState({ selectedIndex });
+      selectedIndex = this.getSelectedIndex(itemData);
     }
 
-    setTimeout(() => {
-      this.setState({
-        classStr: 'm-picker-show',
-      }, () => {
-        this.initWheel();
-      });
-    }, 20);
+    this.setState({ 
+      itemData, 
+      selectedIndex 
+    }, () => {
+      setTimeout(() => {
+        this.setState({
+          classStr: 'm-picker-show',
+        }, () => {
+          this.initWheel();
+        });
+      }, 20);
+    });
+  }
+
+  getSelectedIndex(itemData) {
+    let selectedIndex = [];
+
+    if (this.props.type === 'date') {
+      selectedIndex.push(99);
+      let date = this.props.defaultDate.split('-');
+      selectedIndex.push(Number(date[1]) - 1);
+      selectedIndex.push(Number(date[2]) - 1);
+    } else {
+      itemData.forEach(val => selectedIndex.push(0));
+    }
+    
+    return selectedIndex;
   }
 
   initWheel() {
@@ -72,8 +86,13 @@ class Picker extends React.Component {
 
       this.wheels[i].on('scrollEnd', () => {
         let selectedIndex = this.state.selectedIndex;
+        let itemData = this.state.itemData;
         selectedIndex[i] = this.wheels[i].getSelectedIndex();
-        this.setState({ selectedIndex });
+        if (this.props.type === 'date' && i === 0) {
+          selectedIndex[0] = 99;
+          itemData[0] = Data.getYear(this.state.itemData[0][selectedIndex[0]].val);
+        }
+        this.setState({ itemData, selectedIndex });
       });
     }
   }
@@ -81,7 +100,7 @@ class Picker extends React.Component {
   getItem() {
     let arr1 = [];
 
-    this.data.forEach((val1, i) => {
+    this.state.itemData.forEach((val1, i) => {
       let arr2 = [];
       val1.forEach((val2, j) => {
         arr2.push(<div className="m-picker-item" key={j}>{val2.text}</div>);
@@ -100,7 +119,7 @@ class Picker extends React.Component {
 
   handleFunc() {
     let arr = [];
-    this.data.forEach((val, i) => {
+    this.state.itemData.forEach((val, i) => {
       arr.push(val[this.state.selectedIndex[i]]);
     });
     this.props.onOk && this.props.onOk(arr, this.state.selectedIndex);
@@ -122,6 +141,8 @@ class Picker extends React.Component {
   }
 
   render() {
+    if (this.state.itemData.length === 0) return null;
+
     let dom = <div className={"m-picker " + this.state.classStr}>
       <div className="m-picker-mask" onClick={() => this.handleHide()}></div>
       <div className="m-picker-body">
