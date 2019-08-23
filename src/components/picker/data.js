@@ -63,7 +63,8 @@ export default {
   },
   // 各月份的总天数
   day_arr(year, month) {
-    let day_str = new Array(31, 28 + this.is_leap(year), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31);
+    let day_str = [];
+    day_str.push(31, 28 + this.is_leap(year), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31);
     return day_str[month - 1];
   },
   date(defaultDate) {

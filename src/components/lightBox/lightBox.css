@@ -1,0 +1,30 @@
+.m-lightBox,
+.m-lightBox-mask {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.m-lightBox {
+  z-index: 99999;
+}
+
+.m-lightBox-mask {
+  z-index: 1;
+  background: rgba(0, 0, 0, .75);
+}
+
+.m-lightBox-body {
+  position: absolute;
+  z-index: 2;
+  left: 50%;
+  top: 50%;
+  background: #FEFEFE;
+  transform: translate3d(-50%, -50%, 0);
+}
+
+.m-lightBox-body img {
+  display: block;
+}

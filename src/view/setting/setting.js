@@ -2,6 +2,7 @@ import React from 'react';
 import './setting.css';
 import Utils from '../../common/Utils';
 import Picker from '../../components/picker/picker';
+import LightBox from '../../components/lightBox/lightBox';
 
 const slable = [{
   id: 1,
@@ -100,7 +101,7 @@ class Setting extends React.Component {
         <div className="set-item-box">
           <div className="set-item userIcon borderBottom">
             <div className="l">头像</div>
-            <div className="r"><img src="./img/pic.jpg" alt="" /></div>
+            <div className="r" onClick={() => this.handleIcon()}><img src="./img/pic.jpg" alt="" /></div>
           </div>
           <div className="set-item borderBottom">
             <div className="l">昵称</div>
@@ -131,11 +132,18 @@ class Setting extends React.Component {
         <div className="set-lable-tips">选择属于你的标签，让更多人欣赏你的小窝~</div>
         {this.getLable()}
         <div className="set-save-btns">
-          <div onClick={() => this.handleCancel()}>取消</div>
           <div onClick={() => this.handleSave()}>保存</div>
         </div>
       </div>
     );
+  }
+
+  handleIcon() {
+    let lightBox = new LightBox({
+      imgUrl: 'https://avatars1.githubusercontent.com/u/28089159?s=460&v=4',
+    });
+
+    this.components.push(lightBox);
   }
 
   updateData(key, val) {
@@ -162,10 +170,6 @@ class Setting extends React.Component {
     });
 
     this.components.push(picker);
-  }
-
-  handleCancel() {
-
   }
 
   handleSave() {
