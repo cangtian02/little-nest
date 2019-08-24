@@ -14,8 +14,8 @@ class Userblock extends React.Component {
 
   }
 
-  handleSetting() {
-    this.props.history.push('/setting');
+  handleRouter(url) {
+    this.props.history.push('/' + url);
   }
 
   render() {
@@ -27,13 +27,12 @@ class Userblock extends React.Component {
             <div className="t">用户昵称霹雳巴拉</div>
             <div className="b"><i>设计师</i><span className="iconfont icon-xingbienan"></span></div>
           </div>
-          <span className="iconfont icon--shezhi r" onClick={() => this.handleSetting()}></span>
+          <span className="iconfont icon--shezhi r" onClick={() => this.handleRouter('setting')}></span>
         </div>
         <div className="userBlock-numlist">
-          <li><p>23</p><span>关注</span></li>
-          <li><p>4</p><span>粉丝</span></li>
-          <li><p>56</p><span>收藏</span></li>
-          <li><p>67</p><span>获赞</span></li>
+          <li onClick={() => this.handleRouter('follow')}><p>23</p><span>关注</span></li>
+          <li onClick={() => this.handleRouter('fans')}><p>4</p><span>粉丝</span></li>
+          <li><p>56</p><span>获赞与收藏</span></li>
         </div>
         <div className="userBlock-lable">
           <li>简约</li><li>极客范</li><li>90后</li><li>设计师</li>

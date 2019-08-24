@@ -1,6 +1,5 @@
 import React from 'react';
 import './home.css';
-import { NavLink } from 'react-router-dom';
 import Slide  from '../../components/slide/slide';
 import Item from '../../viewComponents/item/item';
 import Footer from '../../viewComponents/footer/footer';
@@ -56,8 +55,6 @@ class Home extends React.Component {
         <div className="home-content">
           <div className="home-slide">
             <Slide data={this.state.banner} />
-            <p>分享你的小窝<br/>来认识与你一样也不一样的人</p>
-            <NavLink className="home-go-submit" activeClassName="active" to="/submit">我要分享</NavLink>
           </div>
           <div className="home-item">
             {this.getItemDom()}

@@ -30,6 +30,7 @@ class Lightbox extends React.Component {
 
   handleHide() {
     this.removeDom();
+    this.props.handleCloseFunc && this.props.handleCloseFunc();
   }
 
   removeDom() {
@@ -66,12 +67,14 @@ Lightbox.propTypes = {
   imgUrl: PropTypes.string,
   btnText: PropTypes.string,
   handleBtnFunc: PropTypes.func,
+  handleCloseFunc: PropTypes.func,
 };
 
 Lightbox.defaultProps = {
   imgUrl: '',
   btnText: '',
   handleBtnFunc: () => { },
+  handleCloseFunc: () => { },
 };
 
 const show = props => {

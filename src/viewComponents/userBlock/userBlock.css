@@ -54,7 +54,7 @@
 }
 
 .userBlock-numlist li {
-  width: 25%;
+  flex: 1;
   height: 2.2rem;
   display: flex;
   flex-direction: column;

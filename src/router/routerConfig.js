@@ -38,6 +38,16 @@ const Setting = Loadable({
     loading: LoadingComponents
 });
 
+const Follow = Loadable({
+    loader: () => import('../view/follow/follow'),
+    loading: LoadingComponents
+});
+
+const Fans = Loadable({
+    loader: () => import('../view/fans/fans'),
+    loading: LoadingComponents
+});
+
 export const routes = [
     {
         path: '/home',
@@ -54,6 +64,12 @@ export const routes = [
     }, {
         path: '/setting',
         component: Setting,
+    }, {
+        path: '/follow',
+        component: Follow,
+    }, {
+        path: '/fans',
+        component: Fans,
     },
 ];
 

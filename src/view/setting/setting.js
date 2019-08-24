@@ -171,6 +171,9 @@ class Setting extends React.Component {
   handleIcon() {
     this.lightBox = new LightBox({
       imgUrl: this.state.info.icon,
+      handleCloseFunc: () => {
+        this.handleUpdateIconClick();
+      }
     });
 
     this.components.push(this.lightBox);
