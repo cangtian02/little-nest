@@ -80,4 +80,16 @@ export default {
     });
     return str;
   },
+  // 输入框将光标转移到最后
+  focusToLast(input) {
+    let len = input.value.length;
+    if (document.selection) {
+      let sel = input.createTextRange();
+      sel.moveStart('character', len);
+      sel.collapse();
+      sel.select();
+    } else if (typeof input.selectionStart === 'number' && typeof input.selectionEnd === 'number') {
+      input.selectionStart = input.selectionEnd = len;
+    }
+  }
 }

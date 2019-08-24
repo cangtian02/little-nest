@@ -8,7 +8,6 @@ class Lightbox extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      classStr: '',
       imgWidth: 0,
     }
   }
@@ -18,13 +17,10 @@ class Lightbox extends React.Component {
     img.src = this.props.imgUrl;
     
     img.onload = () => {
-      setTimeout(() => {
-        let winW = window.innerWidth;
-        this.setState({
-          imgWidth: img.width > winW ? winW : img.width,
-          classStr: 'm-lightBox-show',
-        });
-      }, 20);
+      let winW = window.innerWidth;
+      this.setState({
+        imgWidth: img.width > winW ? winW : img.width,
+      });
     }
 
     img.onerror = () => {
@@ -33,25 +29,33 @@ class Lightbox extends React.Component {
   }
 
   handleHide() {
-    this.setState({
-      classStr: 'm-picker-hide',
-    }, () => {
-      setTimeout(() => {
-        this.removeDom();
-      }, 100);
-    });
+    this.removeDom();
   }
 
   removeDom() {
     if (this.props.element) document.body.removeChild(this.props.element);
   }
 
+  handleBtn() {
+    this.removeDom();
+    this.props.handleBtnFunc && this.props.handleBtnFunc();
+  }
+
   render() {
-    let dom = <div className={"m-lightBox " + this.state.classStr}>
+    if (!this.props.imgUrl) return null;
+
+    let dom = <div className="m-lightBox">
       <div className="m-lightBox-mask" onClick={() => this.handleHide()}></div>
       <div className="m-lightBox-body">
         <img src={this.props.imgUrl} style={{ width: this.state.imgWidth }} alt="" />
       </div>
+      {
+        this.props.btnText
+        ?
+          <div className="m-lightBox-btn" onClick={() => this.handleBtn()}>{this.props.btnText}</div>
+        :
+        null
+      }
     </div>;
 
     return ReactDOM.createPortal(dom, this.props.element);
@@ -61,13 +65,13 @@ class Lightbox extends React.Component {
 Lightbox.propTypes = {
   imgUrl: PropTypes.string,
   btnText: PropTypes.string,
-  onOk: PropTypes.func,
+  handleBtnFunc: PropTypes.func,
 };
 
 Lightbox.defaultProps = {
   imgUrl: '',
   btnText: '',
-  onOk: () => { },
+  handleBtnFunc: () => { },
 };
 
 const show = props => {

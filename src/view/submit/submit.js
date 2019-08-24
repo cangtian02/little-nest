@@ -3,15 +3,14 @@ import './submit.css';
 import EditImg from '../../components/editImg/editImg';
 import SelectImg from '../../components/selectImg/selectImg';
 import EditData from './editData/editData';
-import img from './1.jpg';
 
 class Submit extends React.Component {
 
   constructor() {
     super();
     this.state = {
-      initialImg: '11',
-      finalImg: img,
+      initialImg: '',
+      finalImg: '',
     }
   }
 
@@ -33,7 +32,7 @@ class Submit extends React.Component {
               ?
               <EditData imgSrc={this.state.finalImg} />
               :
-              <EditImg imgSrc={this.state.initialImg} proportion={'4:3'} emitImg={src => this.setState({ finalImg: src })} />
+              <EditImg imgSrc={this.state.initialImg} proportion={'4:3'} emitImgWidth={1920} emitImgHeight={1440} quality={0.7} emitImg={src => this.setState({ finalImg: src })} />
           :
           <SelectImg 
             tips={'推荐使用横向图片,图片宽高不小于900*675'} 

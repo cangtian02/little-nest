@@ -8,7 +8,7 @@
 }
 
 .m-lightBox {
-  z-index: 99999;
+  z-index: 999;
 }
 
 .m-lightBox-mask {
@@ -27,4 +27,18 @@
 
 .m-lightBox-body img {
   display: block;
+}
+
+.m-lightBox-btn {
+  position: absolute;
+  left: 50%;
+  bottom: 2rem;
+  z-index: 3;
+  transform: translateX(-50%);
+  font-size: .7rem;
+  color: #ddd;
+  padding: 0 .6rem;
+  line-height: 1.6rem;
+  border-radius: .8rem;
+  border: .5px solid #ddd;
 }

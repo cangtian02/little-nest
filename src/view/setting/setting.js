@@ -3,6 +3,8 @@ import './setting.css';
 import Utils from '../../common/Utils';
 import Picker from '../../components/picker/picker';
 import LightBox from '../../components/lightBox/lightBox';
+import UpdateIcon from './updateIcon/updateIcon';
+import EditImg from '../../components/editImg/editImg';
 
 const slable = [{
   id: 1,
@@ -28,9 +30,13 @@ class Setting extends React.Component {
     super(props);
     this.state = {
       info: {
+        icon: 'https://avatars1.githubusercontent.com/u/28089159?s=460&v=4',
         name: '昵称',
+        occupation: '设计师',
       },
       lable: [...slable, ...slable, ...slable],
+      toggleUpateIconBtn: false,
+      changeIconSrc: '',
     }
 
     this.components = [];
@@ -101,12 +107,12 @@ class Setting extends React.Component {
         <div className="set-item-box">
           <div className="set-item userIcon borderBottom">
             <div className="l">头像</div>
-            <div className="r" onClick={() => this.handleIcon()}><img src="./img/pic.jpg" alt="" /></div>
+            <div className="r" onClick={() => this.handleIcon()}><img src={this.state.info.icon} alt="" /></div>
           </div>
           <div className="set-item borderBottom">
             <div className="l">昵称</div>
-            <div className="r">
-              <input placeholder={'昵称'} value={this.state.info.name} onChange={e => this.updateData('name', e.target.value)} />
+            <div className="r" onClick={() => this.handleModal('name')}>
+              {this.state.info.name}
             </div>
           </div>
           <div className="set-item borderBottom">
@@ -115,8 +121,8 @@ class Setting extends React.Component {
           </div>
           <div className="set-item borderBottom">
             <div className="l">职业</div>
-            <div className="r">
-              <input placeholder={'职业'} value={'设计师'} onChange={e => this.updateData('name', e.target.value)} />
+            <div className="r" onClick={() => this.handleModal('occupation')}>
+              {this.state.info.occupation}
             </div>
           </div>
           <div className="set-item borderBottom">
@@ -134,22 +140,70 @@ class Setting extends React.Component {
         <div className="set-save-btns">
           <div onClick={() => this.handleSave()}>保存</div>
         </div>
+        <UpdateIcon toggle={this.state.toggleUpateIconBtn} click={() => this.handleUpdateIconClick()} change={src => this.handleUpdateIconChange(src)} />
+        {
+          this.state.changeIconSrc
+          ?
+            <EditImg imgSrc={this.state.changeIconSrc} proportion={'1:1'} emitImgWidth={800} emitImgHeight={800} quality={0.7} emitImg={src => this.updateIconFunc(src)} />
+            :
+            null
+        }
       </div>
     );
   }
 
+  updateIconFunc(src) {
+    this.updateData('icon', src);
+    this.setState({ changeIconSrc: '' });
+  }
+
+  handleUpdateIconClick() {
+    this.lightBox && this.lightBox.parentNode && this.lightBox.parentNode.removeChild(this.lightBox);
+    this.setState({
+      toggleUpateIconBtn: false,
+    });
+  }
+
+  handleUpdateIconChange(src) {
+    this.setState({ changeIconSrc: src });
+  }
+
   handleIcon() {
-    let lightBox = new LightBox({
-      imgUrl: 'https://avatars1.githubusercontent.com/u/28089159?s=460&v=4',
+    this.lightBox = new LightBox({
+      imgUrl: this.state.info.icon,
     });
 
-    this.components.push(lightBox);
+    this.components.push(this.lightBox);
+
+    this.setState({ toggleUpateIconBtn: true });
   }
 
   updateData(key, val) {
     let info = this.state.info;
     info[key] = val;
     this.setState({ info });
+  }
+
+  handleModal(key) {
+    let placeholder = key === 'name' ? '昵称' : '职业';
+    let modal = Utils.toast.modal({
+      message: '<input class="set-info-type-input" id="setInfoType" placeholder=' + placeholder + ' value=' + this.state.info[key] + ' />',
+      onOk: () => {
+        let value = document.getElementById('setInfoType').value;
+        if (value === '') {
+          Utils.toast.info('请输入' + placeholder);
+          return;
+        }
+
+        this.updateData(key, value);
+      },
+    });
+    this.components.push(modal);
+    setTimeout(() => {
+      let input = document.getElementById('setInfoType');
+      input.focus();
+      Utils.focusToLast(input);
+    }, 300);
   }
 
   handlePicker(type) {

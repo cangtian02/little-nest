@@ -52,9 +52,12 @@ class Editimg extends React.Component {
       let width = img.width;
       let height = img.height;
 
+      imgWidth = winWidth;
+      imgHeight = winWidth / width * height;
+
       // 正方形
       if (proportion_1 === proportion_2) {
-        trackerWidth = winWidth / 2;
+        trackerWidth = winWidth / 1.2 > imgHeight ? imgHeight : winWidth / 1.2;
         trackerHeight = trackerWidth;
       }
 
@@ -63,9 +66,6 @@ class Editimg extends React.Component {
         trackerWidth = winWidth * 0.96;
         trackerHeight = trackerWidth / proportion_1 * proportion_2;
       }
-
-      imgWidth = winWidth;
-      imgHeight = winWidth / width * height;
 
       this.setState({
         winWidth,
@@ -187,7 +187,26 @@ class Editimg extends React.Component {
     newImg.src = this.state.imgSrc;
     newImg.onload = () => {
       ctx.drawImage(newImg, x, y, naturalWidth, naturalHeight, 0, 0, naturalWidth, naturalHeight);
-      this.props.emitImg && this.props.emitImg(canvas.toDataURL("image/jpeg"));
+      if (this.props.emitImgWidth && this.props.emitImgHeight) {
+        this.cropImg(canvas.toDataURL("image/jpeg"), naturalWidth, naturalHeight);
+      } else {
+        this.props.emitImg && this.props.emitImg(canvas.toDataURL("image/jpeg"), this.props.quality || 1);
+      }
+    }
+  }
+
+  cropImg(src) {
+    let canvas = document.createElement('canvas');
+    let ctx = canvas.getContext('2d');
+    
+    canvas.width = this.props.emitImgWidth;
+    canvas.height = this.props.emitImgHeight;
+
+    let img = new Image();
+    img.src = src;
+    img.onload = () => {
+      ctx.drawImage(img, 0, 0, img.width, img.height, 0, 0, this.props.emitImgWidth, this.props.emitImgHeight);
+      this.props.emitImg && this.props.emitImg(canvas.toDataURL("image/jpeg"), this.props.quality || 1);
     }
   }
 
