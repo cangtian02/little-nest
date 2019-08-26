@@ -33,7 +33,7 @@ class Wo extends React.Component {
   }
 
   handleCommentBtn(id) {
-    console.log(id)
+    this.props.history.push('/itemEvaluate?itemId=' + id);
   }
 
   getItemDom() {

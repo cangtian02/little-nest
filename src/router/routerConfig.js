@@ -48,6 +48,11 @@ const Fans = Loadable({
     loading: LoadingComponents
 });
 
+const ItemEvaluate = Loadable({
+    loader: () => import('../view/itemEvaluate/itemEvaluate'),
+    loading: LoadingComponents
+});
+
 export const routes = [
     {
         path: '/home',
@@ -70,6 +75,9 @@ export const routes = [
     }, {
         path: '/fans',
         component: Fans,
+    }, {
+        path: '/itemEvaluate',
+        component: ItemEvaluate,
     },
 ];
 
