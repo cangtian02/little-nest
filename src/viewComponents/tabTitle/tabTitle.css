@@ -1,0 +1,27 @@
+.tabTitle {
+  height: 2.4rem;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tabTitle p {
+  padding: 0 1rem;
+  line-height: 2.4rem;
+  position: relative;
+}
+
+.tabTitle p.active {
+  color: #2489ED;
+}
+
+.tabTitle p.active::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: #2489ED;
+}

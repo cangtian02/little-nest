@@ -3,6 +3,7 @@ import './wo.css';
 import Footer from '../../viewComponents/footer/footer';
 import Item from '../../viewComponents/item/item';
 import UserBlock from '../../viewComponents/userBlock/userBlock';
+import TabTitle from '../../viewComponents/tabTitle/tabTitle';
 import img from '../submit/1.jpg';
 
 const item = {
@@ -51,6 +52,7 @@ class Wo extends React.Component {
       <div className="wo">
         <div className="wo-content">
           <UserBlock history={this.props.history} />
+          <TabTitle style={{margin: '.6rem 0'}} />
           <div className="wo-item">
             {this.getItemDom()}
           </div>
