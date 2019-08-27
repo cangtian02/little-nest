@@ -47,12 +47,16 @@ class Wo extends React.Component {
     return arr;
   }
 
+  handleTabTitleClick(i) {
+    console.log(i);
+  }
+
   render() {
     return (
       <div className="wo">
         <div className="wo-content">
           <UserBlock history={this.props.history} />
-          <TabTitle style={{margin: '.6rem 0'}} />
+          <TabTitle style={{margin: '.6rem 0'}} list={['小窝', '文章', '收藏', '赞过']} click={i => this.handleTabTitleClick(i)} />
           <div className="wo-item">
             {this.getItemDom()}
           </div>
