@@ -3,6 +3,7 @@ import './home.css';
 import Slide  from '../../components/slide/slide';
 import Item from '../../viewComponents/item/item';
 import Footer from '../../viewComponents/footer/footer';
+import TabTitle from '../../viewComponents/tabTitle/tabTitle';
 import img from '../submit/1.jpg';
 
 const item = {
@@ -13,6 +14,8 @@ const item = {
   userName: '小明设计师',
   lable: ['简约', '极客范', '简约', '极客范'],
   praise: 30,
+  look: 40,
+  evaluate: 20
 };
 
 class Home extends React.Component {
@@ -29,7 +32,15 @@ class Home extends React.Component {
   componentDidMount() {
     this.setState({
       data: '222',
-      banner: [img, img, img]
+      banner: [{
+        src: img,
+        id: 1,
+        type: 1,
+      }, {
+          src: img,
+          id: 1,
+          type: 2,
+        }]
     });
 
     window.sessionStorage.setItem('goHomeHistory', 'Y');
@@ -47,6 +58,10 @@ class Home extends React.Component {
     return arr;
   }
 
+  handleTabTitleClick(i) {
+    console.log(i);
+  }
+
   render() {
     if (!this.state.data) return null;
     
@@ -56,6 +71,7 @@ class Home extends React.Component {
           <div className="home-slide">
             <Slide data={this.state.banner} />
           </div>
+          <TabTitle style={{ margin: '.6rem 0' }} list={['小窝', '文章']} click={i => this.handleTabTitleClick(i)} />
           <div className="home-item">
             {this.getItemDom()}
           </div>

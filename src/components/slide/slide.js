@@ -5,7 +5,12 @@ import './slide.css';
 function SlideContent(props) {
     let dom = [];
     props.data.forEach((val, i) => {
-        dom.push(<li key={i}><img src={val} alt={val} /></li>);
+        dom.push(
+            <li key={i}>
+                <img src={val.src} alt={val.type} />
+                <i>{val.type === 1 ? '小窝' : '文章'}</i>
+            </li>
+        );
     });
     return (dom);
 }

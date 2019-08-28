@@ -37,12 +37,16 @@ class Wo extends React.Component {
     this.props.history.push('/itemEvaluate?itemId=' + id);
   }
 
+  handleDeleteBtn(id) {
+    
+  }
+
   getItemDom() {
     if (this.state.item.length === 0) return <div className="wo-item-nolist">还没有你的小窝，快上传分享吧~</div>
     
     let arr = [];
     this.state.item.forEach((val, i) => {
-      arr.push(<Item val={val} key={i} showCommentBtn={true} handleItem={id => this.handleItem(id)} handleCommentBtn={id => this.handleCommentBtn(id)} />);
+      arr.push(<Item val={val} key={i} toggleMe handleItem={id => this.handleItem(id)} handleDeleteBtn={id => this.handleDeleteBtn(id)} handleCommentBtn={id => this.handleCommentBtn(id)} />);
     });
     return arr;
   }

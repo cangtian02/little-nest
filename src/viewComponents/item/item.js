@@ -32,6 +32,10 @@ class Item extends React.Component {
     this.props.handleCommentBtn && this.props.handleCommentBtn(this.props.val.id);
   }
 
+  handleDeleteBtn() {
+    this.props.handleDeleteBtn && this.props.handleDeleteBtn(this.props.val.id);
+  }
+
   render() {
     if (!this.props.val) return null;
     let val = this.props.val;
@@ -44,7 +48,7 @@ class Item extends React.Component {
         <div className="ib-name clamp2" onClick={() => this.handleItem()}>{val.name}</div>
         <div className="ib-info">
           {
-            !this.props.showCommentBtn
+            !this.props.toggleMe
             ?
             <div className="ib-user" onClick={() => this.handleItem()}>
               <img src={val.userIcon} alt={val.userName} />
@@ -53,14 +57,16 @@ class Item extends React.Component {
             :
             null
           }
-          <div className="ib-praise" style={this.props.showCommentBtn ? {flex: 1} : {}} onClick={() => this.handleItem()}>
-            <span className="iconfont icon--dianzan"></span>
-            <p>{val.praise || 0}</p>
+          <div className="ib-nums" style={this.props.toggleMe ? {flex: 1} : {}} onClick={() => this.handleItem()}>
+            {val.look || 0}&nbsp;浏览&nbsp;&nbsp;{val.evaluate || 0}&nbsp;评论&nbsp;&nbsp;{val.praise || 0}&nbsp;点赞
           </div>
           {
-            this.props.showCommentBtn
+            this.props.toggleMe
             ?
-              <div className="ib-commentBtn" onClick={() => this.handleCommentBtn()}>查看评论</div>
+              <div className="ib-icons">
+                <span className="iconfont icon-xinbaniconshangchuan-" onClick={() => this.handleCommentBtn()}></span>
+                <span className="iconfont icon--shanchu" onClick={() => this.handleDeleteBtn()}></span>
+              </div>
             :
             null
           }
