@@ -18,8 +18,8 @@ const Home = Loadable({
     loading: LoadingComponents
 });
 
-const Submit = Loadable({
-    loader: () => import('../view/submit/submit'),
+const SubmitNest = Loadable({
+    loader: () => import('../view/submitNest/submitNest'),
     loading: LoadingComponents
 });
 
@@ -58,8 +58,8 @@ export const routes = [
         path: '/home',
         component: Home,
     }, {
-        path: '/submit',
-        component: Submit,
+        path: '/submitNest',
+        component: SubmitNest,
     }, {
         path: '/detail',
         component: Detail,

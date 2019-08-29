@@ -114,7 +114,8 @@
   border-radius: .7rem;
 }
 
-.set-add-lable-input {
+.set-add-lable-input,
+.set-info-type-input {
   width: 100%;
   line-height: 2rem;
   border-bottom: .5px solid #eee;

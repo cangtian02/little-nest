@@ -1,10 +1,10 @@
 import React from 'react';
-import './submit.css';
+import './submitNest.css';
 import EditImg from '../../components/editImg/editImg';
 import SelectImg from '../../components/selectImg/selectImg';
 import EditData from './editData/editData';
 
-class Submit extends React.Component {
+class SubmitNest extends React.Component {
 
   constructor() {
     super();
@@ -24,7 +24,7 @@ class Submit extends React.Component {
 
   render() {
     return (
-      <div className="wrap submit">
+      <div className="wrap submit-nest">
         {
           this.state.initialImg
           ?
@@ -47,4 +47,4 @@ class Submit extends React.Component {
   }
 }
 
-export default Submit;
+export default SubmitNest;

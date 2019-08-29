@@ -1,7 +1,7 @@
 import React from 'react';
-import './item.css';
+import './nestItem.css';
 
-class Item extends React.Component {
+class NestItem extends React.Component {
 
   constructor(props) {
     super(props);
@@ -21,7 +21,7 @@ class Item extends React.Component {
     lable.forEach((val, i) => {
       arr.push(<div key={i}>{val}</div>);
     });
-    return <div className="ib-lable">{arr}</div>;
+    return <div className="nib-lable">{arr}</div>;
   }
 
   handleItem() {
@@ -32,6 +32,10 @@ class Item extends React.Component {
     this.props.handleCommentBtn && this.props.handleCommentBtn(this.props.val.id);
   }
 
+  handleEditBtn() {
+    this.props.handleEditBtn && this.props.handleEditBtn(this.props.val.id);
+  }
+
   handleDeleteBtn() {
     this.props.handleDeleteBtn && this.props.handleDeleteBtn(this.props.val.id);
   }
@@ -40,31 +44,32 @@ class Item extends React.Component {
     if (!this.props.val) return null;
     let val = this.props.val;
     return (
-      <div className="item-box">
-        <div className="ib-img" onClick={() => this.handleItem()}>
+      <div className="nestItem-box">
+        <div className="nib-img" onClick={() => this.handleItem()}>
           <img src={val.img} alt={val.name} />
           {this.getLableDom(val.lable)}
         </div>
-        <div className="ib-name clamp2" onClick={() => this.handleItem()}>{val.name}</div>
-        <div className="ib-info">
+        <div className="nib-name clamp2" onClick={() => this.handleItem()}>{val.name}</div>
+        <div className="nib-info">
           {
             !this.props.toggleMe
             ?
-            <div className="ib-user" onClick={() => this.handleItem()}>
+            <div className="nib-user" onClick={() => this.handleItem()}>
               <img src={val.userIcon} alt={val.userName} />
               <p className="ellipsis">{val.userName}</p>
             </div>
             :
             null
           }
-          <div className="ib-nums" style={this.props.toggleMe ? {flex: 1} : {}} onClick={() => this.handleItem()}>
+          <div className="nib-nums" style={this.props.toggleMe ? {flex: 1} : {}} onClick={() => this.handleItem()}>
             {val.look || 0}&nbsp;浏览&nbsp;&nbsp;{val.evaluate || 0}&nbsp;评论&nbsp;&nbsp;{val.praise || 0}&nbsp;点赞
           </div>
           {
             this.props.toggleMe
             ?
-              <div className="ib-icons">
+              <div className="nib-icons">
                 <span className="iconfont icon-xinbaniconshangchuan-" onClick={() => this.handleCommentBtn()}></span>
+                <span className="iconfont icon-icon_edit" onClick={() => this.handleEditBtn()}></span>
                 <span className="iconfont icon--shanchu" onClick={() => this.handleDeleteBtn()}></span>
               </div>
             :
@@ -76,4 +81,4 @@ class Item extends React.Component {
   }
 }
 
-export default Item; 
+export default NestItem; 

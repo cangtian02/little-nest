@@ -1,10 +1,10 @@
 import React from 'react';
 import './wo.css';
 import Footer from '../../viewComponents/footer/footer';
-import Item from '../../viewComponents/item/item';
+import NestItem from '../../viewComponents/nestItem/nestItem';
 import UserBlock from '../../viewComponents/userBlock/userBlock';
 import TabTitle from '../../viewComponents/tabTitle/tabTitle';
-import img from '../submit/1.jpg';
+import img from '../submitNest/1.jpg';
 
 const item = {
   id: 1,
@@ -37,6 +37,10 @@ class Wo extends React.Component {
     this.props.history.push('/itemEvaluate?itemId=' + id);
   }
 
+  handleEditBtn(id) {
+    
+  }
+
   handleDeleteBtn(id) {
     
   }
@@ -46,7 +50,12 @@ class Wo extends React.Component {
     
     let arr = [];
     this.state.item.forEach((val, i) => {
-      arr.push(<Item val={val} key={i} toggleMe handleItem={id => this.handleItem(id)} handleDeleteBtn={id => this.handleDeleteBtn(id)} handleCommentBtn={id => this.handleCommentBtn(id)} />);
+      arr.push(<NestItem val={val} key={i} toggleMe 
+        handleItem={id => this.handleItem(id)} 
+        handleDeleteBtn={id => this.handleDeleteBtn(id)} 
+        handleEditBtn={id => this.handleEditBtn(id)}
+        handleCommentBtn={id => this.handleCommentBtn(id)} />
+      );
     });
     return arr;
   }

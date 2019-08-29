@@ -1,8 +1,8 @@
 import React from 'react';
 import './itemMore.css';
 import { PublicTitle } from '../../../components/componentList/componentList';
-import Item from '../../../viewComponents/item/item';
-import img from '../../submit/1.jpg';
+import NestItem from '../../../viewComponents/nestItem/nestItem';
+import img from '../../submitNest/1.jpg';
 
 const item = {
   id: 2,
@@ -34,7 +34,7 @@ class Itemmore extends React.Component {
   getItemDom() {
     let arr = [];
     this.state.item.forEach((val, i) => {
-      arr.push(<Item val={val} key={i} handleItem={id => this.handleItem(id)} />);
+      arr.push(<NestItem val={val} key={i} handleItem={id => this.handleItem(id)} />);
     });
     return arr;
   }

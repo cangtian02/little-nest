@@ -1,10 +1,10 @@
 import React from 'react';
 import './home.css';
 import Slide  from '../../components/slide/slide';
-import Item from '../../viewComponents/item/item';
+import NestItem from '../../viewComponents/nestItem/nestItem';
 import Footer from '../../viewComponents/footer/footer';
 import TabTitle from '../../viewComponents/tabTitle/tabTitle';
-import img from '../submit/1.jpg';
+import img from '../submitNest/1.jpg';
 
 const item = {
   id: 1,
@@ -53,7 +53,7 @@ class Home extends React.Component {
   getItemDom() {
     let arr = [];
     this.state.item.forEach((val, i) => {
-      arr.push(<Item val={val} key={i} handleItem={id => this.handleItem(id)} />);
+      arr.push(<NestItem val={val} key={i} handleItem={id => this.handleItem(id)} />);
     });
     return arr;
   }
