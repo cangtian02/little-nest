@@ -1,5 +1,6 @@
 .dt-evaluate {
-  margin: 0 .6rem;
+  padding: 0 .6rem;
+  background: #fff;
 }
 
 .dte-input {
@@ -87,7 +88,7 @@
 
 .load-more.evaluate {
   text-align: center;
-  margin-bottom: .3rem;
+  padding-bottom: .6rem;
 }
 
 .evaluate-text-input {

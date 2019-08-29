@@ -108,6 +108,24 @@ a:active {
   -webkit-line-clamp: 2;
 }
 
+.clamp3 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  /*! autoprefixer: off */
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+.clamp4 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  /*! autoprefixer: off */
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+}
+
 .ellipsis {
   overflow: hidden;
   text-overflow: ellipsis;

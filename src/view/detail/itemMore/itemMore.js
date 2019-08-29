@@ -27,14 +27,10 @@ class Itemmore extends React.Component {
 
   }
 
-  handleItem(id) {
-    this.props.history.push('/detail?itemId=' + id);
-  }
-
   getItemDom() {
     let arr = [];
     this.state.item.forEach((val, i) => {
-      arr.push(<NestItem val={val} key={i} handleItem={id => this.handleItem(id)} />);
+      arr.push(<NestItem val={val} key={i} history={this.props.history} />);
     });
     return arr;
   }
@@ -42,7 +38,7 @@ class Itemmore extends React.Component {
   render() {
     return (
       <div className="dt-itemMore">
-        <PublicTitle val={'更多小窝'} />
+        <div className="dt-itemMore-title"><PublicTitle val={'更多小窝'} /></div>
         <div className="dt-itemMore-block"></div>
         {this.getItemDom()}
       </div>

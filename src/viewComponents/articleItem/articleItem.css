@@ -1,0 +1,71 @@
+.articleItem {
+  padding: .4rem .6rem;
+  margin-bottom: .8rem;
+  background: #fff;
+}
+
+.ari-title {
+  line-height: 1.2rem;
+  font-size: .8rem;
+  font-weight: 600;
+}
+
+.ari-img-box {
+  display: flex;
+  margin: .6rem 0;
+}
+
+.ari-img-box img {
+  width: 33%;
+  margin-right: .3rem;
+  border-radius: .2rem;
+  overflow: hidden;
+}
+
+.ari-info-box {
+  font-size: .7rem;
+  color: #5D5D5D;
+  line-height: 1rem;
+  margin: .4rem 0;
+}
+
+.ari-info {
+  height: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ari-user {
+  display: flex;
+  align-items: center;
+}
+
+.ari-user img {
+  display: block;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  margin-right: .2rem;
+}
+
+.ari-user p {
+  font-size: .6rem;
+  color: #666;
+}
+
+.ari-nums {
+  color: #aaa;
+  font-size: .5rem;
+}
+
+.ari-icons {
+  height: 1rem;
+  display: flex;
+}
+
+.ari-icons span {
+  font-size: 1rem;
+  margin-left: .5rem;
+  color: #CECECE;
+}

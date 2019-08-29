@@ -1,5 +1,6 @@
 .dt-info {
-  margin: 1rem .6rem .4rem .6rem;
+  padding: 1rem .6rem .4rem .6rem;
+  background: #fff;
 }
 
 .dti-user {

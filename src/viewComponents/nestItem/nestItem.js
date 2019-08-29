@@ -25,19 +25,19 @@ class NestItem extends React.Component {
   }
 
   handleItem() {
-    this.props.handleItem && this.props.handleItem(this.props.val.id);
+    this.props.history.push('/detail?itemId=' + this.props.val.id);
   }
 
   handleCommentBtn() {
-    this.props.handleCommentBtn && this.props.handleCommentBtn(this.props.val.id);
+    
   }
 
   handleEditBtn() {
-    this.props.handleEditBtn && this.props.handleEditBtn(this.props.val.id);
+    
   }
 
   handleDeleteBtn() {
-    this.props.handleDeleteBtn && this.props.handleDeleteBtn(this.props.val.id);
+    
   }
 
   render() {

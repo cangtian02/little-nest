@@ -2,6 +2,7 @@ import React from 'react';
 import './home.css';
 import Slide  from '../../components/slide/slide';
 import NestItem from '../../viewComponents/nestItem/nestItem';
+import ArticleItem from '../../viewComponents/articleItem/articleItem';
 import Footer from '../../viewComponents/footer/footer';
 import TabTitle from '../../viewComponents/tabTitle/tabTitle';
 import img from '../submitNest/1.jpg';
@@ -23,8 +24,20 @@ class Home extends React.Component {
   constructor() {
     super();
     this.state = {
+      tabIndex: 0,
       data: '',
-      item: [item, item, item],
+      nestItem: [item],
+      articleItem: [
+        {
+          id: 1,
+          img: [img, img],
+          userIcon: img,
+          userName: '小明设计师',
+          name: '文章名字啊啊啊小窝名字啊啊啊',
+          info: '文章内容啊啊啊小窝名字啊啊啊文章内容啊啊啊小窝名字啊啊啊文章内容啊啊啊小窝名字啊啊啊文章内容啊啊啊小窝名字啊啊啊文章内容啊啊啊小窝名字啊啊啊文章内容啊啊啊小窝名字啊啊啊文章内容啊啊啊小窝名字啊啊啊文章内容啊啊啊小窝名字啊啊啊文章内容啊啊啊小窝名字啊啊啊',
+          praise: 30,
+        }
+      ],
       banner: []
     }
   }
@@ -46,20 +59,30 @@ class Home extends React.Component {
     window.sessionStorage.setItem('goHomeHistory', 'Y');
   }
 
-  handleItem(id) {
-    this.props.history.push('/detail?itemId=' + id);
-  }
-
   getItemDom() {
+    if (this.state.nestItem.length === 0) return <div className="home-item-nolist">还没有小窝，快上传分享吧~</div>;
+    
     let arr = [];
-    this.state.item.forEach((val, i) => {
-      arr.push(<NestItem val={val} key={i} handleItem={id => this.handleItem(id)} />);
+    this.state.nestItem.forEach((val, i) => {
+      arr.push(<NestItem val={val} key={i} history={this.props.history} />);
     });
     return arr;
   }
 
-  handleTabTitleClick(i) {
-    console.log(i);
+
+  getArticleItem() {
+    if (this.state.articleItem.length === 0) return <div className="home-item-nolist">还没有文章，快上传分享吧~</div>
+
+    let arr = [];
+    this.state.articleItem.forEach((val, i) => {
+      arr.push(<ArticleItem val={val} key={i} history={this.props.history} />);
+    });
+
+    return arr;
+  }
+
+  handleTabTitleClick(tabIndex) {
+    this.setState({ tabIndex });
   }
 
   render() {
@@ -73,7 +96,17 @@ class Home extends React.Component {
           </div>
           <TabTitle style={{ margin: '.6rem 0' }} list={['小窝', '文章']} click={i => this.handleTabTitleClick(i)} />
           <div className="home-item">
-            {this.getItemDom()}
+            {
+              this.state.tabIndex === 0
+                ?
+                this.getItemDom()
+                :
+                this.state.tabIndex === 1
+                  ?
+                  this.getArticleItem()
+                  :
+                  null
+            }
           </div>
         </div>
         <Footer />
