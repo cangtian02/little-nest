@@ -5,6 +5,7 @@ import NestItem from '../../viewComponents/nestItem/nestItem';
 import ArticleItem from '../../viewComponents/articleItem/articleItem';
 import UserBlock from '../../viewComponents/userBlock/userBlock';
 import TabTitle from '../../viewComponents/tabTitle/tabTitle';
+import SmallTab from './smallTab/smallTab';
 import img from '../submitNest/1.jpg';
 
 const item = {
@@ -20,7 +21,9 @@ class Wo extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      tabIndex: 0,
+      titleTabIndex: 0,
+      collectSmallTabIndex: 0,
+      praiseSmallTabIndex: 0,
       nestItem: [item],
       articleItem: [
         {
@@ -38,30 +41,80 @@ class Wo extends React.Component {
 
   }
 
-  handleTabTitleClick(tabIndex) {
-    this.setState({ tabIndex });
+  handleTabTitleClick(titleTabIndex) {
+    this.setState({ titleTabIndex });
   }
 
-  getItemDom() {
-    if (this.state.nestItem.length === 0) return <div className="wo-item-nolist">还没有你的小窝，快上传分享吧~</div>
+  getNolistContent(str) {
+    return <div className="wo-item-nolist">{str}</div>;
+  }
+
+  getNestItemDom(item, str) {
+    if (item.length === 0) return this.getNolistContent(str);
     
     let arr = [];
-    this.state.nestItem.forEach((val, i) => {
+    item.forEach((val, i) => {
       arr.push(<NestItem val={val} key={i} toggleMe history={this.props.history} />);
     });
 
     return arr;
   }
 
-  getArticleItem() {
-    if (this.state.articleItem.length === 0) return <div className="wo-item-nolist">还没有你的文章，快上传分享吧~</div>
+  getArticleItem(item, str) {
+    if (item.length === 0) return this.getNolistContent(str);
 
     let arr = [];
-    this.state.articleItem.forEach((val, i) => {
+    item.forEach((val, i) => {
       arr.push(<ArticleItem val={val} key={i} toggleMe history={this.props.history} />);
     });
 
     return arr;
+  }
+
+  getNestContent() {
+    return this.getNestItemDom(this.state.nestItem, '还没有你的小窝，快上传分享吧~');
+  }
+
+  getArticleContent() {
+    return this.getArticleItem(this.state.articleItem, '还没有你的文章，快上传分享吧~');
+  }
+
+  handleCollectSmallTabClick(collectSmallTabIndex) {
+    this.setState({ collectSmallTabIndex });
+  }
+
+  getCollectContent() {
+    return (
+      <div>
+        <SmallTab tabIndex={this.state.collectSmallTabIndex} click={i => this.handleCollectSmallTabClick(i)} />
+        {
+          this.state.collectSmallTabIndex === 0
+          ?
+          this.getNestItemDom(this.state.nestItem, '还没有你的小窝，快上传分享吧~')
+          :
+          this.getArticleItem(this.state.articleItem, '还没有你的文章，快上传分享吧~')
+        }
+      </div>
+    );
+  }
+
+  handlePraiseSmallTabClick(praiseSmallTabIndex) {
+    this.setState({ praiseSmallTabIndex });
+  }
+
+  getPraiseContent() {
+    return (
+      <div>
+        <SmallTab tabIndex={this.state.praiseSmallTabIndex} click={i => this.handlePraiseSmallTabClick(i)} />
+        {
+          this.state.praiseSmallTabIndex === 0
+            ?
+            this.getNestItemDom(this.state.nestItem, '还没有你的小窝，快上传分享吧~')
+            :
+            this.getArticleItem(this.state.articleItem, '还没有你的文章，快上传分享吧~')
+        }
+      </div>
+    );
   }
 
   render() {
@@ -72,15 +125,19 @@ class Wo extends React.Component {
           <TabTitle style={{margin: '.6rem 0'}} list={['小窝', '文章', '收藏', '赞过']} click={i => this.handleTabTitleClick(i)} />
           <div className="wo-item">
             {
-              this.state.tabIndex === 0
+              this.state.titleTabIndex === 0
               ?
-              this.getItemDom()
+                this.getNestContent()
               :
-              this.state.tabIndex === 1
+                this.state.titleTabIndex === 1
               ?
-              this.getArticleItem()
+                this.getArticleContent()
               :
-              null
+                this.state.titleTabIndex === 2
+              ?
+                this.getCollectContent()
+              :
+                this.getPraiseContent()
             }
           </div>
         </div>

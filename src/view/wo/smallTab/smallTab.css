@@ -1,0 +1,28 @@
+.smallTab {
+  height: 2.6rem;
+  display: flex;
+  justify-content: center;
+  padding-bottom: .6rem;
+}
+
+.smt-content {
+  width: 7rem;
+  height: 2rem;
+  background: #eee;
+  border-radius: 1rem;
+  padding: 3px;
+  display: flex;
+}
+
+.smt-item {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 1rem;
+}
+
+.smt-item.active {
+  background: #fff;
+  color: #2489ED;
+}
