@@ -1,5 +1,6 @@
 import React from 'react';
 import './articleItem.css';
+import Utils from '../../common/Utils';
 
 class Articleitem extends React.Component {
 
@@ -12,6 +13,14 @@ class Articleitem extends React.Component {
 
   componentDidMount() {
 
+  }
+
+  componentWillUnmount() {
+    this.removeModal(this.deleteItemModal);
+  }
+
+  removeModal(node) {
+    node && node.parentNode && node.parentNode.removeChild(node);
   }
 
   getImgItem() {
@@ -40,15 +49,22 @@ class Articleitem extends React.Component {
   }
 
   handleCommentBtn() {
-    
+    this.props.history.push('/itemEvaluate?itemId=' + this.props.val.id);
   }
 
   handleEditBtn() {
-    
+    this.props.history.push('/submitNest?itemId=' + this.props.val.id);
   }
 
   handleDeleteBtn() {
-    
+    this.deleteItemModal = Utils.toast.modal({
+      message: '确定删除此文章，删除后不可回复？',
+      onOk: () => {
+        setTimeout(() => {
+          this.props.deleteItem && this.props.deleteItem(this.props.index);
+        }, 300);
+      },
+    });
   }
 
   render() {

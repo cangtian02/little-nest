@@ -1,17 +1,26 @@
 import React from 'react';
 import './nestItem.css';
+import Utils from '../../common/Utils';
 
 class NestItem extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
-
+      
     }
   }
 
   componentDidMount() {
 
+  }
+
+  componentWillUnmount() {
+    this.removeModal(this.deleteItemModal);
+  }
+
+  removeModal(node) {
+    node && node.parentNode && node.parentNode.removeChild(node);
   }
 
   getLableDom(lable) {
@@ -29,20 +38,28 @@ class NestItem extends React.Component {
   }
 
   handleCommentBtn() {
-    
+    this.props.history.push('/itemEvaluate?itemId=' + this.props.val.id);
   }
 
   handleEditBtn() {
-    
+    this.props.history.push('/submitNest?itemId=' + this.props.val.id);
   }
 
   handleDeleteBtn() {
-    
+    this.deleteItemModal = Utils.toast.modal({
+      message: '确定删除此小窝，删除后不可回复？',
+      onOk: () => {
+        setTimeout(() => {
+          this.props.deleteItem && this.props.deleteItem(this.props.index);
+        }, 300);
+      },
+    });
   }
 
   render() {
     if (!this.props.val) return null;
     let val = this.props.val;
+    
     return (
       <div className="nestItem-box">
         <div className="nib-img" onClick={() => this.handleItem()}>
