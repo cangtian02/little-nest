@@ -58,9 +58,9 @@ class NestDetail extends React.Component {
           hideLableInfo={() => this.hideLableInfo()} 
           handleLableIndex={i => this.handleLableIndex(i)}
         />
-        <Info />
+        <Info history={this.props.history} />
         <div className="ned-line"></div>
-        <Evaluate type={1} />
+        <Evaluate type={1} history={this.props.history} />
         <div className="ned-line"></div>
         <Itemmore history={this.props.history} type={1} />
         <div className="ned-line"></div>

@@ -1,0 +1,96 @@
+.ite-title {
+  line-height: 2.2rem;
+  padding-left: .6rem;
+  font-size: .7rem;
+  color: #434343;
+}
+
+.ite-nolist {
+  font-size: .6rem;
+  color: #555;
+  text-align: center;
+  margin-top: 1.6rem;
+}
+
+.ite-item-box {
+  background: #fff;
+  padding-left: .6rem;
+}
+
+.ite-item-box .ite-item.borderBottom:last-child::after {
+  display: none;
+}
+
+.ite-item {
+  display: flex;
+  padding: .75rem 0 .3rem 0;
+}
+
+.ite-item .l {
+  width: 1.4rem;
+  height: 1.4rem;
+  margin-right: .4rem;
+}
+
+.ite-item .l img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.ite-item .r {
+  flex: 1;
+}
+
+.ite-item .r .u {
+  height: 1.4rem;
+  margin-bottom: .4rem;
+}
+
+.ite-item .r .u p {
+  font-size: .7rem;
+  color: #7F7F7F;
+  line-height: .7rem;
+}
+
+.ite-item .r .u span {
+  display: block;
+  font-size: .6rem;
+  color: #aaa;
+  line-height: .7rem;
+}
+
+.ite-item .r .i,
+.ite-item .r .reply {
+  font-size: .7rem;
+  color: #7F7F7F;
+  line-height: 1rem;
+  margin-bottom: .4rem;
+}
+
+.ite-item .r .i span,
+.ite-item .load-more {
+  color: #2489ED;
+  font-size: .6rem;
+}
+
+.ite-item .r .reply span {
+  color: #2489ED;
+}
+
+.ite-item .r .reply span:last-child {
+  font-size: .6rem;
+}
+
+.ite-item .load-more.reply {
+  margin-bottom: .4rem;
+}
+
+.evaluate-text-input {
+  width: 100%;
+  line-height: 2rem;
+  border-bottom: .5px solid #eee;
+  color: #434343;
+}

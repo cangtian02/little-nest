@@ -78,6 +78,8 @@ class Slide extends React.Component {
 	}
 
 	play() {
+		if (!this.props.autoPlay) return;
+
 		clearTimeout(this.timer);
 		this.timer = setTimeout(() => {
 			if (this.state.currentPageIndex >= this.props.data.length) {

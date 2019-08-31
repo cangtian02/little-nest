@@ -25,10 +25,13 @@ class Evaluate extends React.Component {
     node && node.parentNode && node.parentNode.removeChild(node);
   }
 
+  handleGoList() {
+    this.props.history.push('/itemEvaluate?itemId=');
+  }
+
   getItemDom() {
     return (
       <div className="dte-item-box">
-
         <div className="dte-item borderBottom">
           <div className="l"><img src="./img/1.jpg" alt="" /></div>
           <div className="r">
@@ -36,35 +39,14 @@ class Evaluate extends React.Component {
               <p>用户昵称</p>
               <span>08-27</span>
             </div>
-            <div className="i">评论内容发撒播放列表<span onClick={() => this.handleReply()}>&nbsp;&nbsp;&nbsp;回复</span></div>
+            <div className="i">评论内容发撒播放列表<span onClick={() => this.handleReply()}>&nbsp;&nbsp;&nbsp;&nbsp;回复</span></div>
 
-            <div className="dte-item first">
-              <div className="l"><img src="./img/1.jpg" alt="" /></div>
-              <div className="r">
-                <div className="u">
-                  <p>用户昵称</p>
-                  <span>08-27</span>
-                </div>
-                <div className="i">评论内容发撒播放列表</div>
-              </div>
-            </div>
-            <div className="dte-item">
-              <div className="l"><img src="./img/1.jpg" alt="" /></div>
-              <div className="r">
-                <div className="u">
-                  <p>用户昵称</p>
-                  <span>08-27</span>
-                </div>
-                <div className="i">评论内容发撒播放列表</div>
-              </div>
-            </div>
-            <div className="load-more reply">查看更多回复</div>
+            <div className="reply"><span>小明</span>回复<span>小李</span>：评论内容发撒播放列表评论内容发撒播放列表评论内容发撒播放列表评论内容发撒播放列表评论内容发撒播放列表<span onClick={() => this.handleReply()}>&nbsp;&nbsp;&nbsp;&nbsp;回复</span></div>
+            <div className="reply"><span>小明</span>回复<span>小李</span>：评论内容发撒播放列表<span onClick={() => this.handleReply()}>&nbsp;&nbsp;&nbsp;&nbsp;回复</span></div>
 
+            <div className="load-more" onClick={() => this.handleGoList()}>查看更多回复</div>
           </div>
         </div>
-
-        <div className="load-more evaluate">查看更多评论</div>
-
       </div>
     );
   }
@@ -75,6 +57,7 @@ class Evaluate extends React.Component {
         <PublicTitle val={(this.props.type === 1 ? '小窝' : '文章') + '评论'} />
         <div className="dte-input" onClick={() => this.handleEvaluate()}>说点什么？</div>
         {this.getItemDom()}
+        <div className="load-more evaluate" onClick={() => this.handleGoList()}>查看更多评论</div>
       </div>
     );
   }

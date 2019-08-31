@@ -33,9 +33,9 @@ class Articledetail extends React.Component {
     return (
       <div className="articleDetail">
         <Slide data={this.state.info.imgs} proportion={[4, 3]} click={i => this.handleSlideClick(i)} />
-        <Info />
+        <Info history={this.props.history} />
         <div className="ard-line"></div>
-        <Evaluate type={2} />
+        <Evaluate type={2} history={this.props.history} />
         <div className="ard-line"></div>
         <Itemmore history={this.props.history} type={2} />
         <div className="ard-line"></div>

@@ -126,7 +126,7 @@ class Home extends React.Component {
       <div className="home">
         <div className="home-content">
           <div className="home-slide">
-            <Slide data={this.state.banner} proportion={[2, 1]} click={i => this.handleSlideClick(i)} />
+            <Slide autoPlay data={this.state.banner} proportion={[2, 1]} click={i => this.handleSlideClick(i)} />
           </div>
           <TabTitle style={{ margin: '.6rem 0' }} list={['小窝', '文章']} click={i => this.handleTabTitleClick(i)} />
           <div className="home-item">
