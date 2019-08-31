@@ -144,5 +144,5 @@ a:active {
   bottom: 0;
   height: 1px;
   background: #eee;
-  transform: scaleY(.5);
+  transform: scaleY(.75);
 }

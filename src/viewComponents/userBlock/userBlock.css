@@ -86,10 +86,10 @@
   display: flex;
   align-items: center;
   padding: 0 .3rem;
-  border: .5px solid #aaa;
   border-radius: .6rem;
   font-size: .6rem;
-  color: #aaa;
+  background: #f8f8f8;
+  color: #434343;
 }
 
 .userBlock-info {

@@ -148,7 +148,7 @@ class Stepone extends React.Component {
     this.state.lableData.forEach((val, idx) => {
       arr.push(<div key={idx} className={idx === this.state.lableIndex ? 'active' : ''} onClick={() => this.switchLableIndex(idx)}>标签{Utils.numberToZh(idx + 1)}</div>);
     });
-    return <div className="eso-tab-header" id="eso-tab-header">{arr}</div>;
+    return <div className="eso-tab-header borderBottom" id="eso-tab-header">{arr}</div>;
   }
 
   getTabContent() {

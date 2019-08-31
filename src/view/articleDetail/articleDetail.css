@@ -1,0 +1,23 @@
+.ard-line {
+  height: .6rem;
+}
+
+.articleDetail .articleItem {
+  margin-bottom: 0;
+  position: relative;
+}
+
+.articleDetail .articleItem::after {
+  content: '';
+  position: absolute;
+  left: .6rem;
+  right: .6rem;
+  bottom: 0;
+  height: 1px;
+  background: #eee;
+  transform: scaleY(.75);
+}
+
+.articleDetail .articleItem:last-child::after {
+  display: none;
+}

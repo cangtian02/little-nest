@@ -2,122 +2,138 @@ import React from 'react';
 import BScroll from 'better-scroll';
 import './slide.css';
 
-function SlideContent(props) {
-    let dom = [];
-    props.data.forEach((val, i) => {
-        dom.push(
-            <li key={i}>
-                <img src={val.src} alt={val.type} />
-                <i>{val.type === 1 ? '小窝' : '文章'}</i>
-            </li>
-        );
-    });
-    return (dom);
-}
-
-function SlideDots(props) {
-    let dom = [];
-    props.data.forEach((val, i) => {
-        dom.push(<li key={i} className={props.currentIndex === i ? 'active' : ''}></li>);
-    });
-    return (dom);
-}
-
 class Slide extends React.Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            group_style: { width: 0 },
-            currentPageIndex: 0
-        }
-    }
+	constructor(props) {
+		super(props);
+		this.state = {
+			group_style: { width: 0 },
+			currentPageIndex: 0
+		}
+	}
 
-    componentDidMount() {
-        if (this.props.data.length > 0) this.setSlideWidth();
-    }
+	componentDidMount() {
+		if (this.props.data.length > 0) this.setSlideWidth();
+	}
 
-    componentWillUnmount() {
-        this.slide && this.slide.destroy();
-        this.timer && clearTimeout(this.timer);
-    }
+	componentWillUnmount() {
+		this.slide && this.slide.destroy();
+		this.timer && clearTimeout(this.timer);
+	}
 
-    setSlideWidth() {
-        let slideWidth = this.refs.slide.clientWidth;
-        let width = (this.props.data.length + 2) * slideWidth;
-        this.setState({
-            group_style: {
-                width: width
-            }
-        }, () => {
-            this.initSlide();
-        });
-    }
+	setSlideWidth() {
+		if (this.props.data.length === 1) {
+			this.setState({
+				group_style: {
+					width: this.refs.slide.clientWidth
+				}
+			});
+			return;
+		}
 
-    initSlide() {
-        if (this.slide) this.slide.destroy(); this.slide = null;
-        if (this.timer) clearTimeout(this.timer);
+		let slideWidth = this.refs.slide.clientWidth;
+		let width = (this.props.data.length + 2) * slideWidth;
+		this.setState({
+			group_style: {
+				width: width
+			}
+		}, () => {
+			this.initSlide();
+		});
+	}
 
-        this.slide = new BScroll(this.refs.slide, {
-            scrollX: true,
-            scrollY: false,
-            momentum: false,
-            snap: {
-                loop: true,
-                threshold: 0.3,
-                speed: 400
-            },
-            bounce: false
-        });
+	initSlide() {
+		if (this.slide) this.slide.destroy(); this.slide = null;
+		if (this.timer) clearTimeout(this.timer);
 
-        this.slide.on('scrollEnd', () => {
-            this.setState({
-                currentPageIndex: this.slide.getCurrentPage().pageX
-            });
-            this.play();
-        });
+		this.slide = new BScroll(this.refs.slide, {
+			scrollX: true,
+			scrollY: false,
+			momentum: false,
+			snap: {
+				loop: true,
+				threshold: 0.3,
+				speed: 400
+			},
+			bounce: false,
+			click: true
+		});
 
-        this.slide.on('touchEnd', () => {
-            this.play();
-        });
+		this.slide.on('scrollEnd', () => {
+			this.setState({
+				currentPageIndex: this.slide.getCurrentPage().pageX
+			});
+			this.play();
+		});
 
-        this.slide.on('beforeScrollStart', () => {
-            clearTimeout(this.timer);
-        });
+		this.slide.on('touchEnd', () => {
+			this.play();
+		});
 
-        this.play();
-    }
+		this.slide.on('beforeScrollStart', () => {
+			clearTimeout(this.timer);
+		});
 
-    play() {
-        clearTimeout(this.timer);
-        this.timer = setTimeout(() => {
-            if (this.state.currentPageIndex >= this.props.data.length) {
-                this.setState({
-                    currentPageIndex: 0
-                });
-            }
-            this.slide.next();
-        }, 3000);
-    }
+		this.play();
+	}
 
-    render() {
-        if (this.props.data.length === 0) return null;
+	play() {
+		clearTimeout(this.timer);
+		this.timer = setTimeout(() => {
+			if (this.state.currentPageIndex >= this.props.data.length) {
+				this.setState({
+					currentPageIndex: 0
+				});
+			}
+			this.slide.next();
+		}, 3000);
+	}
 
-        return (
-            <div className="m-slide">
-                <div className="m-slide-warp">
-                    <div className="m-slide-content" ref="slide">
-                        <div className="m-slide-group" style={this.state.group_style}>
-                            <SlideContent data={this.props.data} />
-                        </div>
-                        <ul className="m-slide-index">
-                            <SlideDots data={this.props.data} currentIndex={this.state.currentPageIndex} />
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        );
-    }
+	handleClick(i) {
+		this.props.click && this.props.click(i);
+	}
+
+	getSlideContent() {
+		let dom = [];
+		this.props.data.forEach((val, i) => {
+			dom.push(
+				<li key={i} onClick={() => this.handleClick(i)}>
+					<img src={val.src} alt='' />
+					{val.tag ? <i style={{ background: val.tagBg || '#2489ED' }}>{val.tag}</i> : null}
+				</li>
+			);
+		});
+		return (dom);
+	}
+
+	getSlideDots() {
+		let dom = [];
+		this.props.data.forEach((val, i) => {
+			dom.push(<li key={i} className={this.state.currentPageIndex === i ? 'active' : ''}></li>);
+		});
+		return (dom);
+	}
+
+	render() {
+		if (this.props.data.length === 0) return null;
+		let w = window.innerWidth;
+
+		return (
+			<div className="m-slide" style={{ height: w / this.props.proportion[0] * this.props.proportion[1]}}>
+				<div className="m-slide-warp">
+					<div className="m-slide-content" ref="slide">
+						<div className="m-slide-group" style={this.state.group_style}>
+							{this.getSlideContent()}
+						</div>
+						<ul className="m-slide-index">
+							{this.getSlideDots()}
+						</ul>
+					</div>
+				</div>
+			</div>
+		);
+	}
+
 }
 
 export default Slide;

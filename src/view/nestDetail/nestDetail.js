@@ -1,13 +1,13 @@
 import React from 'react';
-import './detail.css';
+import './nestDetail.css';
 import ImgBox from './imgBox/imgBox';
-import Info from './info/info';
-import Evaluate from './evaluate/evaluate';
-import Itemmore from './itemMore/itemMore';
+import Info from '../../viewComponents/info/info';
+import Evaluate from '../../viewComponents/evaluate/evaluate';
+import Itemmore from '../../viewComponents/itemMore/itemMore';
 import Lableinfo from './lableInfo/lableInfo';
 import { BotGoHomeBtn } from '../../components/componentList/componentList';
 
-class Detail extends React.Component {
+class NestDetail extends React.Component {
 
   constructor(props) {
     super(props);
@@ -50,7 +50,7 @@ class Detail extends React.Component {
 
   render() {
     return (
-      <div className="detail">
+      <div className="nestDetail">
         <ImgBox 
           toggleLableInfo={this.state.toggleLableInfo} 
           lableIndex={this.state.lableIndex} 
@@ -59,8 +59,11 @@ class Detail extends React.Component {
           handleLableIndex={i => this.handleLableIndex(i)}
         />
         <Info />
-        <Evaluate />
-        <Itemmore history={this.props.history} />
+        <div className="ned-line"></div>
+        <Evaluate type={1} />
+        <div className="ned-line"></div>
+        <Itemmore history={this.props.history} type={1} />
+        <div className="ned-line"></div>
         <Lableinfo 
           lableData={this.state.lableData}
           toggleLableInfo={this.state.toggleLableInfo} 
@@ -73,4 +76,4 @@ class Detail extends React.Component {
   }
 }
 
-export default Detail; 
+export default NestDetail; 

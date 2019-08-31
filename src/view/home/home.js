@@ -59,20 +59,25 @@ class Home extends React.Component {
   }
 
   componentDidMount() {
+    // 记录进入过首页
+    window.sessionStorage.setItem('goHomeHistory', 'Y');
+
     this.setState({
       data: '222',
       banner: [{
         src: img,
         id: 1,
         type: 1,
+        tag: '小窝',
+        tagBg: '#E87424'
       }, {
-          src: img,
-          id: 1,
-          type: 2,
-        }]
+        src: img,
+        id: 1,
+        type: 2,
+        tag: '文章',
+        tagBg: '#3BB9D8'
+      }]
     });
-
-    window.sessionStorage.setItem('goHomeHistory', 'Y');
   }
 
   getItemDom() {
@@ -101,6 +106,19 @@ class Home extends React.Component {
     this.setState({ tabIndex });
   }
 
+  handleSlideClick(i) {
+    switch (this.state.banner[i].type) {
+      case 1:
+        this.props.history.push('/nestDetail?itemId=' + this.state.banner[i].id);
+        break;
+      case 2:
+        this.props.history.push('/articleDetail?itemId=' + this.state.banner[i].id);
+        break;
+      default:
+        break;
+    }
+  }
+
   render() {
     if (!this.state.data) return null;
     
@@ -108,7 +126,7 @@ class Home extends React.Component {
       <div className="home">
         <div className="home-content">
           <div className="home-slide">
-            <Slide data={this.state.banner} />
+            <Slide data={this.state.banner} proportion={[2, 1]} click={i => this.handleSlideClick(i)} />
           </div>
           <TabTitle style={{ margin: '.6rem 0' }} list={['小窝', '文章']} click={i => this.handleTabTitleClick(i)} />
           <div className="home-item">

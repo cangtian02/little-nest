@@ -38,11 +38,11 @@
   display: flex;
   align-items: center;
   padding: 0 .3rem;
-  border: .5px solid #fff;
   border-radius: .6rem;
-  color: #fff;
+  color: #434343;
   font-size: .6rem;
   margin-left: .4rem;
+  background: rgba(248, 248, 248, .5);
 }
 
 .nib-name {

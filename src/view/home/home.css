@@ -5,15 +5,12 @@
   right: 0;
   bottom: 0;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 .home-content {
-  position: absolute;
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 2.5rem;
-  z-index: 1;
+  flex: 1;
   overflow: auto;
   background: #f5f5f5;
 }

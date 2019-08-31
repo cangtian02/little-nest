@@ -41,14 +41,14 @@
   height: 1.4rem;
   padding: 0 .5rem;
   border-radius: .7rem;
-  color: #434343;
+  color: #fff;
   font-size: .6rem;
-  border: .5px solid #434343;
+  background: #2489ED;
 }
 
 .dti-user .r.disable {
-  color: #aaa;
-  border: .5px solid #aaa;
+  color: #434343;
+  background: #f8f8f8;
 }
 
 .dti-name {
@@ -75,7 +75,7 @@
   line-height: .9rem;
   padding: 0 .3rem;
   border-radius: .45rem;
-  background: #D7D7D7;
+  background: #f8f8f8;
   font-size: .6rem;
   color: #434343;
   margin-right: .3rem;
@@ -104,12 +104,13 @@
 }
 
 .dti-num div span {
-  font-size: 1.1rem;
+  font-size: 1rem;
   color: #aaa;
-  margin-right: .1rem;
+  margin-right: .15rem;
 }
 
 .dti-num div em {
   font-size: .7rem;
   color: #aaa;
+  margin-top: .15rem;
 }

@@ -1,7 +1,6 @@
 .com-input {
   width: 100%;
   height: 2.5rem;
-  border-bottom: .5px solid #eee;
 }
 
 .com-input input {
@@ -16,7 +15,6 @@
 .com-textarea {
   width: 100%;
   height: 3.9rem;
-  border-bottom: .5px solid #eee;
 }
 
 .com-textarea textarea {
@@ -31,10 +29,10 @@
 }
 
 .com-publicTitle {
-  line-height: 1.8rem;
+  line-height: 2.2rem;
   font-size: .7rem;
+  font-weight: bold;
   color: #434343;
-  border-bottom: .5px solid #eee;
 }
 
 .com-gome {

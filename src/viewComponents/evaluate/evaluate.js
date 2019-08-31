@@ -1,7 +1,7 @@
 import React from 'react';
 import './evaluate.css';
-import { PublicTitle }  from '../../../components/componentList/componentList';
-import Utils from '../../../common/Utils';
+import { PublicTitle } from '../../components/componentList/componentList';
+import Utils from '../../common/Utils';
 
 class Evaluate extends React.Component {
 
@@ -29,7 +29,7 @@ class Evaluate extends React.Component {
     return (
       <div className="dte-item-box">
 
-        <div className="dte-item border">
+        <div className="dte-item borderBottom">
           <div className="l"><img src="./img/1.jpg" alt="" /></div>
           <div className="r">
             <div className="u">
@@ -72,7 +72,7 @@ class Evaluate extends React.Component {
   render() {
     return (
       <div className="dt-evaluate">
-        <PublicTitle val={'小窝评论'} />
+        <PublicTitle val={(this.props.type === 1 ? '小窝' : '文章') + '评论'} />
         <div className="dte-input" onClick={() => this.handleEvaluate()}>说点什么？</div>
         {this.getItemDom()}
       </div>

@@ -23,8 +23,13 @@ const SubmitNest = Loadable({
     loading: LoadingComponents
 });
 
-const Detail = Loadable({
-    loader: () => import('../view/detail/detail'),
+const NestDetail = Loadable({
+    loader: () => import('../view/nestDetail/nestDetail'),
+    loading: LoadingComponents
+});
+
+const ArticleDetail = Loadable({
+    loader: () => import('../view/articleDetail/articleDetail'),
     loading: LoadingComponents
 });
 
@@ -61,8 +66,11 @@ export const routes = [
         path: '/submitNest',
         component: SubmitNest,
     }, {
-        path: '/detail',
-        component: Detail,
+        path: '/nestDetail',
+        component: NestDetail,
+    }, {
+        path: '/articleDetail',
+        component: ArticleDetail,
     }, {
         path: '/wo',
         component: Wo,

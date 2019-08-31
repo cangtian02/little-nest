@@ -1,6 +1,6 @@
 .articleItem {
-  padding: .4rem .6rem;
-  margin-bottom: .8rem;
+  padding: .4rem .6rem .6rem .6rem;
+  margin-bottom: .6rem;
   background: #fff;
 }
 
@@ -12,11 +12,12 @@
 
 .ari-img-box {
   display: flex;
+  height: 4rem;
   margin: .6rem 0;
 }
 
 .ari-img-box img {
-  width: 33%;
+  height: 100%;
   margin-right: .3rem;
   border-radius: .2rem;
   overflow: hidden;

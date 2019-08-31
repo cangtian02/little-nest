@@ -4,13 +4,13 @@
 }
 
 .dte-input {
-  margin: .4rem .3rem;
-  line-height: 1.4rem;
-  border-radius: .7rem;
-  border: .5px solid #d7d7d7;
-  color: #d7d7d7;
+  margin: .6rem .3rem;
+  line-height: 1.8rem;
+  border-radius: .9rem;
+  color: #C9C9C9;
   font-size: .7rem;
   padding-left: .6rem;
+  background: #f8f8f8;
 }
 
 .dte-item-box .dte-item.border:last-child {
@@ -24,9 +24,8 @@
   padding-bottom: .2rem;
 }
 
-.dte-item.border {
+.dte-item.borderBottom {
   margin-bottom: .5rem;
-  border-bottom: .5px solid #eee;
 }
 
 .dte-item .l {

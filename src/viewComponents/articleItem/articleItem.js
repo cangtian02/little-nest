@@ -45,7 +45,7 @@ class Articleitem extends React.Component {
   }
 
   handleItem() {
-    this.props.history.push('/detail?itemId=' + this.props.val.id);
+    this.props.history.push('/articleDetail?itemId=' + this.props.val.id);
   }
 
   handleCommentBtn() {
@@ -99,7 +99,7 @@ class Articleitem extends React.Component {
             this.props.toggleMe
               ?
               <div className="ari-icons">
-                <span className="iconfont icon-xinbaniconshangchuan-" onClick={() => this.handleCommentBtn()}></span>
+                <span className="iconfont icon-pinglun1" onClick={() => this.handleCommentBtn()}></span>
                 <span className="iconfont icon-icon_edit" onClick={() => this.handleEditBtn()}></span>
                 <span className="iconfont icon--shanchu" onClick={() => this.handleDeleteBtn()}></span>
               </div>

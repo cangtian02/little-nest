@@ -34,7 +34,7 @@ class NestItem extends React.Component {
   }
 
   handleItem() {
-    this.props.history.push('/detail?itemId=' + this.props.val.id);
+    this.props.history.push('/nestDetail?itemId=' + this.props.val.id);
   }
 
   handleCommentBtn() {
@@ -85,7 +85,7 @@ class NestItem extends React.Component {
             this.props.toggleMe
             ?
               <div className="nib-icons">
-                <span className="iconfont icon-xinbaniconshangchuan-" onClick={() => this.handleCommentBtn()}></span>
+                <span className="iconfont icon-pinglun1" onClick={() => this.handleCommentBtn()}></span>
                 <span className="iconfont icon-icon_edit" onClick={() => this.handleEditBtn()}></span>
                 <span className="iconfont icon--shanchu" onClick={() => this.handleDeleteBtn()}></span>
               </div>

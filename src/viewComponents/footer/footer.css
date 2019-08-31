@@ -1,10 +1,5 @@
 .footer {
   height: 2.5rem;
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 2;
   border-top: .5px solid #eee;
   background: #fff;
 }
