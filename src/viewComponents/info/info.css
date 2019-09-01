@@ -11,25 +11,32 @@
 }
 
 .dti-user .l {
+  flex: 1;
+  height: 2.2rem;
+  display: flex;
+  align-items: center;
+} 
+
+.dti-user .l img {
   width: 2.2rem;
   height: 2.2rem;
   border-radius: 50%;
   overflow: hidden;
 }
 
-.dti-user .c {
+.dti-user .i {
   flex: 1;
   margin: 0 .4rem;
 }
 
-.dti-user .c p {
+.dti-user .i p {
   font-size: .7rem;
   color: #434343;
   font-weight: bold;
   line-height: 1rem;
 }
 
-.dti-user .c span {
+.dti-user .i span {
   font-size: .6rem;
   color: #aaa;
 }

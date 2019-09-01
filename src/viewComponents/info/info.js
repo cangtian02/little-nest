@@ -14,14 +14,20 @@ class Info extends React.Component {
 
   }
 
+  handleGoUserHome() {
+    this.props.history.push('/userHome?userId=');
+  }
+  
   render() {
     return (
       <div className="dt-info">
         <div className="dti-user">
-          <img src="./img/1.jpg" alt="" className="l" />
-          <div className="c">
-            <p>小窝主名称</p>
-            <span>设计师</span>
+          <div className="l" onClick={() => this.handleGoUserHome()}>
+            <img src="./img/1.jpg" alt="" />
+            <div className="i">
+              <p>小窝主名称</p>
+              <span>设计师</span>
+            </div>
           </div>
           <div className="r">关注</div>
         </div>

@@ -83,7 +83,7 @@ class Articleitem extends React.Component {
         }
         <div className="ari-info">
           {
-            !this.props.toggleMe
+            this.props.showUser
               ?
               <div className="ari-user" onClick={() => this.handleItem()}>
                 <img src={val.userIcon} alt={val.userName} />
@@ -92,11 +92,11 @@ class Articleitem extends React.Component {
               :
               null
           }
-          <div className="ari-nums" style={this.props.toggleMe ? { flex: 1 } : {}} onClick={() => this.handleItem()}>
+          <div className="ari-nums" style={!this.props.showUser ? { flex: 1 } : {}} onClick={() => this.handleItem()}>
             {val.look || 0}&nbsp;浏览&nbsp;&nbsp;{val.evaluate || 0}&nbsp;评论&nbsp;&nbsp;{val.praise || 0}&nbsp;点赞
           </div>
           {
-            this.props.toggleMe
+            this.props.showHandle
               ?
               <div className="ari-icons">
                 <span className="iconfont icon-pinglun1" onClick={() => this.handleCommentBtn()}></span>

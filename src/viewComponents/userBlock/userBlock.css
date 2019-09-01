@@ -48,6 +48,25 @@
   margin-top: .3rem;
 }
 
+.userBlock-top .follow-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 1.4rem;
+  padding: 0 .5rem;
+  margin-top: .2rem;
+  border-radius: .7rem;
+  color: #fff;
+  font-size: .6rem;
+  background: #2489ED;
+}
+
+.userBlock-top .follow-btn.disable {
+  color: #434343;
+  background: #f8f8f8;
+}
+
+
 .userBlock-numlist {
   display: flex;
   margin: .8rem 0 .6rem 0;

@@ -21,7 +21,7 @@ class Follow extends React.Component {
     return (
       <div className="follow">
         <div className="follow-title">我的关注</div>
-        <UserItem list={this.state.followList} />
+        <UserItem list={this.state.followList} history={this.props.history} />
       </div>
     );
   }

@@ -80,12 +80,12 @@ class Home extends React.Component {
     });
   }
 
-  getItemDom() {
+  getNestItemDom() {
     if (this.state.nestItem.length === 0) return <div className="home-item-nolist">还没有小窝，快上传分享吧~</div>;
     
     let arr = [];
     this.state.nestItem.forEach((val, i) => {
-      arr.push(<NestItem val={val} key={i} history={this.props.history} />);
+      arr.push(<NestItem val={val} key={i} showUser history={this.props.history} />);
     });
     return arr;
   }
@@ -96,7 +96,7 @@ class Home extends React.Component {
 
     let arr = [];
     this.state.articleItem.forEach((val, i) => {
-      arr.push(<ArticleItem val={val} key={i} history={this.props.history} />);
+      arr.push(<ArticleItem val={val} key={i} showUser history={this.props.history} />);
     });
 
     return arr;
@@ -133,7 +133,7 @@ class Home extends React.Component {
             {
               this.state.tabIndex === 0
                 ?
-                this.getItemDom()
+                this.getNestItemDom()
                 :
                 this.state.tabIndex === 1
                   ?

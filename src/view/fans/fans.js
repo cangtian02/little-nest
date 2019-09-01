@@ -21,7 +21,7 @@ class Fans extends React.Component {
     return (
       <div className="fans">
         <div className="fans-title">我的粉丝</div>
-        <UserItem list={this.state.fansList} />
+        <UserItem list={this.state.fansList} history={this.props.history} />
       </div>
     );
   }

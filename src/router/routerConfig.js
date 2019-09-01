@@ -58,6 +58,11 @@ const ItemEvaluate = Loadable({
     loading: LoadingComponents
 });
 
+const UserHome = Loadable({
+    loader: () => import('../view/userHome/userHome'),
+    loading: LoadingComponents
+});
+
 export const routes = [
     {
         path: '/home',
@@ -86,6 +91,9 @@ export const routes = [
     }, {
         path: '/itemEvaluate',
         component: ItemEvaluate,
+    }, {
+        path: '/userHome',
+        component: UserHome,
     },
 ];
 

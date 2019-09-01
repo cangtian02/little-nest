@@ -27,7 +27,13 @@ class Userblock extends React.Component {
             <div className="t">用户昵称霹雳巴拉</div>
             <div className="b"><i>设计师</i><span className="iconfont icon-xingbienan"></span></div>
           </div>
-          <span className="iconfont icon--shezhi r" onClick={() => this.handleRouter('setting')}></span>
+          {
+            this.props.isMe
+            ?
+              <span className="iconfont icon--shezhi r" onClick={() => this.handleRouter('setting')}></span>
+            :
+              <div className="follow-btn">关注</div>
+          }
         </div>
         <div className="userBlock-numlist">
           <li onClick={() => this.handleRouter('follow')}><p>23</p><span>关注</span></li>

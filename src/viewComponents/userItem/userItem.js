@@ -14,20 +14,28 @@ class Useritem extends React.Component {
 
   }
 
+  handleGoUserHome(i) {
+    this.props.history.push('/userHome?userId=' + this.props.list[i].id);
+  }
+
+  handleFollow(i) {
+
+  }
+
   getItem() {
     let arr = [];
 
     this.props.list.forEach((val, i) => {
       arr.push(
         <div className="userItem borderBottom" key={i}>
-          <div className="l">
+          <div className="l" onClick={() => this.handleGoUserHome(i)}>
             <img src="./img/pic.jpg" alt="" />
             <div className="l_r">
               <p>小明</p>
               <span>设计师</span>
             </div>
           </div>
-          <div className="r disable">已关注</div>
+          <div className="r disable" onClick={() => this.handleFollow(i)}>已关注</div>
         </div>
       );
     });

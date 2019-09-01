@@ -42,7 +42,7 @@ class Itemmore extends React.Component {
   getNestItemDom() {
     let arr = [];
     this.state.nestItem.forEach((val, i) => {
-      arr.push(<NestItem val={val} key={i} history={this.props.history} />);
+      arr.push(<NestItem val={val} key={i} showUser history={this.props.history} />);
     });
     return arr;
   }
@@ -50,7 +50,7 @@ class Itemmore extends React.Component {
   getArticleItem() {
     let arr = [];
     this.state.articleItem.forEach((val, i) => {
-      arr.push(<ArticleItem val={val} key={i} history={this.props.history} />);
+      arr.push(<ArticleItem val={val} key={i} showUser history={this.props.history} />);
     });
     return arr;
   }
