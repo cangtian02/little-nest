@@ -2,6 +2,7 @@
   height: 2.5rem;
   border-top: .5px solid #eee;
   background: #fff;
+  position: relative;
 }
 
 .footer ul {
@@ -50,4 +51,56 @@
   font-size: 1.2rem;
   color: #2489ED;
   font-weight: bold;
+}
+
+.f-submit-box {
+  width: 6.4rem;
+  height: 2.2rem;
+  position: absolute;
+  left: 50%;
+  transform: translate3d(-50%, 50%, 0);
+  top: -3rem;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border-radius: .3rem;
+  box-shadow: 1px 1px 5px #eee;
+  opacity: 0;
+  transition-property: transform, opacity;
+}
+
+.f-submit-box.active {
+  transition-duration: 150ms;
+  transform: translate3d(-50%, 0%, 0);
+  opacity: 1;
+}
+
+.f-submit-box div {
+  flex: 1;
+  text-align: center;
+  color: #2489ED;
+  font-size: .7rem;
+}
+
+.f-submit-box::after {
+  content: '';
+  width: .6rem;
+  height: .6rem;
+  background: #fff;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  bottom: -.2rem;
+}
+
+.f-submit-box::before {
+  content: '';
+  width: 1px;
+  height: .5rem;
+  background: #eee;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate3d(-50%, -50%, 0) scaleX(.75);
 }

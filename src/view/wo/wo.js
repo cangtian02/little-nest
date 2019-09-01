@@ -155,7 +155,7 @@ class Wo extends React.Component {
             }
           </div>
         </div>
-        <Footer />
+        <Footer history={this.props.history} />
       </div>
     );
   }
