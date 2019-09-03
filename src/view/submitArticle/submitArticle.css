@@ -1,3 +1,10 @@
+.submitArticle {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
 .sba-title {
   line-height: 2.2rem;
   padding-left: .6rem;
@@ -5,7 +12,7 @@
 }
 
 .sba-imgs {
-  padding: .6rem .6rem 0 .6rem;
+  padding: 0 .6rem;
   display: flex;
   flex-wrap: wrap;
 }
@@ -43,4 +50,50 @@
   width: 100%;
   height: 100%;
   opacity: 0;
+}
+
+.sba-title-input {
+  width: 100%;
+  background: none;
+  border: none;
+  line-height: 1rem;
+  padding: .6rem;
+  font-size: .8rem;
+  color: #434343;
+  font-weight: bold;
+}
+
+.sba-title-textarea {
+  flex: 1;
+  width: 100%;
+  background: none;
+  border: none;
+  line-height: 1.2rem;
+  padding: .6rem;
+  font-size: .7rem;
+  color: #434343;
+}
+
+.sba-btns {
+  height: 5rem;
+  padding-top: 1rem;
+  padding-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+}
+
+.sba-btns div {
+  width: 4.4rem;
+  text-align: center;
+  margin: 0 .9rem;
+  line-height: 2rem;
+  background: #2489ED;
+  color: #fff;
+  font-size: .7rem;
+  border-radius: .3rem;
 }

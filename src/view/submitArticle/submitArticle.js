@@ -8,8 +8,10 @@ class Submitarticle extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      imgs: [0],
-      emitImg: ''
+      imgs: [],
+      emitImg: '',
+      title: '',
+      content: '',
     }
   }
 
@@ -63,7 +65,7 @@ class Submitarticle extends React.Component {
     
     this.state.imgs.forEach((val, i) => {
       arr.push(
-        <div className="i" key={i}><img src="./img/1.jpg" alt="" /></div>
+        <div className="i" key={i}><img src={val} alt="" /></div>
       );
     });
 
@@ -79,10 +81,28 @@ class Submitarticle extends React.Component {
   }
 
   handleEmitImg(src) {
-    console.log(src);
     let imgs = this.state.imgs;
     imgs.push(src);
-    this.setState({ imgs });
+    this.setState({ 
+      imgs: imgs,
+      emitImg: ''
+    });
+  }
+
+  handleTitle(title) {
+    this.setState({title});
+  }
+
+  handleContent(content) {
+    this.setState({ content });
+  }
+
+  handleSaveDraft() {
+
+  }
+
+  handleShare() {
+    
   }
 
   render() {
@@ -97,6 +117,12 @@ class Submitarticle extends React.Component {
         }
         <div className="sba-title">选择图片</div>
         {this.getImgList()}
+        <input className="sba-title-input" placeholder='请输入文章标题' value={this.state.title} onChange={e => this.handleTitle(e.target.value)} />
+        <textarea className="sba-title-textarea" placeholder='请输入文章内容' value={this.state.content} onChange={e => this.handleContent(e.target.value)}></textarea>
+        <div className="sba-btns">
+          <div onClick={() => this.handleSaveDraft()}>保存草稿</div>
+          <div onClick={() => this.handleShare()}>发布</div>
+        </div>
       </div>
     );
   }
