@@ -58,9 +58,6 @@ class Editimg extends React.Component {
       this.imgRealWidth = width;
       this.imgRealHeight = height;
 
-      imgWidth = winWidth;
-      imgHeight = winWidth / width * height;
-
       // 正方形
       if (proportion_1 === proportion_2) {
         trackerWidth = winWidth / 1.2 > imgHeight ? imgHeight : winWidth / 1.2;
@@ -71,6 +68,14 @@ class Editimg extends React.Component {
       if (proportion_1 > proportion_2) {
         trackerWidth = winWidth * 0.96;
         trackerHeight = trackerWidth / proportion_1 * proportion_2;
+      }
+
+      if (winWidth / width * height >= trackerHeight) {
+        imgWidth = winWidth;
+        imgHeight = winWidth / width * height;
+      } else {
+        imgHeight = trackerHeight;
+        imgWidth = width / (height / imgHeight);
       }
 
       this.setState({
@@ -118,21 +123,7 @@ class Editimg extends React.Component {
     });
 
     this.hammertime.on("panend", e => {
-      let imgLeft = img.offsetLeft;
-      let imgTop = img.offsetTop;
-      
-      if (imgLeft > trackerLeft) {
-        img.style.left = trackerLeft + 'px';
-      }
-      if (imgTop > trackerTop) {
-        img.style.top = trackerTop + 'px';
-      }
-      if (this.state.winWidth - imgWidth - imgLeft > trackerLeft) {
-        img.style.left = -(trackerLeft - (this.state.winWidth - imgWidth)) + 'px';
-      }
-      if (this.state.winHeight - imgHeight - imgTop > trackerTop) {
-        img.style.top = - (trackerTop - (this.state.winHeight - imgHeight)) + 'px';
-      }  
+      this.imgPanend(img, trackerLeft, trackerTop, imgWidth, imgHeight); 
     });
 
     // 缩放
@@ -143,34 +134,50 @@ class Editimg extends React.Component {
       imgHeight = img.height;
     });
 
-    let setImgStyle = (w, h) => {
+    let setImgStyle = (w, h, f) => {
       img.style.width = w + 'px';
       img.style.height = h + 'px';
       img.style.left = (this.state.winWidth - w) / 2 + 'px';
       img.style.top = (this.state.winHeight - h) / 2 + 'px';
+
+      if (f) {
+        this.imgPanend(img, trackerLeft, trackerTop, imgWidth, imgHeight); 
+      }
     }
 
     this.hammertime.on("pinchmove", e => {
       let w = imgWidth * e.scale;
       let h = imgHeight * e.scale;
-      setImgStyle(w, h);
+      setImgStyle(w, h, false);
     });
 
     this.hammertime.on("pinchend", e => {
       imgWidth = imgWidth * e.scale;
       imgHeight = imgHeight * e.scale;
-      let scale = imgWidth / imgHeight;
-      if (imgWidth < trackerWidth) {
-        imgWidth = trackerWidth;
-        imgHeight = imgWidth / scale;
-        setImgStyle(imgWidth, imgHeight);
+      if (imgWidth < trackerWidth || imgHeight < trackerHeight) {
+        setImgStyle(this.state.imgWidth, this.state.imgHeight, true);
+      } else {
+        setImgStyle(imgWidth, imgHeight, true);
       }
-      if (imgHeight < trackerHeight) {
-        imgHeight = trackerHeight;
-        imgWidth = imgWidth * scale;
-        setImgStyle(imgWidth, imgHeight);
-      }  
     });
+  }
+
+  imgPanend(img, trackerLeft, trackerTop, imgWidth, imgHeight) {
+    let imgLeft = img.offsetLeft;
+    let imgTop = img.offsetTop;
+
+    if (imgLeft > trackerLeft) {
+      img.style.left = trackerLeft + 'px';
+    }
+    if (imgTop > trackerTop) {
+      img.style.top = trackerTop + 'px';
+    }
+    if (this.state.winWidth - imgWidth - imgLeft > trackerLeft) {
+      img.style.left = -(trackerLeft - (this.state.winWidth - imgWidth)) + 'px';
+    }
+    if (this.state.winHeight - imgHeight - imgTop > trackerTop) {
+      img.style.top = - (trackerTop - (this.state.winHeight - imgHeight)) + 'px';
+    } 
   }
 
   handleRotateImg() {
@@ -180,14 +187,14 @@ class Editimg extends React.Component {
 
     let canvas = document.createElement('canvas');
     let ctx = canvas.getContext('2d');
-    canvas.width = this.imgRealWidth;
-    canvas.height = this.imgRealHeight;
+    canvas.width = this.imgRealHeight;
+    canvas.height = this.imgRealWidth;
 
     let newImg = new Image();
     newImg.src = this.state.imgSrc;
     newImg.onload = () => {
-      ctx.translate(this.imgRealWidth / 2, this.imgRealHeight / 2)
-      ctx.rotate(90);
+      ctx.translate(this.imgRealHeight, this.imgRealWidth / 2);
+      ctx.rotate(90 * Math.PI / 180);
       ctx.drawImage(newImg, 0, 0);
       let src = canvas.toDataURL("image/jpeg");
       this.setState({

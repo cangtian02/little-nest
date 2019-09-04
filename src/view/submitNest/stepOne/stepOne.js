@@ -49,17 +49,6 @@ class Stepone extends React.Component {
         load: true,
       }, () => {
         this.lableBoxAdd();
-        // 监听全局点击事件，收回摇杆
-        document.addEventListener("click", event => {
-          let cDom = document.getElementById('eso-lable-btn-active');
-          let tDom = event.target;
-          if (cDom === tDom || (cDom && cDom.contains(tDom))) {
-            
-          } else {
-
-          }
-        });
-
         document.getElementById('eso-lable-box').addEventListener('touchstart', this.esoLableBoxFunc, false);
       });
     }
