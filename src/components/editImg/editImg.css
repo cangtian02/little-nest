@@ -31,17 +31,26 @@
   border: .5px solid #fff;
 }
 
-.editImg-btn {
-  width: 5rem;
-  line-height: 2rem;
+.editImg-btns {
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 .6rem;
+  position: absolute;
+  bottom: 2rem;
+  left: 0;
+  right: 0;
+  z-index: 3;
+}
+
+.editImg-btns .r {
+  width: 4rem;
+  margin: 0 .6rem;
+  line-height: 1.8rem;
   color: #fff;
   font-size: .8rem;
   text-align: center;
   background: #2489ED;
   border-radius: .4rem;
-  position: absolute;
-  bottom: 2rem;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 3;
 }

@@ -17,6 +17,9 @@ class Editimg extends React.Component {
       trackerWidth: 0,
       trackerHeight: 0,
     }
+
+    this.imgRealWidth = 0;
+    this.imgRealHeight = 0;
   }
 
   componentDidMount() {
@@ -52,6 +55,9 @@ class Editimg extends React.Component {
       let width = img.width;
       let height = img.height;
 
+      this.imgRealWidth = width;
+      this.imgRealHeight = height;
+
       imgWidth = winWidth;
       imgHeight = winWidth / width * height;
 
@@ -84,6 +90,7 @@ class Editimg extends React.Component {
     let tracker = document.getElementById('editImg-tracker');
     let img = document.getElementById('editImg-img');
     if (!tracker || !img) return;
+    if (this.hammertime) this.hammertime = null;
 
     this.hammertime = new Hammer(tracker, { domEvents: true });
     this.hammertime.get('pan').set({ direction: Hammer.DIRECTION_ALL });
@@ -166,8 +173,33 @@ class Editimg extends React.Component {
     });
   }
 
+  handleRotateImg() {
+    if (this.imgRealWidth < this.props.imgMinHeight || this.imgRealHeight < this.props.imgMinWidth) {
+      return Utils.toast.info('图片宽高最小' + this.props.imgMinWidth + ' * ' + this.props.imgMinHeight); 
+    }
+
+    let canvas = document.createElement('canvas');
+    let ctx = canvas.getContext('2d');
+    canvas.width = this.imgRealWidth;
+    canvas.height = this.imgRealHeight;
+
+    let newImg = new Image();
+    newImg.src = this.state.imgSrc;
+    newImg.onload = () => {
+      ctx.translate(this.imgRealWidth / 2, this.imgRealHeight / 2)
+      ctx.rotate(90);
+      ctx.drawImage(newImg, 0, 0);
+      let src = canvas.toDataURL("image/jpeg");
+      this.setState({
+        imgSrc: src
+      }, () => {
+        this.initData();
+      });
+    }
+  }
+
   // 裁剪图片
-  handleImg() {
+  handleSavaImg() {
     let tracker = document.getElementById('editImg-tracker');
     let img = document.getElementById('editImg-img');
     let naturalWidth = img.naturalWidth;
@@ -218,7 +250,10 @@ class Editimg extends React.Component {
         <div className="editImg-mask"></div>
         <img src={this.state.imgSrc} className="editImg-img" id="editImg-img" style={{ width: this.state.imgWidth + 'px', height: + this.state.imgHeight + 'px', left: 0, top: (this.state.winHeight - this.state.imgHeight) / 2 + 'px'}} alt="图片" />
         <div className="editImg-tracker" id="editImg-tracker" style={{ width: this.state.trackerWidth + 'px', height: + this.state.trackerHeight + 'px', left: (this.state.winWidth - this.state.trackerWidth) / 2 + 'px', top: (this.state.winHeight - this.state.trackerHeight) / 2 + 'px'}}></div>
-        <div className="editImg-btn" onClick={() => this.handleImg()}>确定</div>
+        <div className="editImg-btns">
+          <div className="r" onClick={() => this.handleRotateImg()}>旋转</div>
+          <div className="r" onClick={() => this.handleSavaImg()}>确定</div>
+        </div>
       </div>
     );
   }

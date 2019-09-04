@@ -13,6 +13,9 @@ class Submitarticle extends React.Component {
       title: '',
       content: '',
     }
+
+    this.imgMinWidth = 900;
+    this.imgMinHeight = 675;
   }
 
   componentDidMount() {
@@ -32,20 +35,18 @@ class Submitarticle extends React.Component {
     let img = new window.Image();
     let windowURL = window.URL || window.webkitURL;
     let imgMaxSize = 1024 * 1024 * 10;
-    let imgMinWidth = 900;
-    let imgMinHeight = 675;
     img.src = windowURL.createObjectURL(file);
 
     img.onload = () => {
       loading.parentNode.removeChild(loading);
 
-      if (img.width < imgMinWidth) {
-        Utils.toast.info('图片最小宽度' + imgMinWidth + '像素');
+      if (img.width < this.imgMinWidth) {
+        Utils.toast.info('图片最小宽度' + this.imgMinWidth + '像素');
         return;
       }
 
-      if (img.height < imgMinHeight) {
-        Utils.toast.info('图片最小高度' + imgMinHeight + '像素');
+      if (img.height < this.imgMinHeight) {
+        Utils.toast.info('图片最小高度' + this.imgMinHeight + '像素');
         return;
       }
 
@@ -102,7 +103,7 @@ class Submitarticle extends React.Component {
   }
 
   handleShare() {
-    
+
   }
 
   render() {
@@ -111,7 +112,7 @@ class Submitarticle extends React.Component {
         {
           this.state.emitImg
           ?
-            <EditImg imgSrc={this.state.emitImg} proportion={'4:3'} emitImgWidth={1920} emitImgHeight={1440} quality={0.7} emitImg={src => this.handleEmitImg(src)} />
+            <EditImg imgSrc={this.state.emitImg} proportion={'4:3'} imgMinWidth={this.imgMinWidth} imgMinHeight={this.imgMinHeight} emitImgWidth={1920} emitImgHeight={1440} quality={0.7} emitImg={src => this.handleEmitImg(src)} />
           :
             null
         }
