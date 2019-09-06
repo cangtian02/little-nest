@@ -14,8 +14,8 @@ class Submitarticle extends React.Component {
       content: '',
     }
 
-    this.imgMinWidth = 900;
-    this.imgMinHeight = 675;
+    this.imgMinWidth = 760;
+    this.imgMinHeight = 570;
   }
 
   componentDidMount() {

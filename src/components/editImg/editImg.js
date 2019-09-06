@@ -20,6 +20,7 @@ class Editimg extends React.Component {
 
     this.imgRealWidth = 0;
     this.imgRealHeight = 0;
+    this.img = null;
   }
 
   componentDidMount() {
@@ -49,11 +50,11 @@ class Editimg extends React.Component {
 
     if (!proportion_1 || !proportion_2) return Utils.toast.info('缺少参数');
 
-    let img = new window.Image();
-    img.src = this.state.imgSrc;
-    img.onload = () => {
-      let width = img.width;
-      let height = img.height;
+    this.img = new window.Image();
+    this.img.src = this.state.imgSrc;
+    this.img.onload = () => {
+      let width = this.img.width;
+      let height = this.img.height;
 
       this.imgRealWidth = width;
       this.imgRealHeight = height;
@@ -123,7 +124,7 @@ class Editimg extends React.Component {
     });
 
     this.hammertime.on("panend", e => {
-      this.imgPanend(img, trackerLeft, trackerTop, imgWidth, imgHeight); 
+      this.imgPanend(img, trackerLeft, trackerTop, imgWidth, imgHeight);
     });
 
     // 缩放
@@ -139,10 +140,7 @@ class Editimg extends React.Component {
       img.style.height = h + 'px';
       img.style.left = (this.state.winWidth - w) / 2 + 'px';
       img.style.top = (this.state.winHeight - h) / 2 + 'px';
-
-      if (f) {
-        this.imgPanend(img, trackerLeft, trackerTop, imgWidth, imgHeight); 
-      }
+      if (f) this.imgPanend(img, trackerLeft, trackerTop, imgWidth, imgHeight);
     }
 
     this.hammertime.on("pinchmove", e => {
@@ -189,20 +187,15 @@ class Editimg extends React.Component {
     let ctx = canvas.getContext('2d');
     canvas.width = this.imgRealHeight;
     canvas.height = this.imgRealWidth;
-
-    let newImg = new Image();
-    newImg.src = this.state.imgSrc;
-    newImg.onload = () => {
-      ctx.translate(this.imgRealHeight, this.imgRealWidth / 2);
-      ctx.rotate(90 * Math.PI / 180);
-      ctx.drawImage(newImg, 0, 0);
-      let src = canvas.toDataURL("image/jpeg");
-      this.setState({
-        imgSrc: src
-      }, () => {
-        this.initData();
-      });
-    }
+    ctx.translate(this.imgRealHeight, 0);
+    ctx.rotate(90 * Math.PI / 180);
+    ctx.drawImage(this.img, 0, 0);
+    let src = canvas.toDataURL("image/jpeg");
+    this.setState({
+      imgSrc: src
+    }, () => {
+      this.initData();
+    });
   }
 
   // 裁剪图片
@@ -222,15 +215,11 @@ class Editimg extends React.Component {
     let x = (tracker.offsetLeft - img.offsetLeft) * scale;
     let y = (tracker.offsetTop - img.offsetTop) * scale;
 
-    let newImg = new Image();
-    newImg.src = this.state.imgSrc;
-    newImg.onload = () => {
-      ctx.drawImage(newImg, x, y, naturalWidth, naturalHeight, 0, 0, naturalWidth, naturalHeight);
-      if (this.props.emitImgWidth && this.props.emitImgHeight) {
-        this.cropImg(canvas.toDataURL("image/jpeg"), naturalWidth, naturalHeight);
-      } else {
-        this.props.emitImg && this.props.emitImg(canvas.toDataURL("image/jpeg"), this.props.quality || 1);
-      }
+    ctx.drawImage(this.img, x, y, naturalWidth, naturalHeight, 0, 0, naturalWidth, naturalHeight);
+    if (naturalWidth > this.props.emitImgWidth && naturalHeight > this.props.emitImgHeight) {
+      this.cropImg(canvas.toDataURL("image/jpeg"), naturalWidth, naturalHeight);
+    } else {
+      this.props.emitImg && this.props.emitImg(canvas.toDataURL("image/jpeg"), this.props.quality || 1);
     }
   }
 

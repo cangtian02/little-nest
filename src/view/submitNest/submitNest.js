@@ -37,8 +37,8 @@ class SubmitNest extends React.Component {
           <SelectImg 
             tips={'推荐使用横向图片,图片宽高不小于900*675'} 
             imgMaxSize={10} 
-            imgMinWidth={900}
-            imgMinHeight={675}
+            imgMinWidth={760}
+            imgMinHeight={570}
             imgSrc={src => this.setState({ initialImg: src})} 
           />
         }
