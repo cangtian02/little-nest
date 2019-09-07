@@ -145,8 +145,8 @@ class Setting extends React.Component {
           this.state.changeIconSrc
           ?
             <EditImg imgSrc={this.state.changeIconSrc} proportion={'1:1'} emitImgWidth={800} emitImgHeight={800} quality={0.7} emitImg={src => this.updateIconFunc(src)} />
-            :
-            null
+          :
+          null
         }
       </div>
     );
@@ -170,7 +170,7 @@ class Setting extends React.Component {
 
   handleIcon() {
     this.lightBox = new LightBox({
-      imgUrl: this.state.info.icon,
+      list: [this.state.info.icon],
       handleCloseFunc: () => {
         this.handleUpdateIconClick();
       }

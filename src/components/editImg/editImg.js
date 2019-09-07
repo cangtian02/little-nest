@@ -27,17 +27,6 @@ class Editimg extends React.Component {
     if (this.state.imgSrc) this.initData();
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.imgSrc !== this.state.imgSrc) {
-      this.setState({
-        imgSrc: nextProps.imgSrc,
-        proportion: nextProps.proportion,
-      }, () => {
-        this.initData();
-      });
-    }
-  }
-
   initData() {
     let winWidth = window.innerWidth;
     let winHeight = window.innerHeight;
@@ -61,7 +50,7 @@ class Editimg extends React.Component {
 
       // 正方形
       if (proportion_1 === proportion_2) {
-        trackerWidth = winWidth / 1.2 > imgHeight ? imgHeight : winWidth / 1.2;
+        trackerWidth = winWidth * 0.8;
         trackerHeight = trackerWidth;
       }
 
@@ -178,6 +167,7 @@ class Editimg extends React.Component {
     } 
   }
 
+  // 旋转图片
   handleRotateImg() {
     if (this.imgRealWidth < this.props.imgMinHeight || this.imgRealHeight < this.props.imgMinWidth) {
       return Utils.toast.info('图片宽高最小' + this.props.imgMinWidth + ' * ' + this.props.imgMinHeight); 
@@ -239,7 +229,7 @@ class Editimg extends React.Component {
   }
 
   render() {
-    if (!this.props.imgSrc && !this.state.imgWidth) return null;
+    if (!this.state.imgSrc && !this.state.imgWidth) return null;
 
     return (
       <div className="editImg">

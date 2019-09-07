@@ -2,6 +2,7 @@ import React from 'react';
 import './submitArticle.css';
 import Utils from '../../common/Utils';
 import EditImg from '../../components/editImg/editImg';
+import LightBox from '../../components/lightBox/lightBox';
 
 class Submitarticle extends React.Component {
 
@@ -16,10 +17,19 @@ class Submitarticle extends React.Component {
 
     this.imgMinWidth = 760;
     this.imgMinHeight = 570;
+    this.components = [];
   }
 
   componentDidMount() {
 
+  }
+
+  componentWillUnmount() {
+    this.components.forEach(val => this.removeModal(val));
+  }
+
+  removeModal(node) {
+    node && node.parentNode && node.parentNode.removeChild(node);
   }
 
   changeSelectImg(evt) {
@@ -61,12 +71,29 @@ class Submitarticle extends React.Component {
     }
   }
 
+  handleImg(i) {
+    this.lightBox = new LightBox({
+      list: this.state.imgs,
+      activeIndex: i,
+    });
+    this.components.push(this.lightBox);
+  }
+
+  handleDelImg(i) {
+    let imgs = JSON.parse(JSON.stringify(this.state.imgs));
+    imgs.splice(i, 1);
+    this.setState({imgs});
+  }
+
   getImgList() {
     let arr = [];
     
     this.state.imgs.forEach((val, i) => {
       arr.push(
-        <div className="i" key={i}><img src={val} alt="" /></div>
+        <div className="i" key={i}>
+          <span className="iconfont icon-delete-s del-span" onClick={() => this.handleDelImg(i)}></span>
+          <img src={val} alt="" onClick={() => this.handleImg(i)} />
+        </div>
       );
     });
 
@@ -74,7 +101,7 @@ class Submitarticle extends React.Component {
       <div className="sba-imgs">
         {arr}
         <div className="i span">
-          <span className="iconfont icon-tianjia"></span>
+          <span className="iconfont icon-tianjia add-span"></span>
           <input type="file" id="sba-img-input" accept="image/*" onChange={e => this.changeSelectImg(e)} />
         </div>
       </div>
