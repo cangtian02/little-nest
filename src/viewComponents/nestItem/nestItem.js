@@ -65,6 +65,7 @@ class NestItem extends React.Component {
         <div className="nib-img" onClick={() => this.handleItem()}>
           <img src={val.img} alt={val.name} />
           {this.getLableDom(val.lable)}
+          {val.isDraft ? <em>草稿</em> : null}
         </div>
         <div className="nib-name clamp2" onClick={() => this.handleItem()}>{val.name}</div>
         <div className="nib-info">
@@ -82,7 +83,7 @@ class NestItem extends React.Component {
             {val.look || 0}&nbsp;浏览&nbsp;&nbsp;{val.evaluate || 0}&nbsp;评论&nbsp;&nbsp;{val.praise || 0}&nbsp;点赞
           </div>
           {
-            this.props.showHandle
+            this.props.showHandle && !val.isDraft
             ?
               <div className="nib-icons">
                 <span className="iconfont icon-pinglun1" onClick={() => this.handleCommentBtn()}></span>

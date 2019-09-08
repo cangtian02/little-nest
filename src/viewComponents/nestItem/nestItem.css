@@ -22,6 +22,18 @@
   z-index: 1;
 }
 
+.nib-img em {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 2;
+  font-size: .6rem;
+  color: #fff;
+  padding: 0 .4rem;
+  line-height: 1rem;
+  background: #2489ED;
+}
+
 .nib-lable {
   position: absolute;
   bottom: .4rem;

@@ -106,3 +106,58 @@
   font-size: .7rem;
   border-radius: .3rem;
 }
+
+.stepTwo-lable-box {
+  margin: .6rem .6rem 6rem .6rem;
+}
+
+.slb-title {
+  line-height: 1rem;
+  font-size: .8rem;
+  color: #434343;
+  font-weight: bold;
+  margin-bottom: .4rem;
+}
+
+.slb-tips {
+  font-size: .6rem;
+  color: #aaa;
+  margin-bottom: .6rem;
+}
+
+.slb-lable-box {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.slb-lable-box div {
+  line-height: 1.4rem;
+  color: #333;
+  font-size: .6rem;
+  padding: 0 .8rem;
+  margin: 0 .4rem .4rem 0;
+  background: #D7D7D7;
+  border-radius: .7rem;
+}
+
+.slb-lable-box div.active {
+  background: #2489ED;
+  color: #fff;
+}
+
+.slb-add-lable {
+  width: 3.2rem;
+  line-height: 1.4rem;
+  text-align: center;
+  color: #fff;
+  font-size: .6rem;
+  background: #2489ED;
+  border-radius: .7rem;
+}
+
+.slb-add-lable-input {
+  width: 100%;
+  line-height: 2rem;
+  border-bottom: .5px solid #eee;
+  color: #434343;
+}

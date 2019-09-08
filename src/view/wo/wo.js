@@ -16,6 +16,7 @@ const nestItem = {
   userName: '小明设计师',
   lable: ['简约', '极客范', '简约', '极客范'],
   praise: 30,
+  isDraft: true,
 };
 
 const articleItem = {

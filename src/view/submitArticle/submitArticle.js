@@ -4,6 +4,24 @@ import Utils from '../../common/Utils';
 import EditImg from '../../components/editImg/editImg';
 import LightBox from '../../components/lightBox/lightBox';
 
+const slable = [{
+  id: 1,
+  name: '简约',
+  select: false,
+}, {
+  id: 2,
+  name: '暖色',
+  select: false,
+}, {
+  id: 3,
+  name: '极客范',
+  select: false,
+}, {
+  id: 4,
+  name: '懒窝',
+  select: false,
+}];
+
 class Submitarticle extends React.Component {
 
   constructor(props) {
@@ -13,6 +31,7 @@ class Submitarticle extends React.Component {
       emitImg: '',
       title: '',
       content: '',
+      lable: [...slable],
     }
 
     this.imgMinWidth = 760;
@@ -133,6 +152,55 @@ class Submitarticle extends React.Component {
 
   }
 
+  selectLable(idx) {
+    let lable = JSON.parse(JSON.stringify(this.state.lable));
+    lable[idx].select = !lable[idx].select;
+    this.setState({ lable });
+  }
+
+  addLable() {
+    this.addLableModal = Utils.toast.modal({
+      message: '<input class="slb-add-lable-input" id="slbAddLable" placeholder="标签名称" />',
+      onOk: () => {
+        let name = document.getElementById('slbAddLable').value;
+        if (name === '') {
+          Utils.toast.info('请输入标签名称');
+          return;
+        }
+        let lable = JSON.parse(JSON.stringify(this.state.lable));
+
+        lable.unshift({
+          id: 4,
+          name: name,
+          select: true,
+        });
+
+        this.setState({ lable });
+      },
+    });
+    this.components.push(this.addLableModal);
+    setTimeout(() => {
+      document.getElementById('slbAddLable').focus();
+    }, 300);
+  }
+
+  getLable() {
+    let arr = [];
+
+    this.state.lable.forEach((val, idx) => {
+      arr.push(<div key={idx} className={val.select ? 'active' : ''} onClick={() => this.selectLable(idx)}>{val.name}</div>);
+    });
+
+    return (
+      <div className="stepTwo-lable-box">
+        <div className="slb-title">文章标签</div>
+        <div className="slb-tips">选择合适你的文章标签，标签能快速让人发现一样的你，你还可以自定义标签</div>
+        <div className="slb-lable-box">{arr}</div>
+        <div className="slb-add-lable" onClick={() => this.addLable()}>+自定义</div>
+      </div>
+    );
+  }
+
   render() {
     return (
       <div className="submitArticle">
@@ -147,6 +215,7 @@ class Submitarticle extends React.Component {
         {this.getImgList()}
         <input className="sba-title-input" placeholder='请输入文章标题' value={this.state.title} onChange={e => this.handleTitle(e.target.value)} />
         <textarea className="sba-title-textarea" placeholder='请输入文章内容' value={this.state.content} onChange={e => this.handleContent(e.target.value)}></textarea>
+        {this.getLable()}
         <div className="sba-btns">
           <div onClick={() => this.handleSaveDraft()}>保存草稿</div>
           <div onClick={() => this.handleShare()}>发布</div>
