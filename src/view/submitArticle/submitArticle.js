@@ -145,7 +145,28 @@ class Submitarticle extends React.Component {
   }
 
   handleSaveDraft() {
+    let lable = JSON.parse(JSON.stringify(this.state.lable));
+    lable = lable.filter(item => item.select);
 
+    let obj = {
+      imgs: this.state.imgs,
+      title: this.state.title,
+      content: this.state.content,
+      lable: lable,
+    };
+    if (obj.title === '') {
+      return Utils.toast.info('请输入标题');
+    }
+
+    let store = localStorage.getItem('article_draft');
+    store = store ? JSON.parse(store) : [];
+
+    if (store.length >= 5) {
+      return Utils.toast.info('文章草稿最多保存5个');
+    }
+
+    store.push(obj);
+    localStorage.setItem('article_draft', JSON.stringify(store));
   }
 
   handleShare() {
@@ -173,6 +194,7 @@ class Submitarticle extends React.Component {
           id: 4,
           name: name,
           select: true,
+          isCustom: true,
         });
 
         this.setState({ lable });
