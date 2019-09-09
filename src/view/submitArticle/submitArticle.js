@@ -27,20 +27,24 @@ class Submitarticle extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      imgs: [],
+      img: [],
       emitImg: '',
-      title: '',
-      content: '',
+      name: '',
+      info: '',
       lable: [...slable],
     }
 
     this.imgMinWidth = 760;
     this.imgMinHeight = 570;
     this.components = [];
+
+    this.itemId = null;
+    this.isDraft = null;
+    this.draftId = null;
   }
 
   componentDidMount() {
-
+    this.init();
   }
 
   componentWillUnmount() {
@@ -49,6 +53,52 @@ class Submitarticle extends React.Component {
 
   removeModal(node) {
     node && node.parentNode && node.parentNode.removeChild(node);
+  }
+
+  init() {
+    this.itemId = Number(Utils.getUrlParams('itemId')) || null;
+    this.isDraft = Utils.getUrlParams('isDraft') || null;
+
+    if (this.isDraft) {
+      this.draftId = this.itemId;
+
+      let store = localStorage.getItem('article_draft');
+      store = store ? JSON.parse(store) : [];
+      let idx = store.findIndex(item => item.id === this.draftId);
+      
+      if (idx > -1) {
+        let img = store[idx].img;
+        let name = store[idx].name;
+        let info = store[idx].info;
+
+        this.draftLable = store[idx].lable;
+
+        this.resetDraft();
+
+        this.setState({
+          img, name, info
+        });
+      }
+    }
+  }
+
+  resetDraft() {
+    if (this.isDraft) {
+      let arr1 = [];
+      let lable = JSON.parse(JSON.stringify(this.state.lable));
+
+      this.draftLable.forEach(val => {
+        if (val.isCustom) {
+          arr1.push(val);
+        } else {
+          let idx = lable.findIndex(item => item.id === val.id);
+          if (idx > -1) lable[idx].select = true;
+        }
+      });
+
+      lable = [...arr1, ...lable];
+      this.setState({ lable });
+    }
   }
 
   changeSelectImg(evt) {
@@ -92,22 +142,22 @@ class Submitarticle extends React.Component {
 
   handleImg(i) {
     this.lightBox = new LightBox({
-      list: this.state.imgs,
+      list: this.state.img,
       activeIndex: i,
     });
     this.components.push(this.lightBox);
   }
 
   handleDelImg(i) {
-    let imgs = JSON.parse(JSON.stringify(this.state.imgs));
-    imgs.splice(i, 1);
-    this.setState({imgs});
+    let img = JSON.parse(JSON.stringify(this.state.img));
+    img.splice(i, 1);
+    this.setState({ img });
   }
 
   getImgList() {
     let arr = [];
     
-    this.state.imgs.forEach((val, i) => {
+    this.state.img.forEach((val, i) => {
       arr.push(
         <div className="i" key={i}>
           <span className="iconfont icon-delete-s del-span" onClick={() => this.handleDelImg(i)}></span>
@@ -128,49 +178,20 @@ class Submitarticle extends React.Component {
   }
 
   handleEmitImg(src) {
-    let imgs = this.state.imgs;
-    imgs.push(src);
+    let img = this.state.img;
+    img.push(src);
     this.setState({ 
-      imgs: imgs,
+      img: img,
       emitImg: ''
     });
   }
 
-  handleTitle(title) {
-    this.setState({title});
+  handleName(name) {
+    this.setState({ name });
   }
 
-  handleContent(content) {
-    this.setState({ content });
-  }
-
-  handleSaveDraft() {
-    let lable = JSON.parse(JSON.stringify(this.state.lable));
-    lable = lable.filter(item => item.select);
-
-    let obj = {
-      imgs: this.state.imgs,
-      title: this.state.title,
-      content: this.state.content,
-      lable: lable,
-    };
-    if (obj.title === '') {
-      return Utils.toast.info('请输入标题');
-    }
-
-    let store = localStorage.getItem('article_draft');
-    store = store ? JSON.parse(store) : [];
-
-    if (store.length >= 5) {
-      return Utils.toast.info('文章草稿最多保存5个');
-    }
-
-    store.push(obj);
-    localStorage.setItem('article_draft', JSON.stringify(store));
-  }
-
-  handleShare() {
-
+  handleInfo(info) {
+    this.setState({ info });
   }
 
   selectLable(idx) {
@@ -235,8 +256,8 @@ class Submitarticle extends React.Component {
         }
         <div className="sba-title">选择图片</div>
         {this.getImgList()}
-        <input className="sba-title-input" placeholder='请输入文章标题' value={this.state.title} onChange={e => this.handleTitle(e.target.value)} />
-        <textarea className="sba-title-textarea" placeholder='请输入文章内容' value={this.state.content} onChange={e => this.handleContent(e.target.value)}></textarea>
+        <input className="sba-title-input" placeholder='请输入文章标题' value={this.state.name} onChange={e => this.handleName(e.target.value)} />
+        <textarea className="sba-title-textarea" placeholder='请输入文章内容' value={this.state.info} onChange={e => this.handleInfo(e.target.value)}></textarea>
         {this.getLable()}
         <div className="sba-btns">
           <div onClick={() => this.handleSaveDraft()}>保存草稿</div>
@@ -245,6 +266,43 @@ class Submitarticle extends React.Component {
       </div>
     );
   }
+
+  handleSaveDraft() {
+    if (this.state.name === '') return Utils.toast.info('请输入标题');
+
+    let store = localStorage.getItem('article_draft');
+    store = store ? JSON.parse(store) : [];
+
+    if (store.length >= 5) return Utils.toast.info('文章草稿最多保存5个');
+
+    let lable = JSON.parse(JSON.stringify(this.state.lable));
+    lable = lable.filter(item => item.select);
+
+    if (!this.draftId) this.draftId = new Date().getTime();
+
+    let obj = {
+      id: this.draftId,
+      img: this.state.img,
+      name: this.state.name,
+      info: this.state.info,
+      lable: lable,
+    };
+
+    let idx = store.findIndex(item => item.id === this.draftId);
+    if (idx > -1) {
+      store[idx] = obj;
+    } else {
+      store.unshift(obj);
+    }
+
+    localStorage.setItem('article_draft', JSON.stringify(store));
+    Utils.toast.info('保存成功');
+  }
+
+  handleShare() {
+
+  }
+  
 }
 
-export default Submitarticle; 
+export default Submitarticle;

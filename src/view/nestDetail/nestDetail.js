@@ -63,7 +63,6 @@ class NestDetail extends React.Component {
         <Evaluate type={1} history={this.props.history} />
         <div className="ned-line"></div>
         <Itemmore history={this.props.history} type={1} />
-        <div className="ned-line"></div>
         <Lableinfo 
           lableData={this.state.lableData}
           toggleLableInfo={this.state.toggleLableInfo} 

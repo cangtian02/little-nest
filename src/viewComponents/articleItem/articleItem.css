@@ -2,6 +2,21 @@
   padding: .4rem .6rem .6rem .6rem;
   margin-bottom: .6rem;
   background: #fff;
+  position: relative;
+  overflow: hidden;
+}
+
+.articleItem em {
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 2;
+  font-size: .6rem;
+  color: #fff;
+  padding: 0 .4rem;
+  line-height: 1rem;
+  background: #2489ED;
+  border-bottom-left-radius: .3rem;
 }
 
 .ari-title {

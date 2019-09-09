@@ -45,7 +45,11 @@ class Articleitem extends React.Component {
   }
 
   handleItem() {
-    this.props.history.push('/articleDetail?itemId=' + this.props.val.id);
+    if (this.props.val.isDraft) {
+      this.props.history.push('/submitArticle?itemId=' + this.props.val.id + '&isDraft=1');
+    } else {
+      this.props.history.push('/articleDetail?itemId=' + this.props.val.id);
+    }
   }
 
   handleCommentBtn() {
@@ -53,12 +57,12 @@ class Articleitem extends React.Component {
   }
 
   handleEditBtn() {
-    this.props.history.push('/submitNest?itemId=' + this.props.val.id);
+    this.props.history.push('/submitArticle?itemId=' + this.props.val.id);
   }
 
-  handleDeleteBtn() {
+  handleDeleteBtn(isDraft) {
     this.deleteItemModal = Utils.toast.modal({
-      message: '确定删除此文章，删除后不可回复？',
+      message: '确定删除此' + (isDraft ? '草稿' : '文章') + '，删除后不可回复？',
       onOk: () => {
         setTimeout(() => {
           this.props.deleteItem && this.props.deleteItem(this.props.index);
@@ -73,6 +77,7 @@ class Articleitem extends React.Component {
 
     return (
       <div className="articleItem">
+        {val.isDraft ? <em>草稿</em> : null}
         <div className="ari-title clamp2" onClick={() => this.handleItem()}>{val.name}</div>
         {
           val.img.length > 0
@@ -99,9 +104,21 @@ class Articleitem extends React.Component {
             this.props.showHandle
               ?
               <div className="ari-icons">
-                <span className="iconfont icon-pinglun1" onClick={() => this.handleCommentBtn()}></span>
-                <span className="iconfont icon-icon_edit" onClick={() => this.handleEditBtn()}></span>
-                <span className="iconfont icon--shanchu" onClick={() => this.handleDeleteBtn()}></span>
+                {
+                  !val.isDraft
+                    ?
+                    <span className="iconfont icon-pinglun1" onClick={() => this.handleCommentBtn()}></span>
+                    :
+                    null
+                }
+                {
+                  !val.isDraft
+                    ?
+                    <span className="iconfont icon-icon_edit" onClick={() => this.handleEditBtn()}></span>
+                    :
+                    null
+                }
+                <span className="iconfont icon--shanchu" onClick={() => this.handleDeleteBtn(val.isDraft)}></span>
               </div>
               :
               null

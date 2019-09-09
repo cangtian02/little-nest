@@ -23,7 +23,7 @@ const articleItem = {
   id: 1,
   img: [],
   name: '文章名字啊啊啊小窝名字啊啊啊',
-  info: '文章内容啊啊啊小窝名字啊啊啊文章内容啊啊啊小窝名字啊啊啊文章内容啊啊啊小窝名字啊啊啊文章内容啊啊啊小窝名字啊啊啊文章内容啊啊啊小窝名字啊啊啊文章内容啊啊啊小窝名字啊啊啊文章内容啊啊啊小窝名字啊啊啊文章内容啊啊啊小窝名字啊啊啊文章内容啊啊啊小窝名字啊啊啊',
+  info: '文章内容啊啊啊小窝名字啊啊啊文章内容啊啊啊小窝名字啊啊',
   praise: 30,
   userIcon: img,
   userName: '小明设计师',
@@ -47,8 +47,19 @@ class Wo extends React.Component {
   }
 
   componentDidMount() {
-
+    this.getStore();
   }
+
+  getStore() {
+    let articleStore = localStorage.getItem('article_draft');
+    if (articleStore) {
+      articleStore = JSON.parse(articleStore);
+      articleStore.map(item => item.isDraft = true);
+      let articleItem = JSON.parse(JSON.stringify(this.state.articleItem));
+      articleItem = [...articleStore, ...articleItem];
+      this.setState({ articleItem });
+    }
+  } 
 
   handleTabTitleClick(titleTabIndex) {
     this.setState({ titleTabIndex });
@@ -56,6 +67,15 @@ class Wo extends React.Component {
 
   deleteItem(i, type) {
     let item = type === 'nest' ? this.state.nestItem : this.state.articleItem;
+
+    if (type === 'article' && this.state.articleItem[i].isDraft) {
+      let store = localStorage.getItem('article_draft');
+      store = store ? JSON.parse(store) : [];
+      let idx = store.findIndex(item => item.id === this.draftId);
+      store.splice(idx, 1);
+      localStorage.setItem('article_draft', JSON.stringify(store));
+    }
+
     item.splice(i , 1);
     type === 'nest' ? this.setState({ nestItem: item }) : this.setState({ articleItem: item });
   }

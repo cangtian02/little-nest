@@ -38,7 +38,6 @@ class Articledetail extends React.Component {
         <Evaluate type={2} history={this.props.history} />
         <div className="ard-line"></div>
         <Itemmore history={this.props.history} type={2} />
-        <div className="ard-line"></div>
       </div>
     );
   }
