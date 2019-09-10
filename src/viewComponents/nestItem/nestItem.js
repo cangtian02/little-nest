@@ -34,7 +34,11 @@ class NestItem extends React.Component {
   }
 
   handleItem() {
-    this.props.history.push('/nestDetail?itemId=' + this.props.val.id);
+    if (this.props.val.isDraft) {
+      this.props.history.push('/submitNest?itemId=' + this.props.val.id + '&isDraft=1');
+    } else {
+      this.props.history.push('/nestDetail?itemId=' + this.props.val.id);
+    }
   }
 
   handleCommentBtn() {
@@ -45,9 +49,9 @@ class NestItem extends React.Component {
     this.props.history.push('/submitNest?itemId=' + this.props.val.id);
   }
 
-  handleDeleteBtn() {
+  handleDeleteBtn(isDraft) {
     this.deleteItemModal = Utils.toast.modal({
-      message: '确定删除此小窝，删除后不可回复？',
+      message: '确定删除此' + (isDraft ? '草稿' : '小窝') + '，删除后不可回复？',
       onOk: () => {
         setTimeout(() => {
           this.props.deleteItem && this.props.deleteItem(this.props.index);
@@ -83,12 +87,24 @@ class NestItem extends React.Component {
             {val.look || 0}&nbsp;浏览&nbsp;&nbsp;{val.evaluate || 0}&nbsp;评论&nbsp;&nbsp;{val.praise || 0}&nbsp;点赞
           </div>
           {
-            this.props.showHandle && !val.isDraft
+            this.props.showHandle
             ?
               <div className="nib-icons">
-                <span className="iconfont icon-pinglun1" onClick={() => this.handleCommentBtn()}></span>
-                <span className="iconfont icon-icon_edit" onClick={() => this.handleEditBtn()}></span>
-                <span className="iconfont icon--shanchu" onClick={() => this.handleDeleteBtn()}></span>
+                {
+                  !val.isDraft
+                  ?
+                    <span className="iconfont icon-pinglun1" onClick={() => this.handleCommentBtn()}></span>
+                    :
+                    null
+                }
+                {
+                  !val.isDraft
+                  ?
+                    <span className="iconfont icon-icon_edit" onClick={() => this.handleEditBtn()}></span>
+                    :
+                    null
+                }
+                <span className="iconfont icon--shanchu" onClick={() => this.handleDeleteBtn(val.isDraft)}></span>
               </div>
             :
             null

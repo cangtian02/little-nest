@@ -32,11 +32,15 @@ class Editdata extends React.Component {
     });
   }
 
+  saveDraft(type, val) {
+    console.log(val)
+  }
+
   render() {
     return (
       <div className="editData">
-        <StepOne step={this.state.step} imgSrc={this.props.imgSrc} info={this.state.info} nextStep={e => this.nextStep(e)} />
-        <StepTwo step={this.state.step} imgSrc={this.props.imgSrc} lableData={this.state.lableData} prevStep={e => this.prevStep(e)} />
+        <StepOne step={this.state.step} imgSrc={this.props.imgSrc} info={this.state.info} nextStep={e => this.nextStep(e)} saveDraft={e => this.saveDraft('one', e)} />
+        <StepTwo step={this.state.step} imgSrc={this.props.imgSrc} lableData={this.state.lableData} prevStep={e => this.prevStep(e)} saveDraft={e => this.saveDraft('two', e)} />
       </div>
     );
   }

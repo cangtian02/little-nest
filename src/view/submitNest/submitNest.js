@@ -3,13 +3,14 @@ import './submitNest.css';
 import EditImg from '../../components/editImg/editImg';
 import SelectImg from '../../components/selectImg/selectImg';
 import EditData from './editData/editData';
+import img from '../submitNest/1.jpg';
 
 class SubmitNest extends React.Component {
 
   constructor() {
     super();
     this.state = {
-      initialImg: '',
+      initialImg: img,
       finalImg: '',
     }
   }

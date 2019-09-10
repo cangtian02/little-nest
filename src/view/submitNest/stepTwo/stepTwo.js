@@ -28,7 +28,7 @@ class Steptwo extends React.Component {
     this.state = {
       name: '',
       info: '',
-      lable: [...slable, ...slable, ...slable],
+      lable: [...slable],
     }
   }
 
@@ -100,8 +100,7 @@ class Steptwo extends React.Component {
 
   handleSaveDraft() {
     this.resetLableData().then(info => {
-      console.log(this.props.lableData)
-      console.log(info)
+      this.props.saveDraft && this.props.saveDraft(info);
     });
   }
 

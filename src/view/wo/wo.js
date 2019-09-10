@@ -16,7 +16,6 @@ const nestItem = {
   userName: '小明设计师',
   lable: ['简约', '极客范', '简约', '极客范'],
   praise: 30,
-  isDraft: true,
 };
 
 const articleItem = {
@@ -51,6 +50,15 @@ class Wo extends React.Component {
   }
 
   getStore() {
+    let nestStore = localStorage.getItem('nest_draft');
+    if (nestStore) {
+      nestStore = JSON.parse(nestStore);
+      nestStore.map(item => item.isDraft = true);
+      let nestItem = JSON.parse(JSON.stringify(this.state.nestItem));
+      nestItem = [...nestStore, ...nestItem];
+      this.setState({ nestItem });
+    }
+
     let articleStore = localStorage.getItem('article_draft');
     if (articleStore) {
       articleStore = JSON.parse(articleStore);
@@ -67,6 +75,18 @@ class Wo extends React.Component {
 
   deleteItem(i, type) {
     let item = type === 'nest' ? this.state.nestItem : this.state.articleItem;
+
+    if (type === 'nest' && this.state.nestItem[i].isDraft) {
+      let store = localStorage.getItem('nest_draft');
+      store = store ? JSON.parse(store) : [];
+      if (store.length > 0) {
+        let idx = store.findIndex(item => item.id === this.state.nestItem[i].id);
+        if (idx > -1) {
+          store.splice(idx, 1);
+          localStorage.setItem('nest_draft', JSON.stringify(store));
+        }
+      }
+    }
 
     if (type === 'article' && this.state.articleItem[i].isDraft) {
       let store = localStorage.getItem('article_draft');

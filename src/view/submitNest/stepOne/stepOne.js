@@ -250,8 +250,7 @@ class Stepone extends React.Component {
 
   handleSaveDraft() {
     this.resetLableData().then(lableData => {
-      // console.log(this.props.info)
-      console.log(lableData)
+      this.props.saveDraft && this.props.saveDraft(lableData);
     });
   }
 
