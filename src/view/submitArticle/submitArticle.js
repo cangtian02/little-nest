@@ -289,11 +289,7 @@ class Submitarticle extends React.Component {
     };
 
     let idx = store.findIndex(item => item.id === this.draftId);
-    if (idx > -1) {
-      store[idx] = obj;
-    } else {
-      store.unshift(obj);
-    }
+    idx > -1 ? store[idx] = obj : store.unshift(obj);
 
     localStorage.setItem('article_draft', JSON.stringify(store));
     Utils.toast.info('保存成功');
@@ -302,7 +298,7 @@ class Submitarticle extends React.Component {
   handleShare() {
 
   }
-  
+
 }
 
 export default Submitarticle;

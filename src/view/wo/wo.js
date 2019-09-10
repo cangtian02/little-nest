@@ -71,9 +71,13 @@ class Wo extends React.Component {
     if (type === 'article' && this.state.articleItem[i].isDraft) {
       let store = localStorage.getItem('article_draft');
       store = store ? JSON.parse(store) : [];
-      let idx = store.findIndex(item => item.id === this.state.articleItem[i].id);
-      store.splice(idx, 1);
-      localStorage.setItem('article_draft', JSON.stringify(store));
+      if (store.length > 0) {
+        let idx = store.findIndex(item => item.id === this.state.articleItem[i].id);
+        if (idx > -1) {
+          store.splice(idx, 1);
+          localStorage.setItem('article_draft', JSON.stringify(store));
+        }
+      }
     }
 
     item.splice(i , 1);
