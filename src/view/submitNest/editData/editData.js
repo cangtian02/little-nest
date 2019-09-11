@@ -34,6 +34,11 @@ class Editdata extends React.Component {
 
   saveDraft(type, val) {
     console.log(val)
+    if (type === 'one') {
+      val.forEach((res, idx) => {
+        val[idx] = res.filter(item => !item.id || (item.id && item.value !== ''));
+      });
+    }
   }
 
   render() {

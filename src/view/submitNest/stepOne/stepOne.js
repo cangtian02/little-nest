@@ -5,21 +5,25 @@ import { Input, TextArea } from '../../../components/componentList/componentList
 
 const originalLableData = [
   {
+    id: 1,
     name: '名称',
     value: '',
     type: 'input',
     must: true,
   }, {
+    id: 2,
     name: '品牌',
     value: '',
     type: 'input',
     must: false,
   }, {
+    id: 3,
     name: '型号',
-    type: 'input',
     value: '',
+    type: 'input',
     must: false,
   }, {
+    id: 4,
     name: '简介',
     value: '',
     type: 'textarea',
@@ -185,6 +189,7 @@ class Stepone extends React.Component {
           value: '',
           type: 'input',
           must: false,
+          isCustom: true,
         });
 
         this.setState({ lableData });
@@ -265,7 +270,7 @@ class Stepone extends React.Component {
           x: parseInt(div.offsetLeft * scale, 0),
           y: parseInt(div.offsetTop * scale, 0),
         }
-        lableData[i].push({ pos: pos });
+        lableData[i].unshift({ pos: pos });
       }
       resolve(lableData);
     });
