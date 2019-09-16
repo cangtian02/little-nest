@@ -33,7 +33,27 @@ class Steptwo extends React.Component {
   }
 
   componentDidMount() {
+    this.init();
+  }
 
+  init() {
+    let itemId = Number(Utils.getUrlParams('itemId')) || null;
+    let isDraft = Utils.getUrlParams('isDraft') || null;
+
+    if (isDraft) {
+      let store = localStorage.getItem('nest_draft');
+      store = store ? JSON.parse(store) : [];
+      let idx = store.findIndex(item => item.id === itemId);
+
+      if (idx > -1) {
+        store = store[idx];
+
+        this.setState({
+          name: store.info.name,
+          info: store.info.info,
+        });
+      }
+    }
   }
 
   componentWillUnmount() {
@@ -65,6 +85,7 @@ class Steptwo extends React.Component {
           id: 4,
           name: name,
           select: true,
+          isCustom: true,
         });
 
         this.setState({ lable });

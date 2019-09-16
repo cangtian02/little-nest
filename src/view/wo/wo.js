@@ -54,8 +54,24 @@ class Wo extends React.Component {
     if (nestStore) {
       nestStore = JSON.parse(nestStore);
       nestStore.map(item => item.isDraft = true);
+      let arr = [];
+      nestStore.forEach(val => {
+        let lable = [];
+        if (val.info.lable.length > 0) {
+          val.info.lable.forEach(res => {
+            lable.push(res.name);
+          });
+        }
+        arr.push({
+          id: val.id,
+          img: val.img,
+          name: val.info.name,
+          lable: lable,
+          isDraft: true,
+        });
+      });
       let nestItem = JSON.parse(JSON.stringify(this.state.nestItem));
-      nestItem = [...nestStore, ...nestItem];
+      nestItem = [...arr, ...nestItem];
       this.setState({ nestItem });
     }
 
