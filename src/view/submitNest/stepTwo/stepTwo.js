@@ -52,6 +52,23 @@ class Steptwo extends React.Component {
           name: store.info.name,
           info: store.info.info,
         });
+
+        if (store.info.lable) {
+          let arr1 = [];
+          let lable = JSON.parse(JSON.stringify(this.state.lable));
+
+          store.info.lable.forEach(val => {
+            if (val.isCustom) {
+              arr1.push(val);
+            } else {
+              let idx = lable.findIndex(item => item.id === val.id);
+              if (idx > -1) lable[idx].select = true;
+            }
+          });
+
+          lable = [...arr1, ...lable];
+          this.setState({ lable });
+        }
       }
     }
   }

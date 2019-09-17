@@ -57,7 +57,7 @@ class Wo extends React.Component {
       let arr = [];
       nestStore.forEach(val => {
         let lable = [];
-        if (val.info.lable.length > 0) {
+        if (val.info.lable && val.info.lable.length > 0) {
           val.info.lable.forEach(res => {
             lable.push(res.name);
           });

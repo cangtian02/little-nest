@@ -52,8 +52,7 @@ class Stepone extends React.Component {
       this.setState({
         load: true,
       }, () => {
-        this.lableBoxAdd();
-        document.getElementById('eso-lable-box').addEventListener('touchstart', this.esoLableBoxFunc, false);
+        this.init();
       });
     }
   }
@@ -70,14 +69,52 @@ class Stepone extends React.Component {
     node && node.parentNode && node.parentNode.removeChild(node);
   }
 
+  init() {
+    let itemId = Number(Utils.getUrlParams('itemId')) || null;
+    let isDraft = Utils.getUrlParams('isDraft') || null;
+
+    if (isDraft) {
+      let store = localStorage.getItem('nest_draft');
+      store = store ? JSON.parse(store) : [];
+      let idx = store.findIndex(item => item.id === itemId);
+
+      if (idx > -1) {
+        store = store[idx];
+
+        this.setState({
+          lableData: store.lableData
+        }, () => {
+          let box = document.getElementById('eso-lable-box');
+          let scale = this.imgInfo.width / box.clientWidth;
+
+          this.state.lableData.forEach((val, i) => {
+            this.lableBoxAdd({
+              x: parseInt(val[0].pos.x / scale, 0),
+              y: parseInt(val[0].pos.y / scale, 0),
+            }, i);
+          });
+
+          document.getElementById('eso-lable-box').addEventListener('touchstart', this.esoLableBoxFunc, false);
+        });
+      } else {
+        this.lableBoxAdd();
+        document.getElementById('eso-lable-box').addEventListener('touchstart', this.esoLableBoxFunc, false);
+      }
+
+    } else {
+      this.lableBoxAdd();
+      document.getElementById('eso-lable-box').addEventListener('touchstart', this.esoLableBoxFunc, false);
+    }
+  }
+
   esoLableBoxFunc(e) {
     e.preventDefault();
   }
 
-  lableBoxAdd() {
+  lableBoxAdd(pos = {}, idx = 0) {
     let box = document.getElementById('eso-lable-box');
 
-    if (box.children.length > 0) {
+    if (box.children.length > 0 && idx === 0) {
       document.getElementById('eso-lable-btn-active').removeEventListener('touchmove', this.lableMove, false);
       for (let i = 0; i < box.children.length; i++) {
         box.children[i].removeAttribute('class');
@@ -86,22 +123,28 @@ class Stepone extends React.Component {
     }
 
     let div = document.createElement('div');
-    div.setAttribute('class', 'active');
-    div.setAttribute('id', 'eso-lable-btn-active');
-    div.style.left = (window.innerWidth - 24) / 2  + 'px';
-    div.style.top = (box.clientHeight - 24) / 2 + 'px';
+    let left = pos.x ? pos.x : (window.innerWidth - 24) / 2;
+    let top = pos.y ? pos.y : (box.clientHeight - 24) / 2;
+    if (idx === 0) {
+      div.setAttribute('class', 'active');
+      div.setAttribute('id', 'eso-lable-btn-active');
+    }
+    div.style.left = left + 'px';
+    div.style.top = top + 'px';
     box.appendChild(div);
 
     div.addEventListener('touchmove', this.lableMove, false);
 
     for (let i = 0; i < box.children.length; i++) {
       box.children[i].addEventListener('click', () => {
-        if (i !== this.lableIndex) this.switchLableIndex(i);
+        if (i !== this.state.lableIndex) this.switchLableIndex(i);
       });
     }
   }
 
   lableMove(e) {
+    if (!e.target.className) return;
+
     let id = document.getElementById('eso-lable-btn-active');
     let box = document.getElementById('eso-lable-box');
     let winWidth = window.innerWidth;
@@ -243,7 +286,7 @@ class Stepone extends React.Component {
       let winWidth = window.innerWidth;
       let w = header.childNodes[0].clientWidth * header.childNodes.length;
       if (w > winWidth) header.scrollTo(w, 0);
-      this.lableBoxAdd();
+      this.lableBoxAdd({}, 0);
     });
   }
 
@@ -270,6 +313,7 @@ class Stepone extends React.Component {
           x: parseInt(div.offsetLeft * scale, 0),
           y: parseInt(div.offsetTop * scale, 0),
         }
+        if (lableData[i].pos) lableData.shift();
         lableData[i].unshift({ pos: pos });
       }
       resolve(lableData);

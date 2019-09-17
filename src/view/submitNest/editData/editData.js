@@ -101,9 +101,6 @@ class Editdata extends React.Component {
 
   resetData(type, data) {
     if (type === 1) {
-      data.forEach((res, idx) => {
-        data[idx] = res.filter(item => !item.id || (item.id && item.value !== ''));
-      });
       return data;
     }
 
@@ -111,7 +108,7 @@ class Editdata extends React.Component {
       let obj = {};
       if (data.name) obj.name = data.name;
       if (data.info) obj.name = data.info;
-      if (data.lable.length > 0) obj.lable = data.lable;
+      if (data.lable && data.lable.length > 0) obj.lable = data.lable;
       return obj;
     }
   }
@@ -119,8 +116,8 @@ class Editdata extends React.Component {
   render() {
     return (
       <div className="editData">
-        <StepOne step={this.state.step} imgSrc={this.props.imgSrc} lableData={this.state.lableData} info={this.state.info} nextStep={e => this.nextStep(e)} saveDraft={e => this.saveDraft('one', e)} />
-        <StepTwo step={this.state.step} imgSrc={this.props.imgSrc} lableData={this.state.lableData} info={this.state.info} prevStep={e => this.prevStep(e)} saveDraft={e => this.saveDraft('two', e)} />
+        <StepOne step={this.state.step} imgSrc={this.props.imgSrc} info={this.state.info} nextStep={e => this.nextStep(e)} saveDraft={e => this.saveDraft('one', e)} />
+        <StepTwo step={this.state.step} imgSrc={this.props.imgSrc} lableData={this.state.lableData} prevStep={e => this.prevStep(e)} saveDraft={e => this.saveDraft('two', e)} />
       </div>
     );
   }
