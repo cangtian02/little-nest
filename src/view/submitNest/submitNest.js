@@ -23,9 +23,9 @@ class SubmitNest extends React.Component {
     let store = localStorage.getItem('nest_draft');
     store = store ? JSON.parse(store) : [];
     let isDraft = Utils.getUrlParams('isDraft') || null;
-    let itemId = Number(Utils.getUrlParams('itemId')) || null;
-
+    
     if (isDraft && store.length > 0) {
+      let itemId = Number(Utils.getUrlParams('itemId')) || null;
       let idx = store.findIndex(item => item.id === itemId);
       if (idx > -1) {
         this.setState({

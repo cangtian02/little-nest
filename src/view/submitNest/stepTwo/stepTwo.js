@@ -61,8 +61,8 @@ class Steptwo extends React.Component {
             if (val.isCustom) {
               arr1.push(val);
             } else {
-              let idx = lable.findIndex(item => item.id === val.id);
-              if (idx > -1) lable[idx].select = true;
+              let i = lable.findIndex(item => item.id === val.id);
+              if (i > -1) lable[i].select = true;
             }
           });
 

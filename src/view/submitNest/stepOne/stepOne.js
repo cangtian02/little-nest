@@ -79,10 +79,8 @@ class Stepone extends React.Component {
       let idx = store.findIndex(item => item.id === itemId);
 
       if (idx > -1) {
-        store = store[idx];
-
         this.setState({
-          lableData: store.lableData
+          lableData: store[idx].lableData
         }, () => {
           let box = document.getElementById('eso-lable-box');
           let scale = this.imgInfo.width / box.clientWidth;
@@ -94,17 +92,20 @@ class Stepone extends React.Component {
             }, i);
           });
 
-          document.getElementById('eso-lable-box').addEventListener('touchstart', this.esoLableBoxFunc, false);
+          this.lableBoxListener();
         });
       } else {
         this.lableBoxAdd();
-        document.getElementById('eso-lable-box').addEventListener('touchstart', this.esoLableBoxFunc, false);
+        this.lableBoxListener();
       }
-
     } else {
       this.lableBoxAdd();
-      document.getElementById('eso-lable-box').addEventListener('touchstart', this.esoLableBoxFunc, false);
+      this.lableBoxListener();
     }
+  }
+
+  lableBoxListener() {
+    document.getElementById('eso-lable-box').addEventListener('touchstart', this.esoLableBoxFunc, false);
   }
 
   esoLableBoxFunc(e) {

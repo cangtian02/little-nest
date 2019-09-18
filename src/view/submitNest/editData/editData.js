@@ -35,11 +35,9 @@ class Editdata extends React.Component {
       let idx = store.findIndex(item => item.id === this.draftId);
 
       if (idx > -1) {
-        store = store[idx];
-
         this.setState({
-          lableData: store.lableData,
-          info: store.info,
+          lableData: store[idx].lableData,
+          info: store[idx].info,
         });
       }
     }
@@ -63,21 +61,17 @@ class Editdata extends React.Component {
     if (type === 'one') {
       if (!this.state.info || this.state.info.name === '') return Utils.toast.info('请点击下一步输入小窝名称');
 
-      let obj = {
+      this.savaDraftFunc({
         lableData: this.resetData(1, val),
         info: this.resetData(2, this.state.info)
-      }
-
-      this.savaDraftFunc(obj);
+      });
     }
 
     if (type === 'two') {
-      let obj = {
+      this.savaDraftFunc({
         lableData: this.resetData(1, this.state.lableData),
         info: this.resetData(2, val)
-      }
-
-      this.savaDraftFunc(obj);
+      });
     }
   }
 
