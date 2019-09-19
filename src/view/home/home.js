@@ -1,13 +1,14 @@
 import React from 'react';
 import './home.css';
 import Slide  from '../../components/slide/slide';
+import Pull from '../../components/pull/pull';
 import NestItem from '../../viewComponents/nestItem/nestItem';
 import ArticleItem from '../../viewComponents/articleItem/articleItem';
 import Footer from '../../viewComponents/footer/footer';
 import TabTitle from '../../viewComponents/tabTitle/tabTitle';
 import img from '../submitNest/1.jpg';
 
-const item = {
+const nestItem = {
   id: 1,
   img: img,
   name: '小窝名字啊啊啊小窝名字啊啊啊',
@@ -19,42 +20,29 @@ const item = {
   evaluate: 20
 };
 
+const articleItem = {
+  id: 1,
+  img: [],
+  userIcon: img,
+  userName: '小明设计师',
+  name: '文章名字啊啊啊小窝名字啊啊啊',
+  info: '文章内容啊啊啊小窝名字啊啊啊文',
+  praise: 30,
+};
+
 class Home extends React.Component {
 
   constructor() {
     super();
     this.state = {
+      load: false,
+      banner: [],
       tabIndex: 0,
-      data: '',
-      nestItem: [item],
-      articleItem: [
-        {
-          id: 1,
-          img: [],
-          userIcon: img,
-          userName: '小明设计师',
-          name: '文章名字啊啊啊小窝名字啊啊啊',
-          info: '文章内容啊啊啊小窝名字啊啊啊文章内容啊啊啊小窝名字啊啊啊文章内容啊啊啊小窝名字啊啊啊文章内容啊啊啊小窝名字啊啊啊文章内容啊啊啊小窝名字啊啊啊文章内容啊啊啊小窝名字啊啊啊文章内容啊啊啊小窝名字啊啊啊文章内容啊啊啊小窝名字啊啊啊文章内容啊啊啊小窝名字啊啊啊',
-          praise: 30,
-        }, {
-          id: 1,
-          img: [img],
-          userIcon: img,
-          userName: '小明设计师',
-          name: '文章名字啊啊啊小窝名字啊啊啊',
-          info: '文章内容啊啊啊小窝名字啊啊啊文章内容啊啊啊小窝名字啊啊啊文章内容啊啊啊小窝名字啊啊啊文章内容啊啊啊小窝名字啊啊啊文章内容啊啊啊小窝名字啊啊啊文章内容啊啊啊小窝名字啊啊啊文章内容啊啊啊小窝名字啊啊啊文章内容啊啊啊小窝名字啊啊啊文章内容啊啊啊小窝名字啊啊啊',
-          praise: 30,
-        }, {
-          id: 1,
-          img: [img, img],
-          userIcon: img,
-          userName: '小明设计师',
-          name: '文章名字啊啊啊小窝名字啊啊啊',
-          info: '文章内容啊啊啊小窝名字啊啊啊文章内容啊啊啊小窝名字啊啊啊文章内容啊啊啊小窝名字啊啊啊文章内容啊啊啊小窝名字啊啊啊文章内容啊啊啊小窝名字啊啊啊文章内容啊啊啊小窝名字啊啊啊文章内容啊啊啊小窝名字啊啊啊文章内容啊啊啊小窝名字啊啊啊文章内容啊啊啊小窝名字啊啊啊',
-          praise: 30,
-        },
-      ],
-      banner: []
+      nestItem: [],
+      articleItem: [articleItem],
+      pageSize: 0,
+      maxPageSize: 3,
+      refresh: false,
     }
   }
 
@@ -63,7 +51,7 @@ class Home extends React.Component {
     window.sessionStorage.setItem('goHomeHistory', 'Y');
 
     this.setState({
-      data: '222',
+      load: true,
       banner: [{
         src: img,
         id: 1,
@@ -78,6 +66,38 @@ class Home extends React.Component {
         tagBg: '#3BB9D8'
       }]
     });
+
+    this.getData();
+  }
+
+  getData() {
+    if (this.state.pageSize >= this.state.maxPageSize) return;
+
+    setTimeout(() => {
+      let data = this.state.pageSize === 0 ? [nestItem, nestItem, nestItem] : this.state.nestItem.concat([nestItem, nestItem, nestItem]);
+      this.setState({
+        nestItem: data,
+        refresh: true,
+      }, () => {
+        this.setState({ refresh: false });
+      });
+    }, 300);
+  }
+
+  pullingDown() {
+    this.setState({
+      pageSize: 0,
+    }, () => {
+      this.getData();
+    });
+  }
+
+  pullingUp() {
+    this.setState({
+      pageSize: this.state.pageSize + 1,
+    }, () => {
+      this.getData();
+    });
   }
 
   getNestItemDom() {
@@ -87,9 +107,13 @@ class Home extends React.Component {
     this.state.nestItem.forEach((val, i) => {
       arr.push(<NestItem val={val} key={i} showUser history={this.props.history} />);
     });
-    return arr;
-  }
 
+    return (
+      <Pull forceUpdate={this.state.pageSize === this.state.maxPageSize - 1 ? 0 : 1} refresh={this.state.refresh} pullingDown={() => this.pullingDown()} pullingUp={() => this.pullingUp()}>
+        {arr}
+      </Pull>
+    );
+  }
 
   getArticleItem() {
     if (this.state.articleItem.length === 0) return <div className="home-item-nolist">还没有文章，快上传分享吧~</div>
@@ -120,7 +144,7 @@ class Home extends React.Component {
   }
 
   render() {
-    if (!this.state.data) return null;
+    if (!this.state.load) return null;
     
     return (
       <div className="home">
