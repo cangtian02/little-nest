@@ -7,10 +7,9 @@ class List extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      pageSize: 0,
       data: [],
+      pageSize: 0,
       maxPageSize: 3,
-      forceUpdate: 1,
       refresh: false,
     };
   }
@@ -27,11 +26,8 @@ class List extends React.Component {
       this.setState({
         data: data,
         refresh: true,
-        forceUpdate: this.state.pageSize === this.state.maxPageSize - 1 ? 0 : 1,
       }, () => {
-        this.setState({
-          refresh: false,
-        });
+        this.setState({refresh: false});
       });
     }, 300);
   }
@@ -39,8 +35,6 @@ class List extends React.Component {
   pullingDown() {
     this.setState({
       pageSize: 0,
-      refresh: false,
-      forceUpdate: 1,
     }, () => {
       this.getData();
     });
@@ -49,7 +43,6 @@ class List extends React.Component {
   pullingUp() {
     this.setState({
       pageSize: this.state.pageSize + 1,
-      refresh: false,
     }, () => {
       this.getData();
     });
@@ -66,7 +59,7 @@ class List extends React.Component {
   render() {
     return (
       <div className="list">
-        <Pull forceUpdate={this.state.forceUpdate} refresh={this.state.refresh} pullingDown={() => this.pullingDown()} pullingUp={() => this.pullingUp()}>
+        <Pull forceUpdate={this.state.pageSize === this.state.maxPageSize - 1 ? 0 : 1} refresh={this.state.refresh} pullingDown={() => this.pullingDown()} pullingUp={() => this.pullingUp()}>
           {this.getItem()}
         </Pull>
       </div>

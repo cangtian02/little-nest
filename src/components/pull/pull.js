@@ -32,13 +32,13 @@ class Pull extends React.Component {
   // 组件更新  flag == 0  父组件调用当列表加载完使用，显示暂无更多数据  flag == 1正常数据更新操作
   forceUpdate(flag) {
     if (this.isPullingDown) {   // 下拉刷新
-      this.bScroll.finishPullDown();
-      this.bScroll.refresh();
       this.isPullingDown = false;
       this.setState({
         pullDownText: '下拉刷新',
         pullUpText: '上拉加载',
       });
+      this.bScroll.finishPullDown();
+      this.bScroll.refresh();
     }
     
     if (this.isPullingUp) {   // 上拉加载
