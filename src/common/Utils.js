@@ -91,5 +91,29 @@ export default {
     } else if (typeof input.selectionStart === 'number' && typeof input.selectionEnd === 'number') {
       input.selectionStart = input.selectionEnd = len;
     }
-  }
+  },
+  resetTime(d) {
+    let _d = this.format(d, 'yyyy-MM-dd');
+    let y1 = new Date().getFullYear();
+    let y2 = _d.split('-')[0];
+    return y2 < y1 ? this.format(d, 'yyyy-MM-dd') : this.format(d, 'MM-dd');
+  },
+  resetNum(n) {
+    if (typeof n !== 'number') return 0;
+    if (n < 1000) return n;
+
+    if (n > 999 && n < 10000) {
+      n = n / 1000;
+      n = (n + '').includes('.')  ? n.toFixed(1) : n;
+      return n + 'K';
+    }
+
+    if (n > 9999 && n < 100000000) {
+      n = n / 10000;
+      n = (n + '').includes('.') ? n.toFixed(0) : n;
+      return n + 'W';
+    }
+
+    return n;
+  },
 }
