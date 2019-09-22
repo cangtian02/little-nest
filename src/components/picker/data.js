@@ -7,11 +7,11 @@
 export default {
   gender() {
     return [[{
+      val: 0,
+      text: '女'
+    }, {
       val: 1,
       text: '男'
-    }, {
-      val: 2,
-      text: '女'
     }]];
   },
   getYear(year) {

@@ -33,8 +33,21 @@ class Setting extends React.Component {
         icon: 'https://avatars1.githubusercontent.com/u/28089159?s=460&v=4',
         name: '昵称',
         occupation: '设计师',
+        gender: 1,
+        birthday: '1995-02-22',
+        content: '',
+        lable: [{
+          id: 4,
+          name: '懒窝',
+          select: true,
+        }, {
+          id: 5,
+          name: '自定义一',
+          select: true,
+          isCustom: true,
+        }]
       },
-      lable: [...slable, ...slable, ...slable],
+      lable: slable,
       toggleUpateIconBtn: false,
       changeIconSrc: '',
     }
@@ -43,7 +56,7 @@ class Setting extends React.Component {
   }
 
   componentDidMount() {
-
+    this.initLable();
   }
 
   componentWillUnmount() {
@@ -52,6 +65,20 @@ class Setting extends React.Component {
 
   removeModal(node) {
     node && node.parentNode && node.parentNode.removeChild(node);
+  }
+
+  initLable() {
+    if (this.state.info.lable.length === 0) return;
+
+    let slable = [...this.state.lable];
+
+    this.state.info.lable.forEach((val, i) => {
+      let idx = slable.findIndex(item => item.id === val.id);
+      if (idx > 0) slable[idx].select = true;
+      if (val.isCustom) slable.unshift(val);
+    });
+
+    this.setState({ lable: slable });
   }
 
   selectLable(idx) {
@@ -116,23 +143,23 @@ class Setting extends React.Component {
             </div>
           </div>
           <div className="set-item borderBottom">
-            <div className="l">性别</div>
-            <div className="r" onClick={() => this.handlePicker('gender')}>男</div>
-          </div>
-          <div className="set-item borderBottom">
             <div className="l">职业</div>
             <div className="r" onClick={() => this.handleModal('occupation')}>
               {this.state.info.occupation}
             </div>
           </div>
           <div className="set-item borderBottom">
+            <div className="l">性别</div>
+            <div className="r" onClick={() => this.handlePicker('gender')}>{this.state.info.gender ? '男' : '女'}</div>
+          </div>
+          <div className="set-item borderBottom">
             <div className="l">生日</div>
-            <div className="r" onClick={() => this.handlePicker('date')}>1995-02-22</div>
+            <div className="r" onClick={() => this.handlePicker('date')}>{this.state.info.birthday}</div>
           </div>
         </div>
         <div className="set-title">个人简介</div>
         <div className="set-info-box">
-          <textarea placeholder="~太懒了，啥也不留，emmmm！！！！"></textarea>
+          <textarea placeholder="~太懒了，啥也不留，emmmm！！！！" value={this.state.info.content} onChange={e => this.updateData('content', e.target.value)}></textarea>
         </div>
         <div className="set-title">个性标签</div>
         <div className="set-lable-tips">选择属于你的标签，让更多人欣赏你的小窝~</div>
@@ -213,16 +240,23 @@ class Setting extends React.Component {
     let defaultIndex = [];
     let defaultDate = '';
 
-    if (type === 'gender') defaultIndex = [1];
-    if (type === 'date') defaultDate = '2019-08-21';
+    if (type === 'gender') defaultIndex = [this.state.info.gender];
+    if (type === 'date') defaultDate = this.state.info.birthday;
     
     let picker = Picker({
       type: type,
       defaultIndex: defaultIndex,
       defaultDate: defaultDate,
-      onOk: (val, indx) => {
-        console.log(val)
-        console.log(indx)
+      onOk: val => {
+        if (type === 'gender') {
+          this.updateData('gender', val[0].val);
+        }
+        if (type === 'date') {
+          let y = '' + val[0].val;
+          let m = val[1].val < 10 ? '0' + val[1].val : '' + val[1].val;
+          let d = val[2].val < 10 ? '0' + val[2].val : '' + val[2].val;
+          this.updateData('birthday', y + '-' + m + '-' + d);
+        }
       }
     });
 
@@ -230,7 +264,11 @@ class Setting extends React.Component {
   }
 
   handleSave() {
-
+    let info = Object.assign({}, this.state.info);
+    info.lable = this.state.lable.filter(item => item.select);
+    this.setState({info}, () => {
+      console.log(this.state.info)
+    });    
   }
 
 }

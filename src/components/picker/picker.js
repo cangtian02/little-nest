@@ -64,35 +64,45 @@ class Picker extends React.Component {
     return selectedIndex;
   }
 
+  getBScrollConfig(selectedIndex) {
+    return {
+      probeType: 3,
+      wheel: {
+        selectedIndex: selectedIndex,
+        rotate: 25,
+        adjustTime: 100,
+        wheelWrapperClass: 'm-picker-ul',
+        wheelItemClass: 'm-picker-item',
+        wheelDisabledItemClass: 'wheel-disabled-item',
+      }
+    }
+  }
+
   initWheel() {
     const list = document.getElementsByClassName('m-picker-list');
 
     for (let i = 0; i < list.length; i++) {
       if (!this.wheels[i]) {
-        this.wheels[i] = new BScroll(list[i], {
-          probeType: 3,
-          wheel: {
-            selectedIndex: this.state.selectedIndex[i],
-            rotate: 25,
-            adjustTime: 100,
-            wheelWrapperClass: 'm-picker-ul',
-            wheelItemClass: 'm-picker-item',
-            wheelDisabledItemClass: 'wheel-disabled-item',
-          }
-        });
+        this.wheels[i] = new BScroll(list[i], this.getBScrollConfig(this.state.selectedIndex[i]));
       } else {
         this.wheels[i].refresh();
       }
 
       this.wheels[i].on('scrollEnd', () => {
-        let selectedIndex = this.state.selectedIndex;
-        let itemData = this.state.itemData;
+        let selectedIndex = [...this.state.selectedIndex];
+        let itemData = [...this.state.itemData];
         selectedIndex[i] = this.wheels[i].getSelectedIndex();
         if (this.props.type === 'date' && i === 0) {
-          selectedIndex[0] = 99;
           itemData[0] = Data.getYear(this.state.itemData[0][selectedIndex[0]].val);
+          selectedIndex[0] = 99;
         }
-        this.setState({ itemData, selectedIndex });
+
+        this.setState({ itemData, selectedIndex }, () => {
+          if (i === 0 && this.props.type === 'date') {
+            this.wheels[i] = null;
+            this.wheels[i] = new BScroll(list[i], this.getBScrollConfig(this.state.selectedIndex[i]));
+          }
+        });
       });
     }
   }
