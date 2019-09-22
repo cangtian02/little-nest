@@ -19,7 +19,7 @@ class Useritem extends React.Component {
   }
 
   handleFollow(i) {
-
+    this.props.handleFollow && this.props.handleFollow(!this.props.list[i].follow, i);
   }
 
   getItem() {
@@ -29,13 +29,13 @@ class Useritem extends React.Component {
       arr.push(
         <div className="userItem borderBottom" key={i}>
           <div className="l" onClick={() => this.handleGoUserHome(i)}>
-            <img src="./img/pic.jpg" alt="" />
+            <img src={val.icon} alt={val.name} />
             <div className="l_r">
-              <p>小明</p>
-              <span>设计师</span>
+              <p>{val.name}</p>
+              <span>{val.occupation}</span>
             </div>
           </div>
-          <div className="r disable" onClick={() => this.handleFollow(i)}>已关注</div>
+          <div className={'r' + (val.follow ? ' disable' : '')} onClick={() => this.handleFollow(i)}>{val.follow ? '取消关注' : '关注'}</div>
         </div>
       );
     });

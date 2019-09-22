@@ -7,12 +7,24 @@ class Follow extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      followList: [0, 0, 0],
+      followList: [{
+        id: 1,
+        name: '帕拉毕鹏',
+        occupation: '设计师',
+        icon: 'https://avatars1.githubusercontent.com/u/28089159?s=460&v=4',
+        follow: true,
+      }],
     }
   }
 
   componentDidMount() {
 
+  }
+
+  handleFollow(e, i) {
+    let followList = [...this.state.followList];
+    followList[i].follow = e;
+    this.setState({ followList });
   }
 
   render() {
@@ -21,7 +33,7 @@ class Follow extends React.Component {
     return (
       <div className="follow">
         <div className="follow-title">我的关注</div>
-        <UserItem list={this.state.followList} history={this.props.history} />
+        <UserItem list={this.state.followList} history={this.props.history} handleFollow={(e, i) => this.handleFollow(e, i)} />
       </div>
     );
   }

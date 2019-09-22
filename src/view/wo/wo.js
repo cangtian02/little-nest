@@ -42,6 +42,18 @@ class Wo extends React.Component {
       collectArticleItem: [articleItem],
       praiseNestItem: [nestItem],
       praiseArticleItem: [articleItem],
+      userInfo: {
+        id: 1,
+        name: '名字啦啦啦',
+        occupation: '程序狗',
+        gender: 1,
+        follow: false,
+        followNum: 20,
+        fansNum: 98,
+        praiseAndCollectionNum: 77,
+        lable: ['简约', '90后'],
+        info: ''
+      },
     }
   }
 
@@ -196,7 +208,7 @@ class Wo extends React.Component {
     return (
       <div className="wo">
         <div className="wo-content">
-          <UserBlock history={this.props.history} isMe />
+          <UserBlock history={this.props.history} isMe userInfo={this.state.userInfo}/>
           <TabTitle style={{margin: '.6rem 0'}} list={['小窝', '文章', '收藏', '赞过']} click={i => this.handleTabTitleClick(i)} />
           <div className="wo-item">
             {

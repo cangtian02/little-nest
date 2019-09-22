@@ -68,11 +68,6 @@ const UserHome = Loadable({
     loading: LoadingComponents
 });
 
-const List = Loadable({
-    loader: () => import('../view/list/list'),
-    loading: LoadingComponents
-});
-
 export const routes = [
     {
         path: '/home',
@@ -107,10 +102,7 @@ export const routes = [
     }, {
         path: '/userHome',
         component: UserHome,
-    }, {
-        path: '/list',
-        component: List,
-    },
+    }
 ];
 
 export const RouteWithSubRoutes = route => (

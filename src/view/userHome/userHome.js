@@ -20,7 +20,7 @@ const articleItem = {
   id: 1,
   img: [],
   name: '文章名字啊啊啊小窝名字啊啊啊',
-  info: '文章内容啊啊啊小窝名字啊啊啊文章内容啊啊啊小窝名字啊啊啊文章内容啊啊啊小窝名字啊啊啊文章内容啊啊啊小窝名字啊啊啊文章内容啊啊啊小窝名字啊啊啊文章内容啊啊啊小窝名字啊啊啊文章内容啊啊啊小窝名字啊啊啊文章内容啊啊啊小窝名字啊啊啊文章内容啊啊啊小窝名字啊啊啊',
+  info: '文章内容啊啊啊小窝名字啊啊啊文章内容啊啊啊小',
   praise: 30,
   userIcon: img,
   userName: '小明设计师',
@@ -32,6 +32,18 @@ class Userhome extends React.Component {
     super(props);
     this.state = {
       titleTabIndex: 0,
+      userInfo: {
+        id: 1,
+        name: '名字啦啦啦',
+        occupation: '程序狗',
+        gender: 1,
+        follow: false,
+        followNum: 20,
+        fansNum: 98,
+        praiseAndCollectionNum: 77,
+        lable: ['简约', '90后'],
+        info: ''
+      },
       nestItem: [nestItem],
       articleItem: [articleItem],
     }
@@ -79,10 +91,16 @@ class Userhome extends React.Component {
     return this.getArticleItem(this.state.articleItem, 'TA还没有分享文章哦~',);
   }
 
+  handleFollow(e) {
+    let userInfo = Object.assign({}, this.state.userInfo);
+    userInfo.follow = e;
+    this.setState({ userInfo });
+  }
+
   render() {
     return (
       <div className="userHome">
-        <UserBlock history={this.props.history} />
+        <UserBlock history={this.props.history} userInfo={this.state.userInfo} handleFollow={e => this.handleFollow(e)}/>
         <TabTitle style={{ margin: '.6rem 0' }} list={['小窝', '文章']} click={i => this.handleTabTitleClick(i)} />
         <div className="uh-item">
           {
