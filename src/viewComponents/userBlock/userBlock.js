@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { lnConst } from 'react';
 import './userBlock.css';
 import Utils from '../../common/Utils';
 
@@ -12,7 +12,7 @@ class Userblock extends React.Component {
   }
 
   componentDidMount() {
-
+    
   }
 
   handleRouter(url) {
@@ -60,7 +60,7 @@ class Userblock extends React.Component {
         <div className="userBlock-lable">
           {this.getLable(userInfo.lable)}
         </div>
-        <div className="userBlock-info">{userInfo.info || '~太懒了，啥也不留，emmmm！！！！'}</div>
+        <div className="userBlock-info">{userInfo.info || lnConst.DEFAULT_USERINFO}</div>
       </div>
     );
   }

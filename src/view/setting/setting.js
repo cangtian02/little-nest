@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { lnConst } from 'react';
 import './setting.css';
 import Utils from '../../common/Utils';
 import Picker from '../../components/picker/picker';
@@ -159,7 +159,7 @@ class Setting extends React.Component {
         </div>
         <div className="set-title">个人简介</div>
         <div className="set-info-box">
-          <textarea placeholder="~太懒了，啥也不留，emmmm！！！！" value={this.state.info.content} onChange={e => this.updateData('content', e.target.value)}></textarea>
+          <textarea placeholder={lnConst.DEFAULT_USERINFO} value={this.state.info.content} onChange={e => this.updateData('content', e.target.value)}></textarea>
         </div>
         <div className="set-title">个性标签</div>
         <div className="set-lable-tips">选择属于你的标签，让更多人欣赏你的小窝~</div>

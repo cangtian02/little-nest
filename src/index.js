@@ -8,6 +8,9 @@ import { createStore } from 'redux';
 import rootReducer from './redux/reducers/index';
 import './assets/css/reset.css';
 import './assets/font/iconfont.css';
+import Const  from './common/Const';
+
+React.lnConst = Const;
 
 FastClick.attach(document.body);
 
